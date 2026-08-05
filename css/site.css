@@ -843,6 +843,13 @@ body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; 
   backdrop-filter: blur(4px);
 }
 .page-head--photo .menu-footnote { color: rgba(246, 239, 226, .7); }
+/* The gallery head carries no served pill or download button, so it would
+   sit shorter than the menu heads. Give it a matching minimum height and
+   centre its type so the photographed band reads the same size. */
+.page-head--gallery {
+  display: flex; flex-direction: column; justify-content: center;
+  min-height: clamp(415px, 30vw, 438px);
+}
 .page-head .section-lede { margin-bottom: 0; }
 .page-head__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
 

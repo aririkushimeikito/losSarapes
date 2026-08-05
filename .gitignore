@@ -2,3 +2,4 @@
 # so not tracked.
 _site/
 dist/
+__pycache__/
