@@ -31,14 +31,10 @@ jobs:
         with:
           enablement: true
 
-      # Publish the site only — not the README, the build tool or the
-      # workflow itself.
-      - name: Assemble site
-        run: |
-          mkdir -p _site
-          cp -r index.html css js fonts images videos _site/
-          # Serve the files as-is; there is no Jekyll build here.
-          touch _site/.nojekyll
+      # Renders src/ into _site/ and copies the assets alongside. Publishes
+      # the site only — not the sources, the tools or this workflow.
+      - name: Build site
+        run: python3 tools/build.py _site
 
       - uses: actions/upload-pages-artifact@v3
         with:

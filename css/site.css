@@ -182,6 +182,24 @@ a { color: inherit; }
 }
 .btn--ghost-ink:hover { --btn-bg: rgba(23, 18, 15, .06); --btn-bd: var(--ink); }
 
+/* Header CTA: a hairline outline over the hero, filling in once solid. */
+.btn--outline {
+  --btn-bg: transparent;
+  --btn-fg: var(--bone);
+  --btn-bd: currentColor;
+  min-height: 40px;
+  padding: 0 20px;
+  border-radius: 3px;
+  font-size: .74rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.btn--outline:hover { --btn-bg: var(--marigold); --btn-bd: var(--marigold); --btn-fg: var(--ink); }
+
+/* Marks a control whose real destination is still to be supplied, so an
+   unwired CTA is obvious in review rather than silently going nowhere. */
+.tbd-link { outline: 2px dashed rgba(184, 67, 42, .55); outline-offset: 3px; }
+
 /* ---------- Header ---------- */
 
 .site-header {
@@ -191,72 +209,122 @@ a { color: inherit; }
               color .35s var(--ease);
 }
 .site-header__inner {
-  display: flex; align-items: center; gap: 28px;
+  display: flex; align-items: center; gap: clamp(14px, 1.8vw, 30px);
   height: var(--header-h);
   padding: 0 var(--gutter);
 }
-/* The logo is a tall stacked lockup — tiles above, wordmark below. Shrunk
-   to fit an 84px bar the wordmark becomes unreadable, so the header crops
-   to the wordmark and lets the hero carry the full lockup. */
-.site-header__brand {
-  display: block;
-  height: 34px;
-  overflow: hidden;
-}
-.site-header__brand img {
-  width: auto;
-  height: 106px;      /* full lockup, scaled so the wordmark reads */
-  margin-top: -72px;  /* …then pulled up so only the wordmark shows */
-}
+
+/* The full stacked lockup — tiles over wordmark — sits at the top left of
+   every page. It is the only place the mark appears, so it is sized to be
+   read rather than squeezed into the bar. */
+.site-header__brand { display: block; flex: none; }
+.site-header__brand img { width: auto; height: 72px; }
 
 /* Two logo files, one swapped for the other — no invert filter, which
    would mangle any non-monochrome artwork the restaurant swaps in later. */
 .site-header__brand .logo--dark { display: none; }
 
-/* Over the hero the mark already appears at full size in the hero itself,
-   so the header wordmark stays out of the way until you scroll past it. */
-.site-header:not(.is-stuck):not(.is-open) .site-header__brand {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-6px);
+.site-header__tel {
+  margin-left: auto;
+  font-size: .8rem; font-weight: 700;
+  letter-spacing: .1em;
+  text-decoration: none;
+  white-space: nowrap;
+  opacity: .85;
 }
-.site-header__brand {
-  transition: opacity .3s var(--ease), transform .3s var(--ease), visibility .3s;
-}
+.site-header__tel:hover { opacity: 1; color: var(--marigold); }
 
-.site-nav { margin-left: auto; }
-.site-nav ul {
-  display: flex; gap: 30px;
+.site-nav { flex: 0 1 auto; }
+.site-nav > ul {
+  display: flex; align-items: center; gap: clamp(14px, 1.6vw, 26px);
   margin: 0; padding: 0; list-style: none;
 }
+.site-nav > ul > li { position: relative; display: flex; align-items: center; gap: 2px; }
 .site-nav a {
   position: relative;
-  font-size: .82rem; font-weight: 700;
-  letter-spacing: .12em; text-transform: uppercase;
+  font-size: .78rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
   text-decoration: none;
+  white-space: nowrap;
 }
-.site-nav a::after {
+.site-nav > ul > li > a::after {
   content: ""; position: absolute; left: 0; bottom: -7px;
   width: 100%; height: 2px; background: var(--marigold);
   transform: scaleX(0); transform-origin: left;
   transition: transform .3s var(--ease);
 }
-.site-nav a:hover::after,
-.site-nav a[aria-current="true"]::after { transform: scaleX(1); }
+.site-nav > ul > li > a:hover::after,
+.site-nav > ul > li > a[aria-current="page"]::after { transform: scaleX(1); }
 
-/* Scrolled state: header lands on bone, logo swaps to the ink artwork */
+/* ---------- Menus dropdown ---------- */
+
+.submenu-toggle {
+  display: grid; place-items: center;
+  width: 20px; height: 20px; padding: 0;
+  border: 0; border-radius: 4px;
+  background: none; color: inherit; cursor: pointer;
+}
+.submenu-toggle svg {
+  width: 14px; height: 14px;
+  fill: none; stroke: currentColor;
+  stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round;
+  transition: transform .25s var(--ease);
+}
+.has-menu[data-open="true"] .submenu-toggle svg { transform: rotate(180deg); }
+
+.submenu {
+  position: absolute; top: 100%; left: -18px;
+  z-index: 60;
+  min-width: 224px;
+  margin: 0; padding: 10px 0;
+  list-style: none;
+  background: var(--bone);
+  color: var(--ink);
+  border-radius: 0 0 var(--radius) var(--radius);
+  box-shadow: 0 24px 50px -28px rgba(23, 18, 15, .85);
+  /* Hidden by default; opened on hover for pointers and on click for
+     keyboards and touch, so it is reachable either way. */
+  opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: opacity .2s var(--ease), transform .2s var(--ease), visibility .2s;
+}
+.has-menu:hover .submenu,
+.has-menu:focus-within .submenu,
+.has-menu[data-open="true"] .submenu {
+  opacity: 1; visibility: visible; transform: none;
+}
+.submenu a {
+  display: block;
+  padding: 9px 22px;
+  font-size: .74rem;
+  letter-spacing: .1em;
+}
+.submenu a:hover { background: var(--bone-2); color: var(--adobe); }
+
+/* Scrolled state: header lands on bone, logo swaps to the ink artwork.
+   Pages without a hero have nothing dark to sit on, so they wear that
+   state from the top and push the content down instead of overlapping it. */
 .site-header.is-stuck,
-.site-header.is-open {
+.site-header.is-open,
+body:not(.has-hero) .site-header {
   background: var(--bone);
   color: var(--ink);
   box-shadow: 0 1px 0 rgba(23, 18, 15, .12), 0 10px 30px -20px rgba(23, 18, 15, .5);
 }
 .site-header.is-stuck .logo--light,
-.site-header.is-open  .logo--light { display: none; }
+.site-header.is-open  .logo--light,
+body:not(.has-hero) .logo--light { display: none; }
 .site-header.is-stuck .logo--dark,
-.site-header.is-open  .logo--dark { display: block; }
-.site-header.is-stuck .btn--solid { --btn-bg: var(--adobe); --btn-bd: var(--adobe); --btn-fg: var(--bone); }
-.site-header.is-stuck .btn--solid:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; }
+.site-header.is-open  .logo--dark,
+body:not(.has-hero) .logo--dark { display: block; }
+
+body:not(.has-hero) .site-header { position: sticky; inset: auto; top: 0; }
+
+.site-header.is-stuck .btn--outline,
+body:not(.has-hero) .btn--outline {
+  --btn-bg: var(--adobe); --btn-bd: var(--adobe); --btn-fg: var(--bone);
+}
+.site-header.is-stuck .btn--outline:hover,
+body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; }
 
 .nav-toggle {
   display: none;
@@ -289,14 +357,28 @@ a { color: inherit; }
   overflow-y: auto;
   border-top: 1px solid var(--line);
 }
-.mobile-nav ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; }
+.mobile-nav ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 0; }
 .mobile-nav a {
-  display: block; padding: 14px 0;
-  font-size: 1.05rem; font-weight: 700; text-decoration: none;
+  display: block; padding: 13px 0;
+  font-size: 1.02rem; font-weight: 700; text-decoration: none;
   border-bottom: 1px solid var(--line);
 }
-.mobile-nav li:last-child a { border-bottom: 0; }
-.mobile-nav .btn { margin-top: 16px; width: 100%; border-bottom: 0; }
+/* The seven menus are the reason people open this panel, so they are listed
+   inline rather than buried behind a second tap. */
+.mobile-nav .is-sub a {
+  padding: 10px 0 10px 20px;
+  font-size: .9rem; font-weight: 500;
+  color: var(--ink-soft);
+  border-left: 2px solid var(--bone-3);
+  border-bottom: 0;
+}
+.mobile-nav .is-sub a[aria-current="page"],
+.mobile-nav a[aria-current="page"] { color: var(--adobe); }
+.mobile-nav__cta { margin-top: 18px; width: 100%; }
+.mobile-nav__tel {
+  display: block; margin-top: 14px; text-align: center;
+  font-weight: 700; letter-spacing: .08em; text-decoration: none;
+}
 
 /* ---------- Hero ---------- */
 
@@ -548,19 +630,15 @@ a { color: inherit; }
 }
 .bar__list { margin: 0; padding: 0; list-style: none; }
 .bar__list li {
-  display: grid; gap: 4px 20px;
-  grid-template-columns: auto minmax(0, 1fr);
   padding: 18px 0;
   border-bottom: 1px solid var(--line-dark);
 }
 .bar__list li:first-child { border-top: 1px solid var(--line-dark); }
 .bar__list dfn {
-  grid-row: span 2;
+  display: block; margin-bottom: 4px;
   font-family: var(--display); font-style: normal;
-  font-size: 1.05rem; color: var(--marigold);
-  min-width: 3.2ch;
+  font-size: 1.16rem; color: var(--marigold);
 }
-.bar__list b { font-size: 1.02rem; }
 .bar__list span { color: rgba(246, 239, 226, .68); font-size: .95rem; }
 
 /* ---------- Patio ---------- */
@@ -706,23 +784,354 @@ a { color: inherit; }
   padding-bottom: 32px;
   border-bottom: 1px solid var(--line-dark);
 }
-.site-footer__brand img { width: auto; height: 74px; }
-.site-footer nav ul {
-  display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: flex-end;
-  margin: 0; padding: 0; list-style: none;
+.site-footer__brand img { width: auto; height: 92px; }
+
+.site-footer__cols {
+  display: grid; gap: 32px clamp(24px, 3vw, 48px);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
-.site-footer nav a {
+.site-footer__cols h2 {
+  margin: 0 0 12px;
+  font-size: .74rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--marigold);
+}
+.site-footer__cols p { margin: 0 0 12px; color: rgba(246, 239, 226, .78); font-size: .95rem; }
+.site-footer__cols a { color: inherit; text-decoration: none; }
+.site-footer__cols a:hover { color: var(--marigold); }
+.site-footer__fine { font-size: .85rem !important; color: rgba(246, 239, 226, .5) !important; }
+
+.site-footer ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.site-footer nav a,
+.site-footer__sisters a {
   font-size: .8rem; font-weight: 700;
-  letter-spacing: .14em; text-transform: uppercase;
-  text-decoration: none; color: rgba(246, 239, 226, .78);
+  letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(246, 239, 226, .78);
 }
-.site-footer nav a:hover { color: var(--marigold); }
+
+.social {
+  display: flex !important; flex-wrap: wrap; gap: 8px 16px;
+  margin-top: 4px !important;
+}
+.social a {
+  font-size: .74rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(246, 239, 226, .6);
+}
 .site-footer__base {
   display: flex; flex-wrap: wrap; gap: 10px 24px;
   padding-top: 24px;
   font-size: .84rem; color: rgba(246, 239, 226, .55);
 }
 .site-footer__base p { margin: 0; }
+
+/* ---------- Inner-page header ---------- */
+
+.page-head { padding: clamp(56px, 7vw, 96px) var(--gutter) clamp(44px, 5vw, 68px); }
+.page-head .section-lede { margin-bottom: 0; }
+.page-head__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+
+.welcome__lede {
+  max-width: 60ch;
+  margin: -18px 0 clamp(32px, 4vw, 52px);
+  font-size: clamp(1.02rem, 1.4vw, 1.16rem);
+  color: var(--ink-soft);
+}
+
+.hours__note {
+  margin: 20px 0 0;
+  font-size: .9rem; color: var(--ink-mute);
+  max-width: 46ch;
+}
+
+/* ---------- Pull quote ---------- */
+
+.quote { padding: clamp(56px, 7vw, 92px) var(--gutter); text-align: center; }
+.quote blockquote { margin: 0; }
+.quote p {
+  max-width: 26ch;
+  margin: 0 auto 20px;
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(1.5rem, 3.4vw, 2.5rem);
+  line-height: 1.16;
+  text-wrap: balance;
+}
+.quote cite {
+  font-style: normal;
+  font-size: .76rem; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--marigold);
+}
+
+/* ---------- Menus: teaser, index, pages ---------- */
+
+.menu-teaser { padding: var(--section-y) var(--gutter); background: var(--bone-2); }
+
+.menu-links {
+  display: grid; gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  margin: 0 0 clamp(36px, 5vw, 52px); padding: 0; list-style: none;
+}
+.menu-links a {
+  display: flex; flex-direction: column; gap: 3px;
+  padding: 20px 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bone);
+  text-decoration: none;
+  transition: transform .25s var(--ease), border-color .25s var(--ease);
+}
+.menu-links a:hover { transform: translateY(-3px); border-color: var(--adobe); }
+.menu-links span { font-family: var(--display); font-size: 1.24rem; }
+.menu-links small {
+  font-size: .72rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.menu-index { padding: 0 var(--gutter) var(--section-y); }
+.menu-cards {
+  display: grid; gap: clamp(16px, 2vw, 24px);
+  grid-template-columns: repeat(auto-fit, minmax(268px, 1fr));
+  margin: clamp(44px, 5vw, 64px) 0 clamp(36px, 5vw, 52px); padding: 0;
+  list-style: none;
+}
+.menu-card {
+  padding: clamp(24px, 3vw, 32px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.menu-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px -28px rgba(23, 18, 15, .8); }
+.menu-card h2 { margin: 0 0 6px; font-family: var(--display); font-weight: 400; font-size: 1.5rem; }
+.menu-card h2 a { text-decoration: none; }
+/* Stretch the card's own link over the whole card so the entire tile is
+   the target, without nesting interactive elements. */
+.menu-card h2 a::after { content: ""; position: absolute; inset: 0; }
+.menu-card { position: relative; }
+.menu-card__when {
+  margin: 0 0 12px;
+  font-size: .72rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--adobe);
+}
+.menu-card p:last-child { margin: 0; color: var(--ink-soft); font-size: .97rem; }
+
+.served {
+  display: inline-block;
+  margin: 26px 0 0;
+  padding: 9px 18px;
+  border-radius: 999px;
+  background: var(--bone-2);
+  font-size: .78rem; font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.menu-body { padding: clamp(44px, 6vw, 76px) var(--gutter) var(--section-y); }
+.courses { display: grid; gap: clamp(44px, 6vw, 76px); }
+.course__title {
+  margin: 0 0 6px;
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  color: var(--adobe);
+}
+.course__note { margin: 0 0 26px; color: var(--ink-mute); font-size: .95rem; }
+.course__title + .course__items { margin-top: 26px; }
+
+.course__items {
+  display: grid; gap: 4px 48px;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  margin: 0; padding: 0; list-style: none;
+}
+.menu-item { padding: 18px 0; border-bottom: 1px solid var(--line); }
+.menu-item__head {
+  display: flex; align-items: baseline; gap: 12px;
+}
+.menu-item__head h3 {
+  margin: 0;
+  font-size: 1.04rem; font-weight: 700;
+}
+/* A dotted leader between dish and price — the one place on the site where
+   a printed-menu convention beats a web one. */
+.menu-item__head::after {
+  content: "";
+  order: 1;
+  flex: 1 1 auto;
+  min-width: 18px;
+  height: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px dotted var(--bone-3);
+}
+.menu-item__price { order: 2; font-weight: 700; font-variant-numeric: tabular-nums; }
+.menu-item p { margin: 4px 0 0; color: var(--ink-soft); font-size: .95rem; max-width: 52ch; }
+.menu-item__tags {
+  display: inline-block; margin-top: 8px;
+  font-size: .68rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--cactus);
+}
+
+/* ---------- Prose + aside ---------- */
+
+.prose-section { padding: var(--section-y) var(--gutter); }
+.prose-section.is-tint { background: var(--bone-2); }
+.prose-layout {
+  display: grid; gap: clamp(36px, 5vw, 72px);
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  align-items: start;
+}
+.prose h2 {
+  margin: 0 0 14px;
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+}
+.prose h2 + p { margin-top: 0; }
+.prose p { margin: 0 0 18px; max-width: 62ch; color: var(--ink-soft); }
+.prose > h2:not(:first-child) { margin-top: 40px; }
+
+.prose-aside {
+  padding: clamp(26px, 3vw, 34px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bone);
+}
+.prose-aside h2 {
+  margin: 0 0 18px;
+  font-size: .8rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
+}
+.prose-aside p { color: var(--ink-soft); font-size: .95rem; }
+.prose-aside .btn { width: 100%; margin-top: 10px; }
+
+.facts { margin: 0 0 22px; }
+.facts dt {
+  font-size: .7rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.facts dd { margin: 2px 0 14px; }
+
+.checklist { margin: 0 0 20px; padding: 0; list-style: none; }
+.checklist li {
+  position: relative;
+  padding: 0 0 0 26px; margin-bottom: 10px;
+  color: var(--ink-soft); font-size: .95rem;
+}
+.checklist li::before {
+  content: ""; position: absolute; left: 0; top: .62em;
+  width: 12px; height: 3px; border-radius: 2px;
+  background: var(--adobe);
+}
+.aside-note { margin: 0 0 18px; font-size: .9rem; }
+
+/* ---------- Card rows ---------- */
+
+.cards-section { padding: var(--section-y) var(--gutter); }
+.cards {
+  display: grid; gap: clamp(16px, 2vw, 24px);
+  grid-template-columns: repeat(auto-fit, minmax(268px, 1fr));
+  margin: clamp(32px, 4vw, 48px) 0 0; padding: 0; list-style: none;
+}
+.card {
+  padding: clamp(24px, 3vw, 34px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bone);
+}
+.card h3 {
+  margin: 0 0 10px;
+  font-family: var(--display); font-weight: 400; font-size: 1.4rem;
+}
+.card p { margin: 0; color: var(--ink-soft); font-size: .97rem; }
+
+/* ---------- Events ---------- */
+
+.events-section { padding: 0 var(--gutter) var(--section-y); }
+.events { margin: clamp(32px, 4vw, 48px) 0 0; padding: 0; list-style: none; }
+.event {
+  display: grid; gap: 8px 44px;
+  grid-template-columns: minmax(0, 190px) minmax(0, 1fr);
+  padding: 28px 0;
+  border-top: 2px solid var(--ink);
+}
+.event:last-child { border-bottom: 2px solid var(--ink); }
+.event__when {
+  margin: 0;
+  font-size: .78rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+}
+.event__when span { display: block; margin-top: 4px; color: var(--adobe); }
+.event__body h3 {
+  margin: 0 0 8px;
+  font-family: var(--display); font-weight: 400; font-size: 1.5rem;
+}
+.event__body p { margin: 0 0 12px; color: var(--ink-soft); max-width: 58ch; }
+.event__body a { font-weight: 700; font-size: .92rem; }
+
+/* ---------- Gallery ---------- */
+
+.gallery-section { padding: 0 var(--gutter) var(--section-y); }
+.gallery {
+  display: grid; gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-auto-rows: 220px;
+  margin: clamp(32px, 4vw, 48px) 0 clamp(36px, 5vw, 52px); padding: 0;
+  list-style: none;
+}
+.tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--bone-2);
+}
+.tile img { width: 100%; height: 100%; object-fit: cover; }
+.tile--wide { grid-column: span 2; }
+.tile--tall { grid-row: span 2; }
+.tile__caption {
+  position: absolute; left: 14px; bottom: 14px; z-index: 2;
+  margin: 0;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(246, 239, 226, .92);
+  font-size: .72rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+}
+/* A slot waiting on a photograph — woven, so it reads as deliberate
+   rather than as a broken image. */
+.tile--empty {
+  background:
+    radial-gradient(120% 90% at 50% 40%,
+      rgba(255, 255, 255, .10) 0%, rgba(23, 18, 15, 0) 45%, rgba(23, 18, 15, .38) 100%),
+    repeating-linear-gradient(180deg,
+      var(--adobe) 0 26px, var(--marigold) 26px 34px, var(--bone) 34px 40px,
+      var(--adobe-dark) 40px 48px, var(--ink) 48px 65px, var(--cactus) 65px 74px,
+      var(--bone-2) 74px 80px, var(--cobalt) 80px 104px, var(--marigold) 104px 110px,
+      var(--bone) 110px 118px);
+}
+.tile--empty::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg,
+    rgba(23, 18, 15, .26) 0 1px, rgba(255, 255, 255, .09) 1px 3px);
+  mix-blend-mode: overlay;
+}
+
+/* ---------- Sister restaurants ---------- */
+
+.sisters { padding: var(--section-y) var(--gutter); background: var(--bone-2); }
+.sisters__list {
+  display: grid; gap: clamp(16px, 2vw, 24px);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin: clamp(32px, 4vw, 48px) 0 0; padding: 0; list-style: none;
+}
+.sisters__list h3 {
+  margin: 0 0 6px; padding-top: 16px;
+  border-top: 2px solid var(--ink);
+  font-family: var(--display); font-weight: 400; font-size: 1.34rem;
+}
+.sisters__list a { text-decoration: none; }
+.sisters__list a:hover { color: var(--adobe); }
+.sisters__list p { margin: 0; color: var(--ink-soft); }
 
 /* ---------- Responsive ---------- */
 
@@ -731,17 +1140,26 @@ a { color: inherit; }
   .patio__panel { aspect-ratio: 16 / 9; }
 }
 
-@media (max-width: 900px) {
-  :root { --header-h: 70px; --band-h: 10px; }
-  .site-header__brand { height: 28px; }
-  .site-header__brand img { height: 88px; margin-top: -60px; }
+/* Seven nav items plus a phone number and a CTA stop fitting well before
+   the usual tablet breakpoint, so the panel takes over at 1180px. */
+@media (max-width: 1180px) {
+  :root { --header-h: 76px; --band-h: 10px; }
+  .site-header__brand img { height: 58px; }
   .site-nav, .site-header__cta { display: none; }
-  .nav-toggle { display: block; }
+  .site-header__tel { margin-left: auto; }
+  .nav-toggle { display: block; margin-left: 16px; }
   .hero { padding-bottom: calc(128px + var(--band-h)); }
   .scroll-cue span { display: none; }
   .menu__note .btn { margin-left: 0; }
   .site-footer__top { grid-template-columns: minmax(0, 1fr); }
   .site-footer nav ul { justify-content: flex-start; }
+}
+
+@media (max-width: 600px) {
+  .site-header__brand img { height: 46px; }
+  .site-header__tel { display: none; }   /* the panel carries it instead */
+  /* …which means the toggle has to do the pushing now. */
+  .nav-toggle { margin-left: auto; }
 }
 
 @media (max-width: 560px) {

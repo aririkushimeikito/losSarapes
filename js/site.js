@@ -151,30 +151,53 @@
     });
   }
 
-  /* ---------- Nav highlighting ------------------------------- */
+  /* ---------- Menus dropdown --------------------------------- */
 
-  var navLinks = Array.prototype.slice.call(
-    document.querySelectorAll('.site-nav a[href^="#"]')
-  );
+  /* CSS opens the submenu on hover and on focus-within, which covers mice
+     and keyboards. This adds the click path, which is what touch devices
+     and anyone tapping the chevron actually use. */
+  var dropdowns = document.querySelectorAll('.site-nav .has-menu');
 
-  if (navLinks.length && 'IntersectionObserver' in window) {
-    var sections = navLinks
-      .map(function (a) { return document.querySelector(a.getAttribute('href')); })
-      .filter(Boolean);
+  Array.prototype.forEach.call(dropdowns, function (item) {
+    var toggle = item.querySelector('.submenu-toggle');
+    if (!toggle) return;
 
-    var spy = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        navLinks.forEach(function (a) {
-          var on = a.getAttribute('href') === '#' + entry.target.id;
-          if (on) a.setAttribute('aria-current', 'true');
-          else a.removeAttribute('aria-current');
-        });
+    function setOpen(open) {
+      item.setAttribute('data-open', String(open));
+      toggle.setAttribute('aria-expanded', String(open));
+    }
+
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = toggle.getAttribute('aria-expanded') === 'true';
+      // Only one open at a time.
+      Array.prototype.forEach.call(dropdowns, function (other) {
+        other.setAttribute('data-open', 'false');
+        var t = other.querySelector('.submenu-toggle');
+        if (t) t.setAttribute('aria-expanded', 'false');
       });
-    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+      setOpen(!open);
+    });
 
-    sections.forEach(function (s) { spy.observe(s); });
-  }
+    // Tabbing out of the last link should close it behind you.
+    item.addEventListener('focusout', function (e) {
+      if (!item.contains(e.relatedTarget)) setOpen(false);
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!item.contains(e.target)) setOpen(false);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      if (item.getAttribute('data-open') !== 'true') return;
+      setOpen(false);
+      toggle.focus();
+    });
+  });
+
+  /* Nav highlighting is not done here — now that each nav item is its own
+     page, tools/build.py stamps aria-current="page" into the markup. */
 
   /* ---------- Hours: read the markup, don't duplicate it ------ */
 

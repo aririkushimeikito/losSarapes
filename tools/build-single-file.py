@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
 """
-Build a single self-contained page from the multi-file site.
+Build a single self-contained page from the built site.
 
 The published/preview host serves the page under a strict CSP that blocks
 every external request — no stylesheets, no fonts, no media. So this
 inlines the CSS and JS and rewrites every asset reference to a data URI.
 
-    python3 tools/build-single-file.py dist/index.html
+    python3 tools/build.py _site
+    python3 tools/build-single-file.py dist/index.html [_site/index.html]
+
+Reads the *rendered* page, so it picks up the shared layout rather than
+a second copy of it. Only the home page is worth doing this to; the rest
+of the site is ordinary linked HTML.
 
 Only the mobile video is inlined. The desktop cut is 8 MB, which base64
 encodes to ~11 MB and would push a single HTML file past what is
@@ -20,8 +25,10 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+REPO = Path(__file__).resolve().parent.parent
 OUT = Path(sys.argv[1] if len(sys.argv) > 1 else "dist/index.html")
+PAGE = Path(sys.argv[2] if len(sys.argv) > 2 else REPO / "_site/index.html")
+ROOT = PAGE.parent  # asset paths in the page are relative to it
 
 MOBILE_VIDEO = "videos/los-sarapes-hero-mobile.mp4"
 
@@ -39,7 +46,14 @@ def inline_css(css: str) -> str:
         ref = match.group(1).strip("\"'")
         return f'url("{data_uri(ref.replace("../", "", 1))}")'
 
-    return re.sub(r'url\((\s*["\'][^)]+["\']\s*)\)', sub, css)
+    css = re.sub(r'url\((\s*["\'][^)]+["\']\s*)\)', sub, css)
+
+    # The host supplies its own <body>, so the page's `has-hero` class never
+    # reaches it and the "no hero on this page" rules would all fire. This
+    # build is always the home page, which does have a hero, so those rules
+    # are disabled outright rather than papered over with a class-adding
+    # script that would flash a solid header before it ran.
+    return css.replace("body:not(.has-hero)", ".single-file-build-has-a-hero")
 
 
 def inline_js(js: str) -> str:
@@ -56,14 +70,14 @@ def inline_js(js: str) -> str:
 
 
 def main() -> None:
-    html = (ROOT / "index.html").read_text()
+    html = PAGE.read_text()
     css = inline_css((ROOT / "css/site.css").read_text())
     js = inline_js((ROOT / "js/site.js").read_text())
 
     # The host wraps our output in its own <!doctype>/<head>/<body>, so
     # strip our shell and keep only <title> plus the page content.
     title = re.search(r"<title>(.*?)</title>", html, re.S).group(1)
-    body = re.search(r"<body>(.*)</body>", html, re.S).group(1)
+    body = re.search(r"<body[^>]*>(.*)</body>", html, re.S).group(1)
 
     # Local asset references -> data URIs.
     body = re.sub(
