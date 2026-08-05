@@ -481,7 +481,7 @@ def render_menu(slug: str) -> str:
     head_class = "page-head"
     if menu.get("heroImage"):
         width, height = jpeg_size(ROOT / "images" / "photos" / f'{menu["heroImage"]}.jpg')
-        head_class = "page-head page-head--photo"
+        head_class = "page-head page-head--photo page-head--inner"
         hero = (
             f'  <img class="page-head__bg" src="images/photos/{esc(menu["heroImage"])}.jpg"'
             f' alt="" width="{width}" height="{height}" fetchpriority="high">\n'
@@ -495,7 +495,6 @@ def render_menu(slug: str) -> str:
         f'    <p class="eyebrow">Menus</p>\n'
         f'    <h1 class="section-title">{esc(menu["title"])}</h1>\n'
         f'    <p class="section-lede">{esc(menu["lede"])}</p>\n'
-        f'    <p class="served">{esc(menu["served"])}</p>\n'
         f'    {pdf}\n'
         f'  </div>\n'
         f'</section>\n'

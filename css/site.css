@@ -816,9 +816,13 @@ body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; 
   position: relative;
   isolation: isolate;
   overflow: hidden;
+  display: flex; flex-direction: column; justify-content: center;
   padding-top: clamp(72px, 9vw, 120px);
   padding-bottom: clamp(56px, 7vw, 84px);
-  min-height: clamp(415px, 30vw, 438px);
+  /* One height for every inner head, tracked to the tallest of them — the
+     dinner menu. Any head with less content centres its type inside the
+     same band, so the whole set reads as one size at every width. */
+  min-height: clamp(460px, 446px + 4vw, 504px);
   color: var(--bone);
 }
 .page-head--photo > .wrap { position: relative; z-index: 2; }
