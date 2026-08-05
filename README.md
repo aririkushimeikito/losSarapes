@@ -146,7 +146,7 @@ menu URL, price range and `sameAs` links to every social profile.
 rendering of the web page. Each menu page's download button opens its PDF in
 a new tab; the path is the `pdf` field for that menu in `src/data/menus.json`
 (the Catering page links its PDF directly). Current PDFs: lunch, dinner,
-happy hour, cocktail, Sunday brunch, catering.
+happy hour, cocktail, Sunday brunch, kids, catering.
 
 To add one for another menu, drop the PDF in `menus/` and set that menu's
 `pdf` field to its path.

@@ -604,8 +604,10 @@
     "kids": {
       "title": "Kids",
       "heroImage": "dish-queso-fritters-angle",
+      "downloadLabel": "Download Kids Menu (PDF)",
       "lede": "Everything $11, for anyone ten and under.",
       "served": "Available all day. Ten and under only.",
+      "pdf": "menus/los-sarapes-kids-menu.pdf",
       "footnote": "Nuts, seeds and spices are used on premises. Please inform your server of any food allergies before ordering.",
       "cardImage": "dish-queso-fritters-overhead",
       "cardWhen": "All day",
