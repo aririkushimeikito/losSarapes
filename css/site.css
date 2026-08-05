@@ -182,23 +182,26 @@ a { color: inherit; }
 }
 .btn--ghost-ink:hover { --btn-bg: rgba(23, 18, 15, .06); --btn-bd: var(--ink); }
 
-/* Header CTA: a hairline outline over the hero, filling in once solid. */
+/* Header CTA: a hairline outline over the hero, filling in once solid.
+   Same pill and same sentence case as every other button on the site —
+   only the height is trimmed to sit in the bar. */
 .btn--outline {
   --btn-bg: transparent;
   --btn-fg: var(--bone);
   --btn-bd: currentColor;
-  min-height: 40px;
-  padding: 0 20px;
-  border-radius: 3px;
-  font-size: .74rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
+  min-height: 44px;
+  padding: 0 24px;
+  font-size: .9rem;
 }
 .btn--outline:hover { --btn-bg: var(--marigold); --btn-bd: var(--marigold); --btn-fg: var(--ink); }
 
 /* Marks a control whose real destination is still to be supplied, so an
    unwired CTA is obvious in review rather than silently going nowhere. */
 .tbd-link { outline: 2px dashed rgba(184, 67, 42, .55); outline-offset: 3px; }
+/* On a round icon the dashed square reads as breakage rather than a note,
+   so the marker follows the shape. */
+.social .tbd-link { outline: none; box-shadow: 0 0 0 2px rgba(229, 160, 44, .5); }
+.social .tbd-link:hover { box-shadow: 0 0 0 2px var(--marigold); }
 
 /* ---------- Header ---------- */
 
@@ -224,17 +227,7 @@ a { color: inherit; }
    would mangle any non-monochrome artwork the restaurant swaps in later. */
 .site-header__brand .logo--dark { display: none; }
 
-.site-header__tel {
-  margin-left: auto;
-  font-size: .8rem; font-weight: 700;
-  letter-spacing: .1em;
-  text-decoration: none;
-  white-space: nowrap;
-  opacity: .85;
-}
-.site-header__tel:hover { opacity: 1; color: var(--marigold); }
-
-.site-nav { flex: 0 1 auto; }
+.site-nav { flex: 0 1 auto; margin-left: auto; }
 .site-nav > ul {
   display: flex; align-items: center; gap: clamp(14px, 1.6vw, 26px);
   margin: 0; padding: 0; list-style: none;
@@ -810,14 +803,20 @@ body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; 
 }
 
 .social {
-  display: flex !important; flex-wrap: wrap; gap: 8px 16px;
-  margin-top: 4px !important;
+  display: flex !important; flex-wrap: wrap; gap: 10px;
+  margin-top: 16px !important;
 }
 .social a {
-  font-size: .74rem; font-weight: 700;
-  letter-spacing: .12em; text-transform: uppercase;
-  color: rgba(246, 239, 226, .6);
+  display: grid; place-items: center;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  transition: transform .25s var(--ease), filter .25s var(--ease);
 }
+.social svg { width: 26px; height: 26px; display: block; }
+/* Each mark carries its own brand colour, so they sit back a little on the
+   dark footer until you go for one. */
+.social a { filter: saturate(.9) brightness(.94); }
+.social a:hover { transform: translateY(-2px); filter: none; }
 .site-footer__base {
   display: flex; flex-wrap: wrap; gap: 10px 24px;
   padding-top: 24px;
@@ -1146,8 +1145,7 @@ body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; 
   :root { --header-h: 76px; --band-h: 10px; }
   .site-header__brand img { height: 58px; }
   .site-nav, .site-header__cta { display: none; }
-  .site-header__tel { margin-left: auto; }
-  .nav-toggle { display: block; margin-left: 16px; }
+  .nav-toggle { display: block; margin-left: auto; }
   .hero { padding-bottom: calc(128px + var(--band-h)); }
   .scroll-cue span { display: none; }
   .menu__note .btn { margin-left: 0; }
@@ -1157,9 +1155,6 @@ body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; 
 
 @media (max-width: 600px) {
   .site-header__brand img { height: 46px; }
-  .site-header__tel { display: none; }   /* the panel carries it instead */
-  /* …which means the toggle has to do the pushing now. */
-  .nav-toggle { margin-left: auto; }
 }
 
 @media (max-width: 560px) {
