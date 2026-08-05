@@ -818,6 +818,7 @@ body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; 
   overflow: hidden;
   padding-top: clamp(72px, 9vw, 120px);
   padding-bottom: clamp(56px, 7vw, 84px);
+  min-height: clamp(415px, 30vw, 438px);
   color: var(--bone);
 }
 .page-head--photo > .wrap { position: relative; z-index: 2; }
@@ -843,12 +844,15 @@ body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; 
   backdrop-filter: blur(4px);
 }
 .page-head--photo .menu-footnote { color: rgba(246, 239, 226, .7); }
-/* The gallery head carries no served pill or download button, so it would
-   sit shorter than the menu heads. Give it a matching minimum height and
-   centre its type so the photographed band reads the same size. */
-.page-head--gallery {
+/* Inner heads with no served pill or download button (every page but the
+   menus) centre their type, so the photographed band fills to the shared
+   min-height instead of leaving a gap below a short block. The menus keep
+   their top-aligned layout and reach the same height through their own
+   content. */
+.page-head--inner {
   display: flex; flex-direction: column; justify-content: center;
-  min-height: clamp(415px, 30vw, 438px);
+  padding-top: clamp(48px, 5vw, 72px);
+  padding-bottom: clamp(48px, 5vw, 72px);
 }
 .page-head .section-lede { margin-bottom: 0; }
 .page-head__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
