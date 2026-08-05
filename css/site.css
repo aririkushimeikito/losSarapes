@@ -1222,12 +1222,12 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
 
 /* ---------- Events ---------- */
 
-.events-section { padding: 0 var(--gutter) var(--section-y); }
-.events { margin: clamp(32px, 4vw, 48px) 0 0; padding: 0; list-style: none; }
+.events-section { padding: var(--section-y) var(--gutter); }
+.events { margin: clamp(40px, 5vw, 60px) 0 0; padding: 0; list-style: none; }
 .event {
-  display: grid; gap: 8px 44px;
+  display: grid; gap: 10px 44px;
   grid-template-columns: minmax(0, 190px) minmax(0, 1fr);
-  padding: 28px 0;
+  padding: clamp(30px, 3.5vw, 42px) 0;
   border-top: 2px solid var(--ink);
 }
 .event:last-child { border-bottom: 2px solid var(--ink); }
