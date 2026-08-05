@@ -13,45 +13,21 @@
   "menus": {
     "lunch": {
       "title": "Lunch",
-      "lede": "A prix fixe lunch at $18.99 — soup or salad, then a main. Dine-in only.",
-      "served": "Prix fixe: Tuesday to Friday only, dine-in. Regular lunch menu Tuesday to Saturday, 11 AM to 3 PM",
+      "downloadLabel": "Download Lunch Menu (PDF)",
+      "lede": "The full lunch card, plus a $18.99 prix fixe Tuesday to Friday.",
+      "served": "Lunch Tuesday to Saturday, 11 AM to 3 PM. Prix fixe is dine-in only, Tuesday to Friday.",
       "pdf": "menus/los-sarapes-lunch-menu.pdf",
+      "footnote": "Consumption of raw undercooked meat, seafood, shellfish or eggs may increase your risk of food borne illness, especially if a prior medical condition is present. Please inform your server of any food allergies before ordering. Nuts, seeds and spices are used on premises. 20% gratuity will be added to parties of 6 or more. Please no substitutions.",
       "courses": [
         {
           "name": "Prix fixe — $18.99",
-          "note": "Your choice of soup or salad, plus one entree. Dine-in only, Tuesday to Friday.",
+          "note": "Your choice of soup or salad plus one entree. Dine-in only, Tuesday to Friday.",
           "items": [
             {
-              "name": "Tortilla chicken soup",
-              "desc": "Choose this or the salad course.",
-              "price": null,
-              "tags": "Soup"
+              "name": "Soup or salad",
+              "desc": "Tortilla chicken soup, soup of the day, ensalada de la casa or ensalada Caesar.",
+              "price": null
             },
-            {
-              "name": "Soup of the day",
-              "desc": "Ask your server what is on today.",
-              "price": null,
-              "tags": "Soup"
-            },
-            {
-              "name": "Ensalada de la casa",
-              "desc": "The house salad.",
-              "price": null,
-              "tags": "Salad"
-            },
-            {
-              "name": "Ensalada Caesar",
-              "desc": "Caesar salad.",
-              "price": null,
-              "tags": "Salad"
-            }
-          ],
-          "hidePrice": true
-        },
-        {
-          "name": "Prix fixe entrees",
-          "note": "One of the four, included in the $18.99.",
-          "items": [
             {
               "name": "Pescado Acapulco",
               "desc": "Grouper, Cointreau-garlic lemon sauce. Side of fresh vegetables.",
@@ -74,6 +50,179 @@
             }
           ],
           "hidePrice": true
+        },
+        {
+          "name": "Botanas | Appetizers",
+          "items": [
+            {
+              "name": "Guacamole real",
+              "desc": "Made to order, avocado, cilantro, lime and pico de gallo. Served with homemade corn tortilla chips.",
+              "price": "13.95"
+            },
+            {
+              "name": "Banderillas ahogadas",
+              "desc": "Crispy corn chicken taquitos, topped with crema, green and red hot sauces, queso fresco and cilantro.",
+              "price": "10.50"
+            },
+            {
+              "name": "Mexican nachos",
+              "desc": "Homemade corn tortilla chips and fresh pico de gallo.",
+              "price": "6.50"
+            },
+            {
+              "name": "Queso fundido",
+              "desc": "Oven melted Chihuahua cheese, your choice of chorizo, mushrooms, rajas poblanas (mild) or rajas rancheras (hot). Corn or flour tortillas. Add combo 5.",
+              "price": "12.50"
+            },
+            {
+              "name": "Street corn",
+              "desc": "Chargrilled corn on the cob drizzled with creamy chipotle mayo, queso fresco.",
+              "price": "7",
+              "tags": "GF"
+            },
+            {
+              "name": "Cocktail de ceviche",
+              "desc": "Grouper and shrimp cooked in lime and orange juice, with a tangy valentina sauce. Avocado and cilantro.",
+              "price": "14.95"
+            },
+            {
+              "name": "Sarapes nachos",
+              "desc": "Homemade corn tortilla chips, Chihuahua cheese, refried black beans, pico de gallo, cilantro.",
+              "price": "12"
+            }
+          ]
+        },
+        {
+          "name": "Flatbreads",
+          "items": [
+            {
+              "name": "Margarita",
+              "desc": "Mix of vegetables sauteed with butter aioli, taquera sauce, cilantro, queso fresco.",
+              "price": "15",
+              "tags": "Vegetarian"
+            },
+            {
+              "name": "Carne, pollo o carnitas",
+              "desc": "Arrachera beef steak, carnitas or grilled chicken, taquera sauce, cilantro, pico de gallo and cheese.",
+              "price": "15"
+            },
+            {
+              "name": "Al pastor",
+              "desc": "Achiote and citrus marinated grilled pork. Topped with pineapple, cilantro and onions.",
+              "price": "14.50"
+            }
+          ]
+        },
+        {
+          "name": "Sopas | Soups",
+          "note": "Cup 8, bowl 10.",
+          "items": [
+            {
+              "name": "Sopa de tortilla",
+              "desc": "Tomato and chicken stock, shredded chicken, corn tortilla strips, avocado, cilantro and queso fresco.",
+              "price": "8 / 10"
+            },
+            {
+              "name": "Crema poblana",
+              "desc": "Poblano pepper bisque.",
+              "price": "8 / 10"
+            },
+            {
+              "name": "Crema de elote",
+              "desc": "Mexican corn chowder.",
+              "price": "8 / 10"
+            }
+          ]
+        },
+        {
+          "name": "Ensaladas | Salads",
+          "items": [
+            {
+              "name": "Ensalada Caesar",
+              "desc": "Romaine lettuce tossed with our homemade croutons and Caesar dressing. Topped with parmesan cheese. Add chicken 7.",
+              "price": "12"
+            },
+            {
+              "name": "House salad",
+              "desc": "Spring mix, pico de gallo, guacamole, queso fresco.",
+              "price": "8"
+            },
+            {
+              "name": "Ensalada Sarapes",
+              "desc": "Fresh mix of greens, sauteed vegetables, topped with your choice of marinated and grilled strips of chicken, beef or combo. Pico de gallo, guacamole and sour cream.",
+              "price": "18"
+            }
+          ]
+        },
+        {
+          "name": "1 lb. burrito",
+          "items": [
+            {
+              "name": "1 lb. burrito",
+              "desc": "Large flour tortilla stuffed with rice, cheese and refried black beans. Your choice of vegetarian, chicken, beef steak, carnitas, tinga poblana or pastor, topped with sour cream, salsa taquera, queso fresco and cilantro.",
+              "price": "13.95"
+            }
+          ]
+        },
+        {
+          "name": "Platillos fuertes | Main courses",
+          "items": [
+            {
+              "name": "Parrillada",
+              "desc": "Sauteed mild bell peppers and onions with your choice of carnitas, beef steak, chicken or vegetarian, applewood bacon bites, fresh pineapple and cheese. Served on a sizzling skillet. Flour or corn tortillas on the side.",
+              "price": "16"
+            },
+            {
+              "name": "Pollo mestizo",
+              "desc": "Boneless chicken breast smothered with a creamy chipotle sauce. Served with salad, rice and refried black beans.",
+              "price": "17"
+            },
+            {
+              "name": "Enchiladas",
+              "desc": "Soft corn tortillas stuffed with your choice of chicken, beef, cheese, carnitas or vegetarian. Poured with green hot, red hot, mole, bean or mild tomato sauce. Topped with crema, cilantro, onions, queso fresco. Rice and refried black beans.",
+              "price": "16"
+            },
+            {
+              "name": "Mole poblano",
+              "desc": "Boneless chicken breast poured with mole sauce, roasted sesame seeds. Served with refried black beans and rice.",
+              "price": "18"
+            },
+            {
+              "name": "La memelita",
+              "desc": "Handmade corn tortillas topped with refried beans. Choice of chicken, tinga poblana, beef or vegetables.",
+              "price": "14"
+            },
+            {
+              "name": "Quesadilla Sarapes",
+              "desc": "Grilled large flour tortilla stuffed with your choice of chicken (blanco) or beef steak (negro), melted Chihuahua cheese. Served with guacamole, pico de gallo, sour cream. Rice on the side.",
+              "price": "14"
+            },
+            {
+              "name": "Fajitas Sarapes",
+              "desc": "Sauteed mild bell peppers and onions with your choice of carnitas, beef steak, chicken or vegetarian. Served with rice, refried black beans, guacamole, crema and pico de gallo. Flour or corn tortillas on the side.",
+              "price": "16"
+            },
+            {
+              "name": "Tacos de birria",
+              "desc": "Slow simmered braised beef with guajillo and Mexican spices, corn tortillas. Side of savory beef broth.",
+              "price": "19"
+            },
+            {
+              "name": "Tacos de pescado",
+              "desc": "Beer battered or grilled grouper, shredded carrots, mixed cabbage, cilantro and chipotle-mayo, flour tortillas. Taquera sauce on the side.",
+              "price": "20"
+            },
+            {
+              "name": "Tacos del paisa",
+              "desc": "Your choice of grilled chicken, grilled beef steak, al pastor, tinga poblana or chorizo with jalapeño and onions. No combinations please. Choice of flour or corn tortillas.",
+              "price": "15"
+            },
+            {
+              "name": "Tacos de camaron",
+              "desc": "Sauteed shrimp, garlic, Mexican spices, cheese. Garnished with avocado and cilantro.",
+              "price": "21"
+            }
+          ]
         }
       ]
     },

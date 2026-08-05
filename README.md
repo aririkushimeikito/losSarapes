@@ -108,13 +108,22 @@ cannot ship unnoticed. Search for `tbd` and `TODO`:
 - the photograph of the three owners for the About page — it was not in the
   batch uploaded to the repository. Drop it at `images/photos/owners.jpg`
   and swap the marked slot in `src/pages/about.html`
-- the a la carte lunch menu — the supplied image was too low-resolution to
-  transcribe prices from safely, so only the prix fixe is on the site
 - real guest reviews in `src/data/reviews.json` — three of the four cards
   are templates and render greyed with a PLACEHOLDER chip
 
-Menu item names and descriptions are written as representative placeholders
-and should be checked against the real menu before launch.
+Lunch and Cocktails are transcribed from the printed cards, with real
+prices. Dinner, Kids, Happy hour, Beers and Brunch are still representative
+placeholders and should be replaced from the printed menus.
+
+## SEO
+
+`SITE_URL` at the top of `tools/build.py` is the domain everything is built
+from — canonical links, `og:url`, the absolute share image, `sitemap.xml`,
+`robots.txt` and the structured data. Moving the site is one line there.
+
+Each page carries its own title, description and canonical URL. The
+Restaurant JSON-LD in `src/layout.html` includes the address, phone, hours,
+menu URL, price range and `sameAs` links to every social profile.
 
 ## The downloadable menu PDFs
 

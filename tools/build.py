@@ -30,6 +30,11 @@ import shutil
 import sys
 from pathlib import Path
 
+# The domain the site will be served from. Canonical URLs, Open Graph URLs,
+# the sitemap and the structured data are all built from it, so moving the
+# site is a one-line change here.
+SITE_URL = "https://www.lossarapeshorsham.com"
+
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "src"
 ASSET_DIRS = ["css", "js", "fonts", "images", "videos"]
@@ -361,13 +366,18 @@ def render_menu(slug: str) -> str:
 
     pdf = ""
     if menu.get("pdf"):
+        label = menu.get("downloadLabel", f'Download the {menu["title"].lower()} menu (PDF)')
         pdf = (
             f'<a class="btn btn--solid menu-download" href="{esc(menu["pdf"])}"'
-            f' target="_blank" rel="noopener" download>'
+            f' target="_blank" rel="noopener">'
             f'<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">'
             f'<path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 19h16"/></svg>'
-            f'Download the {esc(menu["title"].lower())} menu (PDF)</a>'
+            f'{esc(label)}</a>'
         )
+
+    footnote = ""
+    if menu.get("footnote"):
+        footnote = f'<p class="menu-footnote wrap">{esc(menu["footnote"])}</p>'
 
     courses = []
     for course in menu["courses"]:
@@ -421,6 +431,7 @@ def render_menu(slug: str) -> str:
         f'<div class="sarape-band sarape-rule" aria-hidden="true"></div>\n'
         f'<section class="menu-body">\n'
         f'  <div class="wrap courses">{"".join(courses)}</div>\n'
+        f'  {footnote}\n'
         f'</section>\n'
     )
 
@@ -454,6 +465,9 @@ def main() -> None:
             "title": meta.get("title", "Los Sarapes Horsham"),
             "description": meta.get("description", ""),
             "body_class": meta.get("class", ""),
+            "canonical": f"{SITE_URL}/{'' if page.name == 'index.html' else page.name}",
+            "site_url": SITE_URL,
+            "og_image": meta.get("image", "images/photos/dining-room.jpg"),
             "nav_desktop": desktop_nav(active),
             "nav_mobile": mobile_nav(active),
             # `content` is substituted before the hours tokens so that a page
@@ -485,6 +499,22 @@ def main() -> None:
     # Without this, a branch-root Pages build hands the repo to Jekyll, which
     # renders README.md as the home page and ignores everything else.
     (out / ".nojekyll").touch()
+
+    # A sitemap listing exactly the pages that exist, so it cannot go stale.
+    urls = "".join(
+        f"  <url><loc>{SITE_URL}/{'' if name == 'index.html' else name}</loc>"
+        f"<changefreq>monthly</changefreq>"
+        f"<priority>{'1.0' if name == 'index.html' else '0.7'}</priority></url>\n"
+        for name in built
+    )
+    (out / "sitemap.xml").write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        f"{urls}</urlset>\n"
+    )
+    (out / "robots.txt").write_text(
+        f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n"
+    )
 
     print(f"{out}: {len(built)} pages — {', '.join(built)}")
 

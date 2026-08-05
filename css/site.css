@@ -246,7 +246,9 @@ a { color: inherit; }
 
 .submenu-toggle {
   display: grid; place-items: center;
-  width: 20px; height: 20px; padding: 0;
+  /* A real button, so it gets a real target rather than the 20px the
+     chevron itself needs. */
+  width: 28px; height: 28px; padding: 0;
   border: 0; border-radius: 4px;
   background: none; color: inherit; cursor: pointer;
 }
@@ -543,7 +545,7 @@ body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; 
 }
 .welcome__facts {
   display: grid; gap: clamp(28px, 4vw, 48px);
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));
   margin: 0; padding: 0; list-style: none;
 }
 .welcome__facts h3 {
@@ -560,7 +562,7 @@ body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; 
 
 .menu__grid {
   display: grid; gap: clamp(16px, 2vw, 24px);
-  grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(258px, 100%), 1fr));
   margin: 0 0 clamp(36px, 5vw, 52px); padding: 0;
   list-style: none;
 }
@@ -744,7 +746,7 @@ body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; 
 
 .site-footer__cols {
   display: grid; gap: 32px clamp(24px, 3vw, 48px);
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
 }
 /* Grid items default to min-width:auto, which lets wide content push a
    column past its track instead of shrinking. Without this a long line
@@ -909,7 +911,7 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
 
 .menu-links {
   display: grid; gap: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
   margin: 0 0 clamp(36px, 5vw, 52px); padding: 0; list-style: none;
 }
 .menu-links a {
@@ -932,7 +934,7 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
 .menu-index { padding: 0 var(--gutter) var(--section-y); }
 .menu-cards {
   display: grid; gap: clamp(16px, 2vw, 24px);
-  grid-template-columns: repeat(auto-fit, minmax(268px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(268px, 100%), 1fr));
   margin: clamp(44px, 5vw, 64px) 0 clamp(36px, 5vw, 52px); padding: 0;
   list-style: none;
 }
@@ -1018,7 +1020,7 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
 
 .course__items {
   display: grid; gap: 4px 48px;
-  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(330px, 100%), 1fr));
   margin: 0; padding: 0; list-style: none;
 }
 .menu-item { padding: 18px 0; border-bottom: 1px solid var(--line); }
@@ -1107,7 +1109,7 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
 .cards-section { padding: var(--section-y) var(--gutter); }
 .cards {
   display: grid; gap: clamp(16px, 2vw, 24px);
-  grid-template-columns: repeat(auto-fit, minmax(268px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(268px, 100%), 1fr));
   margin: clamp(32px, 4vw, 48px) 0 0; padding: 0; list-style: none;
 }
 .card {
@@ -1151,7 +1153,7 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
 .gallery-section { padding: 0 var(--gutter) var(--section-y); }
 .gallery {
   display: grid; gap: 14px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
   grid-auto-rows: 220px;
   margin: clamp(32px, 4vw, 48px) 0 clamp(36px, 5vw, 52px); padding: 0;
   list-style: none;
@@ -1268,7 +1270,8 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
 .timeline a { font-weight: 700; font-size: .88rem; }
 
 @media (max-width: 640px) {
-  .timeline li { grid-template-columns: minmax(0, 1fr); }
+  .timeline li,
+  .event { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* ---------- Reviews ---------- */
@@ -1277,7 +1280,7 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
 
 .review-grid {
   display: grid; gap: clamp(16px, 2vw, 24px);
-  grid-template-columns: repeat(auto-fit, minmax(266px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(266px, 100%), 1fr));
   margin: 0; padding: 0; list-style: none;
 }
 
@@ -1335,8 +1338,8 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
   border-radius: 999px;
   background: var(--adobe);
   color: var(--bone);
-  font-size: .62rem; font-weight: 700;
-  letter-spacing: .16em; text-transform: uppercase;
+  font-size: .7rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
 }
 
 /* ---------- Sister restaurants ---------- */
@@ -1344,7 +1347,7 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
 .sisters { padding: var(--section-y) var(--gutter); background: var(--bone-2); }
 .sisters__list {
   display: grid; gap: clamp(16px, 2vw, 24px);
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   margin: clamp(32px, 4vw, 48px) 0 0; padding: 0; list-style: none;
 }
 .sisters__list h3 {
@@ -1359,7 +1362,10 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
 /* ---------- Responsive ---------- */
 
 @media (max-width: 1000px) {
-  .bar__layout, .patio__layout, .visit__layout { grid-template-columns: minmax(0, 1fr); }
+  .bar__layout, .patio__layout, .visit__layout,
+  /* prose + aside was never in this list, so it stayed two columns all
+     the way down and crushed the aside to 102px on a 320px screen. */
+  .prose-layout { grid-template-columns: minmax(0, 1fr); }
   .patio__panel { aspect-ratio: 16 / 9; }
 }
 
