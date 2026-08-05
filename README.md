@@ -8,6 +8,7 @@ src/layout.html        the header, footer and <head> every page shares
 src/pages/*.html       front matter + body, one file per page
 src/data/menus.json    every menu item on the site
 src/data/hours.json    THE hours — everything that states a time comes from here
+src/data/reviews.json  guest reviews on the home page
 tools/build.py         renders src/ -> _site/
 tools/build-single-file.py   folds one page into a single self-contained file
 css/ js/ fonts/ images/ videos/
@@ -95,6 +96,8 @@ unnoticed. Search for `tbd` and `TODO`:
 - photographs for the gallery; every empty tile is captioned with the shot
   that belongs there
 - a patio photograph, to replace the woven CSS panel on the home page
+- real guest reviews in `src/data/reviews.json` — three of the four cards
+  are templates and render greyed with a PLACEHOLDER chip
 
 Menu item names and descriptions are written as representative placeholders
 and should be checked against the real menu before launch.

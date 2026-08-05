@@ -214,6 +214,55 @@ def hours_data(hours: dict) -> str:
     })
 
 
+# --------------------------------------------------------------- reviews
+
+def render_reviews() -> str:
+    data = json.loads((SRC / "data" / "reviews.json").read_text())
+
+    cards = []
+    for review in data["reviews"]:
+        placeholder = review.get("placeholder", False)
+        rating = int(review.get("rating", 5))
+
+        stars = "".join(
+            f'<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"'
+            f' class="star{"" if i < rating else " is-empty"}">'
+            f'<path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/>'
+            f"</svg>"
+            for i in range(5)
+        )
+
+        name = esc(review["name"])
+        source = esc(review["source"])
+        attribution = (
+            f'<a href="{esc(review["url"])}" target="_blank" rel="noopener">{source}</a>'
+            if review.get("url") else source
+        )
+
+        cards.append(
+            f'<li class="review-card{" review-card--placeholder" if placeholder else ""}">'
+            + ('<p class="review-card__flag">Placeholder</p>' if placeholder else "")
+            + f'<p class="stars" role="img" aria-label="{rating} out of 5">{stars}</p>'
+            f'<blockquote><p>{esc(review["quote"])}</p></blockquote>'
+            f'<p class="review-card__by">'
+            f'<span class="review-card__name">{name}</span>'
+            f'<span class="review-card__source">on {attribution}</span>'
+            f'</p>'
+            f'</li>'
+        )
+
+    return (
+        f'<section class="reviews" id="reviews">\n'
+        f'  <div class="wrap">\n'
+        f'    <p class="eyebrow">Reviews</p>\n'
+        f'    <h2 class="section-title">{esc(data["heading"])}</h2>\n'
+        f'    <p class="section-lede">{esc(data["lede"])}</p>\n'
+        f'    <ul class="review-grid">{"".join(cards)}</ul>\n'
+        f'  </div>\n'
+        f'</section>\n'
+    )
+
+
 def render_menu(slug: str) -> str:
     """Build a menu page body from src/data/menus.json."""
     data = json.loads((SRC / "data" / "menus.json").read_text())
@@ -306,6 +355,7 @@ def main() -> None:
             "hours_footer_note": hours["footerNote"],
             "hours_jsonld": hours_jsonld(hours),
             "hours_data": hours_data(hours),
+            "reviews": render_reviews(),
         }.items():
             html = html.replace("{{" + token + "}}", value)
 

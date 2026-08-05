@@ -1,0 +1,53 @@
+{
+  "_comment": [
+    "Guest reviews shown at the foot of the home page.",
+    "",
+    "\"placeholder\": true marks a card as a template rather than a real",
+    "review. Those render greyed, with the quote dashed and a PLACEHOLDER",
+    "chip over it, so nobody mistakes one for something a guest wrote and",
+    "so they cannot ship unnoticed.",
+    "",
+    "To use one: paste the real review into \"quote\", put the reviewer's",
+    "name in \"name\", name the site in \"source\", set \"rating\", and set",
+    "\"placeholder\" to false. The card styles itself from there.",
+    "",
+    "Only quote real reviews, from the platform they were left on. The one",
+    "real entry below is the review already quoted on the site.",
+    "",
+    "\"url\" is optional — point it at the review so a reader can check it."
+  ],
+
+  "heading": "What guests say",
+  "lede": "Twenty-five years of them. These are the ones we keep going back to.",
+
+  "reviews": [
+    {
+      "quote": "Excellent vibes and very personal service. The menu was crisp and yummy. Will surely recommend this restaurant to friends and family.",
+      "name": "A guest",
+      "source": "Google",
+      "rating": 5,
+      "placeholder": false
+    },
+    {
+      "quote": "Paste a guest review here. Two or three sentences sit best in this space — long enough to say something specific, short enough to read at a glance.",
+      "name": "Reviewer name",
+      "source": "Google",
+      "rating": 5,
+      "placeholder": true
+    },
+    {
+      "quote": "And a second one here. Reviews that name a dish or a person on the floor read as far more convincing than ones that only say the food was good.",
+      "name": "Reviewer name",
+      "source": "Yelp",
+      "rating": 5,
+      "placeholder": true
+    },
+    {
+      "quote": "A third, if you want a full row. Delete this entry from src/data/reviews.json and the grid closes up on its own.",
+      "name": "Reviewer name",
+      "source": "TripAdvisor",
+      "rating": 4,
+      "placeholder": true
+    }
+  ]
+}

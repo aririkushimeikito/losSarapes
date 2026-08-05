@@ -783,6 +783,10 @@ body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; 
   display: grid; gap: 32px clamp(24px, 3vw, 48px);
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
+/* Grid items default to min-width:auto, which lets wide content push a
+   column past its track instead of shrinking. Without this a long line
+   spills across the neighbouring column. */
+.site-footer__cols > * { min-width: 0; }
 .site-footer__cols h2 {
   margin: 0 0 12px;
   font-size: .74rem; font-weight: 700;
@@ -886,8 +890,21 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
 .status-pill--visit { margin-bottom: 20px; color: var(--cactus); }
 .status-pill--visit.is-closed { color: var(--adobe); }
 
-.status-pill--footer { margin: 0 0 14px !important; color: #7ED39B; }
+/* The footer sits in a narrow grid column, and the full sentence does not
+   fit — it used to run out of its column and across the one beside it. It
+   states just the word, with the sentence kept for screen readers. */
+.status-pill--footer {
+  position: relative;
+  margin: 0 0 16px !important;
+  color: #7ED39B;
+}
 .status-pill--footer.is-closed { color: rgba(246, 239, 226, .6); }
+.status-pill--footer .status-pill__full {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.status-pill--footer .status-pill__short { display: inline; }
 
 /* ---------- Footer hours, grouped ---------- */
 
@@ -1175,6 +1192,74 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
   background: repeating-linear-gradient(90deg,
     rgba(23, 18, 15, .26) 0 1px, rgba(255, 255, 255, .09) 1px 3px);
   mix-blend-mode: overlay;
+}
+
+/* ---------- Reviews ---------- */
+
+.reviews { padding: var(--section-y) var(--gutter); background: var(--bone-2); }
+
+.review-grid {
+  display: grid; gap: clamp(16px, 2vw, 24px);
+  grid-template-columns: repeat(auto-fit, minmax(266px, 1fr));
+  margin: 0; padding: 0; list-style: none;
+}
+
+.review-card {
+  display: flex; flex-direction: column;
+  padding: clamp(26px, 3vw, 34px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bone);
+}
+
+.stars { display: flex; gap: 3px; margin: 0 0 16px; }
+.star { width: 17px; height: 17px; fill: var(--marigold); }
+.star.is-empty { fill: rgba(23, 18, 15, .16); }
+
+.review-card blockquote { margin: 0 0 20px; }
+.review-card blockquote p {
+  margin: 0;
+  font-size: 1.02rem;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+/* Hanging quote mark, so the card reads as speech without spending a line
+   on a decorative glyph. */
+.review-card blockquote p::before { content: "\201C"; margin-left: -.42em; }
+.review-card blockquote p::after { content: "\201D"; }
+
+.review-card__by {
+  display: flex; flex-direction: column; gap: 2px;
+  margin: auto 0 0; padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.review-card__name { font-weight: 700; font-size: .95rem; }
+.review-card__source {
+  font-size: .72rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+/* A card nobody has filled in yet. Deliberately flat and grey so it cannot
+   be mistaken for something a guest actually wrote. */
+.review-card--placeholder {
+  background: transparent;
+  border-style: dashed;
+  border-color: rgba(184, 67, 42, .45);
+}
+.review-card--placeholder .star { fill: rgba(23, 18, 15, .18); }
+.review-card--placeholder blockquote p,
+.review-card--placeholder .review-card__name { color: var(--ink-mute); }
+.review-card--placeholder .review-card__by { border-top-color: rgba(184, 67, 42, .3); }
+.review-card__flag {
+  align-self: flex-start;
+  margin: 0 0 14px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--adobe);
+  color: var(--bone);
+  font-size: .62rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
 }
 
 /* ---------- Sister restaurants ---------- */
