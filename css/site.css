@@ -968,6 +968,13 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
   transition: transform .3s var(--ease), box-shadow .3s var(--ease);
 }
 .menu-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px -28px rgba(23, 18, 15, .8); }
+.menu-card__image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: calc(var(--radius) - 5px);
+  margin-bottom: 18px;
+}
 .menu-card h2 { margin: 0 0 6px; font-family: var(--display); font-weight: 400; font-size: 1.5rem; }
 .menu-card h2 a { text-decoration: none; }
 /* Stretch the card's own link over the whole card so the entire tile is

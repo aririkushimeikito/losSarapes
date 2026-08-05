@@ -105,13 +105,12 @@ cannot ship unnoticed. Search for `tbd` and `TODO`:
 - catering pricing, minimums and lead times
 - private-party room capacities, deposits and minimums
 - this season's dated events, or delete that block
-- the photograph of the three owners for the About page. **Push it to
-  `images/photos/owners.jpg` and rebuild — nothing else to change.** The
-  build renders the photograph if the file is there and the marked
-  placeholder if it is not. It is exempt from the gallery completeness
-  check, so it will not fail the build.
 - real guest reviews in `src/data/reviews.json` — three of the four cards
   are templates and render greyed with a PLACEHOLDER chip
+
+Two menu cards use the nearest photograph rather than an exact one: Sunday
+brunch and Kids have no dedicated shot in the library. Swap them in
+`src/pages/menus.html` when brunch and kids' plates are photographed.
 
 Lunch and Cocktails are transcribed from the printed cards, with real
 prices. Dinner, Kids, Happy hour, Beers and Brunch are still representative
