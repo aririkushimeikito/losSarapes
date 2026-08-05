@@ -346,7 +346,10 @@ body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; 
   border-top: 1px solid var(--line);
 }
 .mobile-nav ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 0; }
-.mobile-nav a {
+/* The Order-online button is an .btn and must keep its centred flex layout,
+   padding and pill border — so it is excluded from this generic link rule,
+   which would otherwise turn it into a left-aligned block. */
+.mobile-nav a:not(.mobile-nav__cta) {
   display: block; padding: 13px 0;
   font-size: 1.02rem; font-weight: 700; text-decoration: none;
   border-bottom: 1px solid var(--line);
