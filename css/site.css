@@ -825,7 +825,12 @@ body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; 
   min-height: clamp(460px, 446px + 4vw, 504px);
   color: var(--bone);
 }
-.page-head--photo > .wrap { position: relative; z-index: 2; }
+/* The head is a flex column (to centre its type vertically). Without this,
+   the wrap would shrink to its content width and the auto margins would
+   centre that — pushing a short head like Kids off to the middle. Fill the
+   column so the wrap keeps its max-width and its left edge lines up with the
+   body content on every page. */
+.page-head--photo > .wrap { position: relative; z-index: 2; width: 100%; }
 .page-head__bg {
   position: absolute; inset: 0; z-index: 0;
   width: 100%; height: 100%;
