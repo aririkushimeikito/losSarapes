@@ -127,23 +127,20 @@ Each page carries its own title, description and canonical URL. The
 Restaurant JSON-LD in `src/layout.html` includes the address, phone, hours,
 menu URL, price range and `sameAs` links to every social profile.
 
-## The downloadable menu PDFs
+## The downloadable menus
 
-`tools/build-menu-pdfs.js` prints the built menu pages to PDF with Chromium,
-so the download and the web page come from the same source and cannot
-disagree. The result is searchable and about 100 KB, which a scan of the
-printed menu would not be. `@media print` in `css/site.css` is that PDF's
-design — it drops the header, footer, jump links and download button, and
-adds the address and phone under the title.
+`menus/` holds the restaurant's own menu PDFs — the printed artwork, not a
+rendering of the web page. `menus/los-sarapes-lunch-menu.pdf` is three
+pages: prix fixe, the a la carte lunch card, and drinks. The download
+button on `menu-lunch.html` opens it in a new tab; the path is the `pdf`
+field in `src/data/menus.json`.
 
-```sh
-python3 tools/build.py _site
-node tools/build-menu-pdfs.js _site      # needs playwright + a Chromium
-cp _site/menus/*.pdf menus/              # commit the result
-```
+To add one for another menu, drop the PDF in `menus/` and set that menu's
+`pdf` field to its path.
 
-The PDFs are committed rather than built in CI, so the deploy job needs no
-browser. Regenerate and re-commit whenever a menu changes.
+`@media print` in `css/site.css` still styles the menu pages for anyone
+printing one straight from the browser — it drops the header, footer, jump
+links and download button, and adds the address and phone under the title.
 
 ## Publishing one page to a CSP-restricted host
 
