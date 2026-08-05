@@ -6,17 +6,10 @@
   'use strict';
 
   /* ------------------------------------------------------------
-     EDIT ME — service hours live in the markup, not here.
-     The <ul id="hoursList"> in the Visit section carries
-     data-day / data-open / data-close on each row and is the one
-     place hours are written down: it renders without JS, it is
-     crawlable, and the "Open now" badge in the hero is derived
-     from it. To change hours, edit that list.
-
-     data-open / data-close are 24h decimals: 11.5 = 11:30 AM.
-     A row with no data-open is a closed day.
+     Hours are not edited here. They live in src/data/hours.json and
+     tools/build.py renders every printed time on the site from that
+     file, plus the JSON blob this script reads further down.
      ------------------------------------------------------------ */
-  var TIME_ZONE = 'America/New_York';
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var conn = navigator.connection || {};
@@ -199,19 +192,29 @@
   /* Nav highlighting is not done here — now that each nav item is its own
      page, tools/build.py stamps aria-current="page" into the markup. */
 
-  /* ---------- Hours: read the markup, don't duplicate it ------ */
+  /* ---------- Open or closed, right now ---------------------- */
 
+  /* Every printed time on the site is generated at build time from
+     src/data/hours.json. The same file is emitted here as JSON, and it is
+     the only thing this script reads — so the badge can never contradict
+     the hours printed next to it. */
+  var blob = document.getElementById('hoursData');
   var HOURS = {};
-  var hoursRows = document.querySelectorAll('#hoursList li[data-day]');
+  var TIME_ZONE = 'America/New_York';
 
-  Array.prototype.forEach.call(hoursRows, function (row) {
-    var day = parseInt(row.getAttribute('data-day'), 10);
-    var open = row.getAttribute('data-open');
-    var close = row.getAttribute('data-close');
-    HOURS[day] = (open === null || close === null)
-      ? null
-      : [[parseFloat(open), parseFloat(close)]];
-  });
+  if (blob) {
+    try {
+      var parsed = JSON.parse(blob.textContent);
+      TIME_ZONE = parsed.timeZone || TIME_ZONE;
+      Object.keys(parsed.days).forEach(function (day) {
+        var block = parsed.days[day];
+        HOURS[parseInt(day, 10)] = block ? [block] : null;
+      });
+    } catch (e) {
+      // Malformed data: leave every badge hidden rather than guess.
+      HOURS = {};
+    }
+  }
 
   function localNow() {
     // Read the clock in the restaurant's time zone, not the visitor's.
@@ -248,26 +251,10 @@
     return '';
   }
 
-  var now = localNow();
+  var targets = document.querySelectorAll('[data-status]');
 
-  // Rewrite each row's time text from its own data, so the printed hours
-  // and the badge can never disagree, and flag today.
-  Array.prototype.forEach.call(hoursRows, function (row) {
-    var day = parseInt(row.getAttribute('data-day'), 10);
-    var blocks = HOURS[day];
-    var cell = row.querySelector('.hours__time');
-
-    if (cell) {
-      cell.textContent = blocks
-        ? blocks.map(function (b) { return pretty(b[0]) + ' – ' + pretty(b[1]); }).join(', ')
-        : 'Closed';
-    }
-    row.classList.toggle('is-closed', !blocks);
-    row.classList.toggle('is-today', day === now.day);
-  });
-
-  var status = document.getElementById('openStatus');
-  if (status && hoursRows.length) {
+  if (targets.length && Object.keys(HOURS).length) {
+    var now = localNow();
     var today = HOURS[now.day] || [];
     var openBlock = null;
 
@@ -275,20 +262,57 @@
       if (now.time >= today[i][0] && now.time < today[i][1]) { openBlock = today[i]; break; }
     }
 
-    if (openBlock) {
-      status.textContent = 'Open now until ' + pretty(openBlock[1]);
-      status.className = 'status is-open';
+    var isOpen = Boolean(openBlock);
+    var text;
+
+    if (isOpen) {
+      text = 'Open now until ' + pretty(openBlock[1]);
     } else {
       var later = null;
       for (var j = 0; j < today.length; j++) {
         if (now.time < today[j][0]) { later = today[j]; break; }
       }
-      status.textContent = later
-        ? 'Opens today at ' + pretty(later[0])
-        : nextOpening(now.day);
-      status.className = 'status is-closed';
+      var next = later ? 'Opens today at ' + pretty(later[0]) : nextOpening(now.day);
+      // Lowercase only the leading O, so the AM/PM stays capitalised.
+      text = 'Closed — ' + next.charAt(0).toLowerCase() + next.slice(1);
     }
-    status.hidden = !status.textContent;
+
+    Array.prototype.forEach.call(targets, function (el) {
+      // The hero badge is bare text inside an existing line; everywhere
+      // else the badge is a pill that owns its own dot.
+      var bare = el.getAttribute('data-status-style') === 'bare';
+
+      if (bare) {
+        el.textContent = text;
+      } else {
+        el.innerHTML = '';
+        var dot = document.createElement('span');
+        dot.className = 'status-pill__dot';
+        dot.setAttribute('aria-hidden', 'true');
+        el.appendChild(dot);
+
+        var full = document.createElement('span');
+        full.className = 'status-pill__full';
+        full.textContent = text;
+        el.appendChild(full);
+
+        // The header bar has no room for the whole sentence on a phone, so
+        // it carries a one-word version and CSS picks which one shows.
+        var short = document.createElement('span');
+        short.className = 'status-pill__short';
+        short.textContent = isOpen ? 'Open' : 'Closed';
+        short.setAttribute('aria-hidden', 'true');
+        el.appendChild(short);
+      }
+
+      el.classList.remove('is-open', 'is-closed');
+      el.classList.add(isOpen ? 'is-open' : 'is-closed');
+      el.hidden = !text;
+    });
+
+    // Mark today's row wherever the full table is printed.
+    var todayRow = document.querySelector('.hours li[data-day="' + now.day + '"]');
+    if (todayRow) todayRow.classList.add('is-today');
   }
 
   /* ---------- Footer year ------------------------------------ */

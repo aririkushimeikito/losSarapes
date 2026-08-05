@@ -1,0 +1,34 @@
+{
+  "_comment": [
+    "THE hours. Everything on the site that states an opening time is",
+    "generated from this file by tools/build.py: the table in the Visit",
+    "section, the grouped list in the footer, the openingHoursSpecification",
+    "in the JSON-LD, and the data blob js/site.js reads to work out whether",
+    "the restaurant is open right now.",
+    "",
+    "Change a time here, run the build, and every one of those follows.",
+    "",
+    "open/close are 24-hour decimals: 11.5 = 11:30 AM, 21 = 9 PM.",
+    "A day with null for both is a closed day.",
+    "",
+    "timeZone is the restaurant's own, not the visitor's — someone checking",
+    "from California should see whether the kitchen in Ambler is open."
+  ],
+
+  "timeZone": "America/New_York",
+
+  "displayOrder": [2, 3, 4, 5, 6, 0, 1],
+
+  "days": [
+    { "day": 0, "name": "Sunday",    "short": "Sun", "open": 11, "close": 21 },
+    { "day": 1, "name": "Monday",    "short": "Mon", "open": null, "close": null },
+    { "day": 2, "name": "Tuesday",   "short": "Tue", "open": 11, "close": 21 },
+    { "day": 3, "name": "Wednesday", "short": "Wed", "open": 11, "close": 21 },
+    { "day": 4, "name": "Thursday",  "short": "Thu", "open": 11, "close": 21 },
+    { "day": 5, "name": "Friday",    "short": "Fri", "open": 11, "close": 22 },
+    { "day": 6, "name": "Saturday",  "short": "Sat", "open": 11, "close": 22 }
+  ],
+
+  "note": "Lunch until 3 PM, dinner from 3 PM. Sunday brunch runs 11 AM to 3 PM. Happy hour Tuesday to Friday, 4:30 to 6:30 PM, at the bar and on the patio.",
+  "footerNote": "Lunch until 3 PM, dinner from 3 PM.<br>Sunday brunch 11 AM &ndash; 3 PM."
+}

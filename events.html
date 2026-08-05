@@ -38,6 +38,10 @@
       <img class="logo--dark" src="images/logo/los-sarapes-logo.png" alt="" width="556" height="449" aria-hidden="true">
     </a>
 
+    <!-- Filled in by js/site.js from the hours blob at the foot of the page.
+         Hidden until then, since with scripting off we cannot know. -->
+    <p class="status-pill status-pill--header" data-status hidden></p>
+
     <nav class="site-nav" aria-label="Main">
       <ul>
         <li><a href="index.html">Home</a></li>
@@ -266,16 +270,9 @@
         </div>
         <div>
           <h2>Hours</h2>
-          <p>
-            Tue&ndash;Thu 11 AM &ndash; 9 PM<br>
-            Fri&ndash;Sat 11 AM &ndash; 10 PM<br>
-            Sun 11 AM &ndash; 9 PM<br>
-            Monday closed
-          </p>
-          <p class="site-footer__fine">
-            Lunch until 3 PM, dinner from 3 PM.<br>
-            Sunday brunch 11 AM &ndash; 3 PM.
-          </p>
+          <p class="status-pill status-pill--footer" data-status hidden></p>
+          <ul class="hours-compact"><li><span>Tue&ndash;Thu</span><span>11 AM &ndash; 9 PM</span></li><li><span>Fri&ndash;Sat</span><span>11 AM &ndash; 10 PM</span></li><li><span>Sun</span><span>11 AM &ndash; 9 PM</span></li><li><span>Mon</span><span>Closed</span></li></ul>
+          <p class="site-footer__fine">Lunch until 3 PM, dinner from 3 PM.<br>Sunday brunch 11 AM &ndash; 3 PM.</p>
         </div>
         <nav aria-label="Footer">
           <h2>More</h2>
@@ -321,11 +318,33 @@
     "addressCountry": "US"
   },
   "openingHoursSpecification": [
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Sunday"], "opens": "11:00", "closes": "21:00" },
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday", "Saturday"], "opens": "11:00", "closes": "22:00" }
+    {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+            "Sunday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday"
+        ],
+        "opens": "11:00",
+        "closes": "21:00"
+    },
+    {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+            "Friday",
+            "Saturday"
+        ],
+        "opens": "11:00",
+        "closes": "22:00"
+    }
   ]
 }
 </script>
+
+<!-- The one place the hours reach the browser as data. Generated from
+     src/data/hours.json, same as every printed time on the page. -->
+<script type="application/json" id="hoursData">{"timeZone": "America/New_York", "days": {"0": [11, 21], "1": null, "2": [11, 21], "3": [11, 21], "4": [11, 21], "5": [11, 22], "6": [11, 22]}}</script>
 
 <script src="js/site.js" defer></script>
 </body>

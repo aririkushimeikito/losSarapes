@@ -7,6 +7,7 @@ bar, 1101 Horsham Rd, Ambler PA. Static HTML, no dependencies, no framework.
 src/layout.html        the header, footer and <head> every page shares
 src/pages/*.html       front matter + body, one file per page
 src/data/menus.json    every menu item on the site
+src/data/hours.json    THE hours — everything that states a time comes from here
 tools/build.py         renders src/ -> _site/
 tools/build-single-file.py   folds one page into a single self-contained file
 css/ js/ fonts/ images/ videos/
@@ -57,16 +58,26 @@ files themselves only name which menu they are. Prices are `null` and render
 as a dashed `$—` placeholder, because the printed menu is the source of truth
 for prices and none were supplied.
 
-**Hours** live in the `<ul id="hoursList">` on `src/pages/index.html`. Each row
-carries `data-open` / `data-close` as 24-hour decimals (`11.5` = 11:30 AM); a
-row with neither is a closed day. `js/site.js` reads that list and derives the
-printed times, the "today" highlight and the *Open now until…* badge in the
-hero, computed in the restaurant's own time zone rather than the visitor's.
-Edit the markup and the rest follows; times still render with JavaScript off.
+**Hours** are `src/data/hours.json`, and that file is the only place any
+opening time is written down. `tools/build.py` renders all of it from there:
 
-Two copies of the hours do **not** update themselves — the footer block and
-the `openingHoursSpecification` JSON-LD, both in `src/layout.html`. Change
-them alongside.
+- the seven-row table in the Visit section
+- the grouped list in the footer (consecutive days with matching hours are
+  collapsed automatically — `Tue–Thu`, `Fri–Sat`)
+- the `openingHoursSpecification` in the JSON-LD
+- a JSON blob `js/site.js` reads to work out whether the kitchen is open
+  right now
+
+`open` / `close` are 24-hour decimals (`11.5` = 11:30 AM); a day with `null`
+for both is closed. Change a time, run the build, and every one of those
+follows — they cannot drift apart.
+
+**The open/closed badge** appears in the header on every page, in the hero
+line, above the Visit hours and in the footer. All four are filled by one
+computation in `js/site.js`, evaluated in the restaurant's own time zone
+rather than the visitor's — someone checking from California sees whether
+Ambler is open. With JavaScript off the badges stay hidden, since the answer
+is not knowable; the printed hours still render, because they are static.
 
 ## Still to fill in
 

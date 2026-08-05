@@ -22,7 +22,7 @@ class: has-hero
       <p class="hero__eyebrow">
         <span>Cook. Taste. Inspire.</span>
         <span class="dot" aria-hidden="true"></span>
-        <span class="status" id="openStatus" hidden></span>
+        <span class="status" data-status data-status-style="bare" hidden></span>
       </p>
 
       <h1 class="hero__title">Always fresh.<br>Mexican at its best.</h1>
@@ -214,33 +214,9 @@ class: has-hero
       <div class="visit__layout">
         <div>
           <h3 class="sr-only">Hours</h3>
-          <ul class="hours" id="hoursList">
-            <li data-day="0" data-open="11" data-close="21">
-              <span class="hours__day">Sunday</span><span class="hours__time">11 AM – 9 PM</span>
-            </li>
-            <li data-day="1" class="is-closed">
-              <span class="hours__day">Monday</span><span class="hours__time">Closed</span>
-            </li>
-            <li data-day="2" data-open="11" data-close="21">
-              <span class="hours__day">Tuesday</span><span class="hours__time">11 AM – 9 PM</span>
-            </li>
-            <li data-day="3" data-open="11" data-close="21">
-              <span class="hours__day">Wednesday</span><span class="hours__time">11 AM – 9 PM</span>
-            </li>
-            <li data-day="4" data-open="11" data-close="21">
-              <span class="hours__day">Thursday</span><span class="hours__time">11 AM – 9 PM</span>
-            </li>
-            <li data-day="5" data-open="11" data-close="22">
-              <span class="hours__day">Friday</span><span class="hours__time">11 AM – 10 PM</span>
-            </li>
-            <li data-day="6" data-open="11" data-close="22">
-              <span class="hours__day">Saturday</span><span class="hours__time">11 AM – 10 PM</span>
-            </li>
-          </ul>
-          <p class="hours__note">
-            Lunch until 3 PM, dinner from 3 PM. Sunday brunch runs 11 AM to 3 PM.
-            Happy hour Tuesday to Friday, 4:30 to 6:30 PM, at the bar and on the patio.
-          </p>
+          <p class="status-pill status-pill--visit" data-status hidden></p>
+          {{hours_table}}
+          <p class="hours__note">{{hours_note}}</p>
         </div>
 
         <div class="contact">

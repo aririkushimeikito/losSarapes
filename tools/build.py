@@ -113,6 +113,107 @@ def mobile_nav(active: str) -> str:
     return "\n      ".join(items)
 
 
+# ---------------------------------------------------------------- hours
+
+def load_hours() -> dict:
+    return json.loads((SRC / "data" / "hours.json").read_text())
+
+
+def pretty(decimal: float) -> str:
+    """11 -> '11 AM', 21.5 -> '9:30 PM'. Matches pretty() in js/site.js."""
+    hour = int(decimal) % 24
+    minute = round((decimal % 1) * 60)
+    suffix = "PM" if hour >= 12 else "AM"
+    twelve = 12 if hour % 12 == 0 else hour % 12
+    return f"{twelve}{f':{minute:02d}' if minute else ''} {suffix}"
+
+
+def span(day: dict) -> str:
+    if day["open"] is None:
+        return "Closed"
+    return f'{pretty(day["open"])} &ndash; {pretty(day["close"])}'
+
+
+def grouped(hours: dict) -> list:
+    """Collapse consecutive days that keep the same hours into one row.
+
+    Walked in displayOrder, which starts on Tuesday, so the closed day
+    falls at the end rather than leading the list with 'Closed'."""
+    by_day = {d["day"]: d for d in hours["days"]}
+    runs = []
+    for num in hours["displayOrder"]:
+        day = by_day[num]
+        key = (day["open"], day["close"])
+        if runs and runs[-1][0] == key:
+            runs[-1][1].append(day)
+        else:
+            runs.append([key, [day]])
+
+    rows = []
+    for _, days in runs:
+        if len(days) == 1:
+            label = days[0]["short"]
+        else:
+            label = f'{days[0]["short"]}&ndash;{days[-1]["short"]}'
+        rows.append((label, span(days[0])))
+    return rows
+
+
+def hours_table(hours: dict) -> str:
+    """The full seven-row table for the Visit section."""
+    by_day = {d["day"]: d for d in hours["days"]}
+    rows = []
+    for num in hours["displayOrder"]:
+        day = by_day[num]
+        closed = ' class="is-closed"' if day["open"] is None else ""
+        rows.append(
+            f'<li data-day="{day["day"]}"{closed}>'
+            f'<span class="hours__day">{day["name"]}</span>'
+            f'<span class="hours__time">{span(day)}</span>'
+            f'</li>'
+        )
+    return f'<ul class="hours" id="hoursList">{"".join(rows)}</ul>'
+
+
+def hours_footer(hours: dict) -> str:
+    rows = "".join(
+        f'<li><span>{label}</span><span>{time}</span></li>'
+        for label, time in grouped(hours)
+    )
+    return f'<ul class="hours-compact">{rows}</ul>'
+
+
+def hours_jsonld(hours: dict) -> str:
+    by_day = {d["day"]: d for d in hours["days"]}
+    buckets = {}
+    for day in hours["days"]:
+        if day["open"] is None:
+            continue
+        buckets.setdefault((day["open"], day["close"]), []).append(day["name"])
+
+    specs = []
+    for (opens, closes), names in buckets.items():
+        day_of_week = names[0] if len(names) == 1 else names
+        specs.append({
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": day_of_week,
+            "opens": f"{int(opens):02d}:{round((opens % 1) * 60):02d}",
+            "closes": f"{int(closes):02d}:{round((closes % 1) * 60):02d}",
+        })
+    return json.dumps(specs, indent=4)[1:-1].strip()
+
+
+def hours_data(hours: dict) -> str:
+    """The blob js/site.js reads to decide open or closed, right now."""
+    return json.dumps({
+        "timeZone": hours["timeZone"],
+        "days": {
+            str(d["day"]): None if d["open"] is None else [d["open"], d["close"]]
+            for d in hours["days"]
+        },
+    })
+
+
 def render_menu(slug: str) -> str:
     """Build a menu page body from src/data/menus.json."""
     data = json.loads((SRC / "data" / "menus.json").read_text())
@@ -178,6 +279,7 @@ def main() -> None:
         out.mkdir(parents=True)
 
     layout = (SRC / "layout.html").read_text()
+    hours = load_hours()
     built = []
 
     for page in sorted((SRC / "pages").glob("*.html")):
@@ -195,7 +297,15 @@ def main() -> None:
             "body_class": meta.get("class", ""),
             "nav_desktop": desktop_nav(active),
             "nav_mobile": mobile_nav(active),
+            # `content` is substituted before the hours tokens so that a page
+            # body may use them too — the Visit table on the home page does.
             "content": body,
+            "hours_table": hours_table(hours),
+            "hours_footer": hours_footer(hours),
+            "hours_note": hours["note"],
+            "hours_footer_note": hours["footerNote"],
+            "hours_jsonld": hours_jsonld(hours),
+            "hours_data": hours_data(hours),
         }.items():
             html = html.replace("{{" + token + "}}", value)
 
