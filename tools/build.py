@@ -296,8 +296,8 @@ def render_gallery() -> str:
         )
 
     return (
-        f'<nav class="jump-nav" aria-label="Sections of this gallery">\n'
-        f'  <ul>{jump}</ul>\n'
+        f'<nav class="jump-bar" aria-label="Sections of this gallery">\n'
+        f'  <div class="wrap"><ul>{jump}</ul></div>\n'
         f'</nav>\n'
         f'{"".join(sections)}\n'
     )
@@ -449,13 +449,13 @@ def render_menu(slug: str) -> str:
         f'    <h1 class="section-title">{esc(menu["title"])}</h1>\n'
         f'    <p class="section-lede">{esc(menu["lede"])}</p>\n'
         f'    <p class="served">{esc(menu["served"])}</p>\n'
-        f'    <nav class="course-jump" aria-label="Sections of this menu">\n'
-        f'      <ul>{jump}</ul>\n'
-        f'    </nav>\n'
         f'    {pdf}\n'
         f'  </div>\n'
         f'</section>\n'
         f'<div class="sarape-band sarape-rule" aria-hidden="true"></div>\n'
+        f'<nav class="jump-bar" aria-label="Sections of this menu">\n'
+        f'  <div class="wrap"><ul>{jump}</ul></div>\n'
+        f'</nav>\n'
         f'<section class="menu-body">\n'
         f'  <div class="wrap courses">{"".join(courses)}</div>\n'
         f'  {footnote}\n'
@@ -491,7 +491,9 @@ def main() -> None:
         for token, value in {
             "title": meta.get("title", "Los Sarapes Horsham"),
             "description": meta.get("description", ""),
-            "body_class": meta.get("class", ""),
+            "body_class": (meta.get("class", "") + (
+                " has-jump" if (meta.get("menu") or active == "gallery") else ""
+            )).strip(),
             "canonical": f"{SITE_URL}/{'' if page.name == 'index.html' else page.name}",
             "site_url": SITE_URL,
             "og_image": meta.get("image", "images/photos/dining-room.jpg"),

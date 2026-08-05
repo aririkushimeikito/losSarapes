@@ -116,6 +116,19 @@ Lunch and Cocktails are transcribed from the printed cards, with real
 prices. Dinner, Kids, Happy hour, Beers and Brunch are still representative
 placeholders and should be replaced from the printed menus.
 
+## The jump bar
+
+Menu pages and the gallery carry a bar of section titles that sticks under
+the header, so the list stays reachable from anywhere on a long page. It is
+rendered as a direct child of `<main>` — a sticky element only sticks inside
+its own parent, so leaving it in the page head would unstick it as soon as
+that section scrolled away.
+
+Pages that have one get `has-jump` on `<body>`, which adds the bar's height
+to their anchor offset. `html` already carries `scroll-padding-top` for the
+header; the class adds only the bar on top of that. Counting the header
+twice is what once dropped every jump target a header-height too low.
+
 ## SEO
 
 `SITE_URL` at the top of `tools/build.py` is the domain everything is built
