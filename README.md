@@ -58,7 +58,10 @@ used for the desktop bar, the dropdown and the mobile panel. Add a page there
 and add the matching file in `src/pages/`.
 
 **Menus** are `src/data/menus.json`. Every menu page renders from it; the page
-files themselves only name which menu they are. Prices are `null` and render
+files themselves only name which menu they are. `heroImage` is the photograph
+behind that menu's title; `cardImage` / `cardWhen` / `cardBlurb` drive its
+card, which appears on both the Menus page and the home page from this one
+definition. Prices are `null` and render
 as a dashed `$—` placeholder, because the printed menu is the source of truth
 for prices and none were supplied.
 
@@ -109,8 +112,8 @@ cannot ship unnoticed. Search for `tbd` and `TODO`:
   are templates and render greyed with a PLACEHOLDER chip
 
 Two menu cards use the nearest photograph rather than an exact one: Sunday
-brunch and Kids have no dedicated shot in the library. Swap them in
-`src/pages/menus.html` when brunch and kids' plates are photographed.
+brunch and Kids have no dedicated shot in the library. Swap `cardImage` in
+`src/data/menus.json` when brunch and kids' plates are photographed.
 
 Lunch and Cocktails are transcribed from the printed cards, with real
 prices. Dinner, Kids, Happy hour, Beers and Brunch are still representative

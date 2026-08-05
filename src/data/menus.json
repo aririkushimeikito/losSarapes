@@ -8,11 +8,16 @@
     "price renders as a dashed $— placeholder that is impossible to miss.",
     "Fill in \"price\": \"$14\" to replace it.",
     "",
-    "\"tags\" is optional — use it for V, GF, spicy and so on."
+    "\"tags\" is optional — use it for V, GF, spicy and so on.",
+    "",
+    "cardImage / cardWhen / cardBlurb drive the menu cards on the Menus page",
+    "AND the teaser on the home page — one definition, two pages, so they",
+    "cannot drift apart. cardOrder sets the order they appear in."
   ],
   "menus": {
     "lunch": {
       "title": "Lunch",
+      "heroImage": "dish-fish-tacos-patio",
       "downloadLabel": "Download Lunch Menu (PDF)",
       "lede": "The full lunch card, plus a $18.99 prix fixe Tuesday to Friday.",
       "served": "Lunch Tuesday to Saturday, 11 AM to 3 PM. Prix fixe is dine-in only, Tuesday to Friday.",
@@ -224,10 +229,14 @@
             }
           ]
         }
-      ]
+      ],
+      "cardImage": "dish-fish-tacos-plate",
+      "cardWhen": "Tuesday to Saturday, 11 AM – 3 PM",
+      "cardBlurb": "Smaller plates, out of the kitchen fast, so an hour is enough."
     },
     "dinner": {
       "title": "Dinner",
+      "heroImage": "dish-steak-grilled",
       "lede": "The full kitchen — moles built from whole chiles, plates that take all morning to get ready.",
       "served": "Dinner is served from 3 PM — until 9 PM Tuesday to Thursday and Sunday, until 10 PM Friday and Saturday",
       "courses": [
@@ -360,10 +369,14 @@
             }
           ]
         }
-      ]
+      ],
+      "cardImage": "dish-steak-grilled",
+      "cardWhen": "From 3 PM until close",
+      "cardBlurb": "The full kitchen — the parrilla, the moles, the plates that take all morning."
     },
     "kids": {
       "title": "Kids",
+      "heroImage": "dish-queso-fritters-angle",
       "lede": "For anyone under twelve. Smaller plates, nothing spicy, and it comes out first.",
       "served": "Available all day",
       "courses": [
@@ -417,10 +430,14 @@
             }
           ]
         }
-      ]
+      ],
+      "cardImage": "dish-queso-fritters-overhead",
+      "cardWhen": "All day",
+      "cardBlurb": "Under twelve. Smaller plates, nothing spicy, and it comes out first."
     },
     "happy-hour": {
       "title": "Happy hour",
+      "heroImage": "bar",
       "lede": "At the bar and on the patio, Tuesday through Friday. Same kitchen, smaller plates, better prices.",
       "served": "Tuesday to Friday, 4:30 PM to 6:30 PM — bar and patio only",
       "courses": [
@@ -482,10 +499,14 @@
             }
           ]
         }
-      ]
+      ],
+      "cardImage": "drink-margarita-blue-rim",
+      "cardWhen": "Tuesday to Friday, 4:30 – 6:30 PM",
+      "cardBlurb": "Bar and patio only. Same kitchen, smaller plates, better prices."
     },
     "cocktails": {
       "title": "Cocktails & wine",
+      "heroImage": "bar-taps",
       "lede": "Margaritas shaken to order with fresh lime, a mezcal list, and wine by the glass or the bottle.",
       "served": "Served whenever the bar is open. Please drink responsibly.",
       "pdf": "menus/los-sarapes-lunch-menu.pdf",
@@ -671,10 +692,14 @@
             }
           ]
         }
-      ]
+      ],
+      "cardImage": "drink-cocktail-red",
+      "cardWhen": "Whenever the bar is open",
+      "cardBlurb": "Margaritas shaken to order, and the tequila shelf behind them."
     },
     "beers": {
       "title": "Beers & drafts",
+      "heroImage": "bar-long",
       "lede": "Mexican lagers, local drafts, and something dark when the weather turns.",
       "served": "Draft list changes — ask what is pouring today",
       "courses": [
@@ -751,10 +776,14 @@
             }
           ]
         }
-      ]
+      ],
+      "cardImage": "bar-taps",
+      "cardWhen": "Draft list rotates",
+      "cardBlurb": "Mexican lagers, local drafts, horchata and aguas frescas."
     },
     "brunch": {
       "title": "Sunday brunch",
+      "heroImage": "table-spread-flatbread",
       "lede": "One day a week, the kitchen turns to eggs, chilaquiles and a very large michelada.",
       "served": "Sundays, 11 AM to 3 PM",
       "courses": [
@@ -834,7 +863,19 @@
             }
           ]
         }
-      ]
+      ],
+      "cardImage": "dish-flatbread-drinks",
+      "cardWhen": "Sundays, 11 AM – 3 PM",
+      "cardBlurb": "Chilaquiles, huevos rancheros, and a very large michelada."
     }
-  }
+  },
+  "cardOrder": [
+    "lunch",
+    "dinner",
+    "happy-hour",
+    "cocktails",
+    "beers",
+    "brunch",
+    "kids"
+  ]
 }

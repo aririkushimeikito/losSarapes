@@ -807,6 +807,39 @@ body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; 
 /* ---------- Inner-page header ---------- */
 
 .page-head { padding: clamp(56px, 7vw, 96px) var(--gutter) clamp(44px, 5vw, 68px); }
+
+/* A photograph behind the menu title, with type over it. */
+.page-head--photo {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-top: clamp(72px, 9vw, 120px);
+  padding-bottom: clamp(56px, 7vw, 84px);
+  color: var(--bone);
+}
+.page-head--photo > .wrap { position: relative; z-index: 2; }
+.page-head__bg {
+  position: absolute; inset: 0; z-index: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+/* Dark enough on the left, where the type sits, to hold AA contrast; the
+   photograph still reads on the right. */
+.page-head__scrim {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(100deg, rgba(23, 18, 15, .90) 0%, rgba(23, 18, 15, .70) 45%, rgba(23, 18, 15, .38) 100%),
+    linear-gradient(to top, rgba(23, 18, 15, .55) 0%, rgba(23, 18, 15, 0) 60%);
+}
+.page-head--photo .eyebrow { color: var(--marigold); }
+.page-head--photo .section-title { text-shadow: 0 2px 30px rgba(23, 18, 15, .5); }
+.page-head--photo .section-lede { color: rgba(246, 239, 226, .92); }
+.page-head--photo .served {
+  background: rgba(246, 239, 226, .14);
+  color: var(--bone);
+  backdrop-filter: blur(4px);
+}
+.page-head--photo .menu-footnote { color: rgba(246, 239, 226, .7); }
 .page-head .section-lede { margin-bottom: 0; }
 .page-head__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
 
@@ -917,47 +950,23 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
 /* ---------- Menus: teaser, index, pages ---------- */
 
 .menu-teaser { padding: var(--section-y) var(--gutter); background: var(--bone-2); }
+.menu-teaser .menu-cards { margin-top: 0; }
 
-.menu-links {
-  display: grid; gap: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
-  margin: 0 0 clamp(36px, 5vw, 52px); padding: 0; list-style: none;
-}
 /* A grid item stretches, but the link inside it does not unless told to,
    so a card whose title wraps was taller than its neighbours. */
-.menu-links li { display: flex; }
-.menu-links a {
-  display: flex; flex-direction: column; gap: 3px;
-  width: 100%;
-  padding: 20px 22px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--bone);
-  text-decoration: none;
-  transition: transform .25s var(--ease), border-color .25s var(--ease);
-}
-.menu-links a:hover { transform: translateY(-3px); border-color: var(--adobe); }
 
-/* There are seven menus, and on a wide screen they belong on one line
-   rather than five-and-two. auto-fit cannot be told "all of them", so the
-   count is stated once there is room for it. */
-@media (min-width: 1100px) {
-  .menu-links { grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; }
-  .menu-links a { padding: 18px 16px; }
-  .menu-links span { font-size: 1.1rem; }
-  .menu-links small { font-size: .66rem; letter-spacing: .08em; }
-}
-.menu-links span { font-family: var(--display); font-size: 1.24rem; }
-.menu-links small {
-  font-size: .72rem; font-weight: 700;
-  letter-spacing: .12em; text-transform: uppercase;
-  color: var(--ink-mute);
-}
 
 .menu-index { padding: 0 var(--gutter) var(--section-y); }
 .menu-cards {
   display: grid; gap: clamp(16px, 2vw, 24px);
   grid-template-columns: repeat(auto-fit, minmax(min(268px, 100%), 1fr));
+}
+/* Seven cards over four columns is two rows — 4 then 3 — which reads
+   better than a single squeezed line. */
+@media (min-width: 1040px) {
+  .menu-cards { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+.menu-cards {
   margin: clamp(44px, 5vw, 64px) 0 clamp(36px, 5vw, 52px); padding: 0;
   list-style: none;
 }

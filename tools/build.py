@@ -373,6 +373,34 @@ def render_reviews() -> str:
     )
 
 
+def render_menu_cards() -> str:
+    """The seven menu cards, used by both the Menus page and the home page.
+
+    They were written out by hand in src/pages/menus.html and summarised
+    again on the home page, which meant a change to a menu's hours had two
+    places to land and one of them got missed. Both render from here now."""
+    data = json.loads((SRC / "data" / "menus.json").read_text())
+    slugs = {"lunch": "menu-lunch.html", "dinner": "menu-dinner.html",
+             "kids": "menu-kids.html", "happy-hour": "menu-happy-hour.html",
+             "cocktails": "menu-cocktails.html", "beers": "menu-beers.html",
+             "brunch": "menu-brunch.html"}
+
+    cards = []
+    for slug in data["cardOrder"]:
+        menu = data["menus"][slug]
+        width, height = jpeg_size(ROOT / "images" / "photos" / f'{menu["cardImage"]}.jpg')
+        cards.append(
+            f'<li class="menu-card">'
+            f'<img class="menu-card__image" src="images/photos/{esc(menu["cardImage"])}.jpg"'
+            f' alt="" width="{width}" height="{height}" loading="lazy">'
+            f'<h2><a href="{slugs[slug]}">{esc(menu["title"])}</a></h2>'
+            f'<p class="menu-card__when">{esc(menu["cardWhen"])}</p>'
+            f'<p>{esc(menu["cardBlurb"])}</p>'
+            f'</li>'
+        )
+    return f'<ul class="menu-cards">{"".join(cards)}</ul>'
+
+
 def anchor(text: str) -> str:
     """A stable id from a course name, for the jump links at the top."""
     slug = re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
@@ -442,8 +470,23 @@ def render_menu(slug: str) -> str:
             f'</section>'
         )
 
+    # A photograph behind the page head, with a scrim over it so the type
+    # keeps its contrast. Rendered as an <img> rather than a CSS background:
+    # it can carry real dimensions, so the band does not jump as it loads.
+    hero = ""
+    head_class = "page-head"
+    if menu.get("heroImage"):
+        width, height = jpeg_size(ROOT / "images" / "photos" / f'{menu["heroImage"]}.jpg')
+        head_class = "page-head page-head--photo"
+        hero = (
+            f'  <img class="page-head__bg" src="images/photos/{esc(menu["heroImage"])}.jpg"'
+            f' alt="" width="{width}" height="{height}" fetchpriority="high">\n'
+            f'  <div class="page-head__scrim" aria-hidden="true"></div>\n'
+        )
+
     return (
-        f'<section class="page-head">\n'
+        f'<section class="{head_class}">\n'
+        f'{hero}'
         f'  <div class="wrap">\n'
         f'    <p class="eyebrow">Menus</p>\n'
         f'    <h1 class="section-title">{esc(menu["title"])}</h1>\n'
@@ -510,6 +553,7 @@ def main() -> None:
             "hours_data": hours_data(hours),
             "reviews": render_reviews(),
             "gallery": render_gallery(),
+            "menu_cards": render_menu_cards(),
             "owners_image": owners_image(),
         }.items():
             html = html.replace("{{" + token + "}}", value)
