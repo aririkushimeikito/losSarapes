@@ -143,8 +143,8 @@ def span(day: dict) -> str:
 def grouped(hours: dict) -> list:
     """Collapse consecutive days that keep the same hours into one row.
 
-    Walked in displayOrder, which starts on Tuesday, so the closed day
-    falls at the end rather than leading the list with 'Closed'."""
+    Walked in displayOrder, which starts on Monday so the week reads in
+    the usual order."""
     by_day = {d["day"]: d for d in hours["days"]}
     runs = []
     for num in hours["displayOrder"]:
