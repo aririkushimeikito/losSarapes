@@ -105,9 +105,11 @@ cannot ship unnoticed. Search for `tbd` and `TODO`:
 - catering pricing, minimums and lead times
 - private-party room capacities, deposits and minimums
 - this season's dated events, or delete that block
-- the photograph of the three owners for the About page — it was not in the
-  batch uploaded to the repository. Drop it at `images/photos/owners.jpg`
-  and swap the marked slot in `src/pages/about.html`
+- the photograph of the three owners for the About page. **Push it to
+  `images/photos/owners.jpg` and rebuild — nothing else to change.** The
+  build renders the photograph if the file is there and the marked
+  placeholder if it is not. It is exempt from the gallery completeness
+  check, so it will not fail the build.
 - real guest reviews in `src/data/reviews.json` — three of the four cards
   are templates and render greyed with a PLACEHOLDER chip
 

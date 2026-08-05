@@ -220,13 +220,40 @@ def hours_data(hours: dict) -> str:
     })
 
 
+def owners_image() -> str:
+    """The photograph of the three owners on the About page.
+
+    It has been sent through chat several times but chat attachments never
+    reach this filesystem — only what is pushed to the repository does. So
+    rather than hard-code one or the other, this checks: drop the file at
+    images/photos/owners.jpg, rebuild, and it appears. No edit needed."""
+    path = ROOT / "images" / "photos" / "owners.jpg"
+    if path.exists():
+        width, height = jpeg_size(path)
+        return (
+            f'<img class="aside-image" src="images/photos/owners.jpg"'
+            f' alt="Luis, Mauricio and Alfonso"'
+            f' width="{width}" height="{height}" loading="lazy">'
+        )
+    return (
+        '<div class="aside-image aside-image--pending" aria-hidden="true">'
+        '<span class="tbd">Owners\' photograph — push it to '
+        'images/photos/owners.jpg</span></div>'
+    )
+
+
 # --------------------------------------------------------------- gallery
 
 def render_gallery() -> str:
     """The gallery page, from src/data/gallery.json and the files on disk."""
     data = json.loads((SRC / "data" / "gallery.json").read_text())
 
-    on_disk = {p.stem for p in (ROOT / "images" / "photos").glob("*.jpg")}
+    # Photographs with a dedicated home elsewhere on the site, which are
+    # deliberately not in the gallery. Without this the completeness check
+    # below would reject them and fail the build.
+    NOT_IN_GALLERY = {"owners"}
+
+    on_disk = {p.stem for p in (ROOT / "images" / "photos").glob("*.jpg")} - NOT_IN_GALLERY
     listed = {p["file"] for p in data["photos"]}
     # An uploaded photograph nobody added to the data file would otherwise sit
     # in the repository unused and unnoticed. Fail instead.
@@ -481,6 +508,7 @@ def main() -> None:
             "hours_data": hours_data(hours),
             "reviews": render_reviews(),
             "gallery": render_gallery(),
+            "owners_image": owners_image(),
         }.items():
             html = html.replace("{{" + token + "}}", value)
 

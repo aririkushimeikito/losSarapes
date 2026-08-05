@@ -548,6 +548,15 @@ body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; 
   grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));
   margin: 0; padding: 0; list-style: none;
 }
+.welcome__image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+}
+/* The rule that used to open each fact now sits under its photograph,
+   separating the picture from the label rather than starting the column. */
 .welcome__facts h3 {
   margin: 0 0 8px; padding-top: 16px;
   border-top: 2px solid var(--ink);
@@ -914,8 +923,12 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
   grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
   margin: 0 0 clamp(36px, 5vw, 52px); padding: 0; list-style: none;
 }
+/* A grid item stretches, but the link inside it does not unless told to,
+   so a card whose title wraps was taller than its neighbours. */
+.menu-links li { display: flex; }
 .menu-links a {
   display: flex; flex-direction: column; gap: 3px;
+  width: 100%;
   padding: 20px 22px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -924,6 +937,16 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
   transition: transform .25s var(--ease), border-color .25s var(--ease);
 }
 .menu-links a:hover { transform: translateY(-3px); border-color: var(--adobe); }
+
+/* There are seven menus, and on a wide screen they belong on one line
+   rather than five-and-two. auto-fit cannot be told "all of them", so the
+   count is stated once there is room for it. */
+@media (min-width: 1100px) {
+  .menu-links { grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; }
+  .menu-links a { padding: 18px 16px; }
+  .menu-links span { font-size: 1.1rem; }
+  .menu-links small { font-size: .66rem; letter-spacing: .08em; }
+}
 .menu-links span { font-family: var(--display); font-size: 1.24rem; }
 .menu-links small {
   font-size: .72rem; font-weight: 700;
