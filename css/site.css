@@ -1188,25 +1188,26 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
 .package { padding: var(--section-y) var(--gutter); }
 .package .wrap { max-width: var(--measure); margin: 0 auto; }
 .package__items {
-  display: grid; gap: clamp(16px, 2vw, 24px);
+  display: grid; gap: clamp(18px, 2.2vw, 28px);
   grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
-  margin: clamp(28px, 4vw, 44px) 0; padding: 0; list-style: none;
+  margin: clamp(36px, 5vw, 56px) 0; padding: 0; list-style: none;
 }
 .package__items li {
-  padding: clamp(20px, 2.5vw, 28px);
+  padding: clamp(22px, 2.5vw, 30px);
+  background: rgba(246, 239, 226, .04);
   border: 1px solid var(--line-dark);
   border-radius: var(--radius);
 }
 .package__items h3 {
-  margin: 0 0 8px;
+  margin: 0 0 10px;
   font-family: var(--display); font-weight: 400; font-size: 1.3rem;
 }
-.package__items p { margin: 0; color: rgba(246, 239, 226, .78); font-size: .95rem; }
+.package__items p { margin: 0; color: rgba(246, 239, 226, .78); font-size: .95rem; line-height: 1.55; }
 
 .package__terms {
-  display: flex; flex-wrap: wrap; gap: 10px 40px;
-  margin: 0 0 clamp(28px, 4vw, 40px);
-  padding-top: clamp(24px, 3vw, 34px);
+  display: flex; flex-wrap: wrap; gap: 18px 48px;
+  margin: clamp(36px, 5vw, 56px) 0 clamp(36px, 5vw, 52px);
+  padding-top: clamp(30px, 3.5vw, 40px);
   border-top: 1px solid var(--line-dark);
 }
 .package__terms p { margin: 0; font-size: 1.02rem; }
@@ -1214,7 +1215,7 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
   font-family: var(--display); font-weight: 400; font-size: 1.5rem;
   color: var(--marigold);
 }
-.package__terms span { display: block; font-size: .82rem; color: rgba(246, 239, 226, .6); }
+.package__terms span { display: block; margin-top: 2px; font-size: .82rem; color: rgba(246, 239, 226, .6); }
 /* The download button sits on the dark package section, so it keeps the
    solid marigold fill rather than the dark-on-light default. */
 .package .menu-download { --btn-bg: var(--marigold); --btn-bd: var(--marigold); --btn-fg: var(--ink); }
