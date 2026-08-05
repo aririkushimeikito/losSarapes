@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Los Sarapes Horsham — Fine Mexican Cuisine, Margarita &amp; Tequila Bar</title>
+<meta name="description" content="Handmade Mexican dishes, a full margarita and tequila bar, and a shaded patio in Horsham, PA. Always fresh, Mexican at its best.">
+<meta name="theme-color" content="#17120F">
+
+<!-- ============================================================
+     BEFORE LAUNCH — placeholder copy is marked with class="tbd"
+     in the Visit section and needs the real values dropped in:
+       • street address
+       • phone number
+       • online-ordering URL (every href="#order" CTA target)
+     Search this file for "tbd" and "TODO" to find them all.
+     ============================================================ -->
+
+<meta property="og:type" content="restaurant">
+<meta property="og:title" content="Los Sarapes Horsham — Fine Mexican Cuisine">
+<meta property="og:description" content="Handmade Mexican dishes, a full margarita and tequila bar, and a shaded patio in Horsham, PA.">
+<meta property="og:image" content="images/hero/los-sarapes-hero-poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23B8432A'/><text x='16' y='23' font-family='Arial Black,sans-serif' font-size='19' fill='%23F6EFE2' text-anchor='middle'>S</text></svg>">
+<link rel="apple-touch-icon" href="images/logo/los-sarapes-logo.png">
+
+<!-- Fonts are self-hosted (see css/site.css); these two carry every headline
+     and every line of body copy, so they are worth preloading. -->
+<link rel="preload" as="font" type="font/woff2" href="fonts/lilita-one-400.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/karla-variable.woff2" crossorigin>
+
+<!-- Poster paints instantly while the video streams in -->
+<link rel="preload" as="image" href="images/hero/los-sarapes-hero-poster.jpg" fetchpriority="high">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============================================================
+     HEADER — transparent over the hero, solid once you scroll past
+     ============================================================ -->
+<header class="site-header" id="siteHeader">
+  <div class="site-header__inner">
+    <a class="site-header__brand" href="#hero" aria-label="Los Sarapes Horsham — home">
+      <img class="logo--light" src="images/logo/los-sarapes-logo-white.png" alt="Los Sarapes" width="556" height="449">
+      <img class="logo--dark" src="images/logo/los-sarapes-logo.png" alt="" width="556" height="449" aria-hidden="true">
+    </a>
+
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#bar">Tequila bar</a></li>
+        <li><a href="#patio">Patio</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+    </nav>
+
+    <a class="btn btn--solid site-header__cta" href="#order">Order online</a>
+
+    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="mobileNav">
+      <span class="nav-toggle__bars" aria-hidden="true"></span>
+      <span class="sr-only">Menu</span>
+    </button>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav" hidden>
+    <ul>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#bar">Tequila bar</a></li>
+      <li><a href="#patio">Patio</a></li>
+      <li><a href="#visit">Visit</a></li>
+      <li><a class="btn btn--solid" href="#order">Order online</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================================================
+       HERO — restaurant footage behind the mark, sarape band below
+       ============================================================ -->
+  <section class="hero" id="hero">
+
+    <div class="hero__media">
+      <!-- src is set in JS so phones get the light file and Save-Data users get none -->
+      <video class="hero__video" id="heroVideo"
+             poster="images/hero/los-sarapes-hero-poster.jpg"
+             muted loop playsinline preload="none"
+             aria-hidden="true" tabindex="-1"></video>
+      <div class="hero__scrim" aria-hidden="true"></div>
+    </div>
+
+    <div class="hero__content">
+      <img class="hero__mark" src="images/logo/los-sarapes-logo-white.png"
+           alt="Los Sarapes" width="556" height="449" fetchpriority="high">
+
+      <p class="hero__eyebrow">
+        <span>Horsham, Pennsylvania</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span class="status" id="openStatus" hidden></span>
+      </p>
+
+      <h1 class="hero__title">Always fresh.<br>Mexican at its best.</h1>
+
+      <p class="hero__lede">
+        Handmade dishes, a full margarita and tequila bar, and a shaded patio
+        five minutes off the Turnpike.
+      </p>
+
+      <div class="hero__actions">
+        <a class="btn btn--solid" href="#menu">View the menu</a>
+        <a class="btn btn--ghost" href="#visit">Get directions</a>
+      </div>
+    </div>
+
+    <button class="sound-toggle" id="soundToggle" type="button" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path class="ico-speaker" d="M4 9h4l5-4v14l-5-4H4z"/>
+        <path class="ico-off" d="M17 9.5l4 5m0-5l-4 5"/>
+        <path class="ico-on" d="M16.5 9a4 4 0 0 1 0 6M19 6.5a7.5 7.5 0 0 1 0 11"/>
+      </svg>
+      <span class="sound-toggle__label" id="soundLabel">Sound off</span>
+    </button>
+
+    <a class="scroll-cue" href="#welcome">
+      <span>Menu &amp; hours</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg>
+    </a>
+
+    <!-- Signature: the sarape band, woven along the bottom edge of the hero -->
+    <div class="sarape-band" aria-hidden="true"></div>
+  </section>
+
+  <!-- ============================================================
+       WELCOME — short strip so the hero has something to sit on
+       ============================================================ -->
+  <section class="welcome" id="welcome">
+    <div class="welcome__inner">
+      <h2 class="welcome__title">Come hungry, stay a while</h2>
+      <ul class="welcome__facts">
+        <li>
+          <h3>The patio</h3>
+          <p>Covered, shaded, and open all summer — the best seat we have.</p>
+        </li>
+        <li>
+          <h3>The bar</h3>
+          <p>Margaritas mixed to order and a tequila list worth reading twice.</p>
+        </li>
+        <li>
+          <h3>Takeout</h3>
+          <p>Call ahead or order online and we'll have it hot at the host stand.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="sarape-band sarape-rule" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       MENU — four category cards. No prices: the printed menu is the
+       source of truth for those and we will not let them drift.
+       ============================================================ -->
+  <section class="menu" id="menu">
+    <div class="wrap">
+      <p class="eyebrow">The kitchen</p>
+      <h2 class="section-title">Cooked the long way, every day</h2>
+      <p class="section-lede">
+        Masa pressed in house, salsas roasted each morning, moles built from
+        whole chiles. Nothing here comes out of a bag.
+      </p>
+
+      <ul class="menu__grid">
+        <li class="dish-card">
+          <svg class="dish-card__glyph" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <path d="M3 20a13 13 0 0 1 26 0z"/><path d="M3 20h26M9 20v-4M16 20v-6M23 20v-4"/>
+          </svg>
+          <h3>Antojitos</h3>
+          <p>The small plates the kitchen sends out first — the ones people order twice.</p>
+          <ul>
+            <li>Guacamole, made at the table</li>
+            <li>Queso fundido</li>
+            <li>Street corn</li>
+          </ul>
+        </li>
+
+        <li class="dish-card">
+          <svg class="dish-card__glyph" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <path d="M4 24h24"/><path d="M7 24V13a9 9 0 0 1 18 0v11"/><path d="M12 8V4M16 8V3M20 8V4"/>
+          </svg>
+          <h3>From the grill</h3>
+          <p>Fajitas, carne asada and marinated chicken, still sizzling when they reach you.</p>
+          <ul>
+            <li>Fajitas for one or two</li>
+            <li>Carne asada</li>
+            <li>Camarones a la parrilla</li>
+          </ul>
+        </li>
+
+        <li class="dish-card">
+          <svg class="dish-card__glyph" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <rect x="4" y="9" width="24" height="14" rx="7"/><path d="M11 9v14M21 9v14"/>
+          </svg>
+          <h3>Casa specialties</h3>
+          <p>Enchiladas, chiles rellenos and slow-braised plates that take all morning.</p>
+          <ul>
+            <li>Enchiladas, four ways</li>
+            <li>Chile relleno</li>
+            <li>Carnitas</li>
+          </ul>
+        </li>
+
+        <li class="dish-card">
+          <svg class="dish-card__glyph" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <path d="M8 6h16l-8 9z"/><path d="M16 15v11M11 26h10"/>
+          </svg>
+          <h3>Sweet &amp; strong</h3>
+          <p>Flan, fried ice cream, and a short list of after-dinner pours.</p>
+          <ul>
+            <li>Flan de la casa</li>
+            <li>Fried ice cream</li>
+            <li>Café de olla</li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="menu__note">
+        <p>
+          Vegetarian, gluten-free and kid-sized versions of most plates — just ask
+          your server and the kitchen will sort it out.
+        </p>
+        <!-- TODO: point at the real full-menu PDF or ordering page -->
+        <a class="btn btn--ghost-ink" href="#order">See the full menu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TEQUILA BAR — the dark beat in the middle of the page
+       ============================================================ -->
+  <section class="bar is-dark" id="bar">
+    <div class="wrap bar__layout">
+      <div>
+        <p class="eyebrow">The bar</p>
+        <h2 class="section-title">A tequila list worth reading twice</h2>
+        <p class="section-lede">
+          Every margarita is shaken to order with fresh lime — no mix, no
+          shortcuts. Behind them sits a shelf we have spent years filling.
+        </p>
+        <a class="btn btn--solid" href="#visit">Pull up a stool</a>
+      </div>
+
+      <ol class="bar__list">
+        <li>
+          <dfn>01</dfn>
+          <b>Blanco</b>
+          <span>Unaged and green-peppery. What the house margarita is built on.</span>
+        </li>
+        <li>
+          <dfn>02</dfn>
+          <b>Reposado</b>
+          <span>A few months in oak. Softer, a little vanilla, easy to sip.</span>
+        </li>
+        <li>
+          <dfn>03</dfn>
+          <b>Añejo</b>
+          <span>A year or more down. Order it neat and take your time.</span>
+        </li>
+        <li>
+          <dfn>04</dfn>
+          <b>Mezcal</b>
+          <span>Smoke from the roasting pit. Ask and we will pour you a taste.</span>
+        </li>
+        <li>
+          <dfn>05</dfn>
+          <b>The house margarita</b>
+          <span>Blanco, lime, orange liqueur, salt if you want it. Nothing else.</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PATIO
+       ============================================================ -->
+  <section class="patio" id="patio">
+    <div class="wrap patio__layout">
+      <!-- No patio photography in the asset set yet — the panel is woven
+           from the sarape motif. Swap in an <img> once a shot exists. -->
+      <div class="patio__panel" aria-hidden="true">
+        <span class="patio__badge">Open all summer</span>
+      </div>
+
+      <div>
+        <p class="eyebrow">Outside</p>
+        <h2 class="section-title">The best seat we have</h2>
+        <p class="section-lede">
+          Covered, shaded and quiet enough to hear the person across from you.
+          When the weather turns, it is the first table to go.
+        </p>
+        <ul class="patio__points">
+          <li>Covered and shaded, so the sun is never the problem</li>
+          <li>Full menu and the full bar, served outside</li>
+          <li>Big tables for big groups — call ahead and we will set them up</li>
+          <li>First come, first served, weather permitting</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="sarape-band sarape-rule" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       VISIT — this hours list is the single source of truth for the
+       whole page. js/site.js reads the data-* attributes below and
+       reuses them for the "Open now" badge up in the hero.
+       ============================================================ -->
+  <section class="visit" id="visit">
+    <div class="wrap">
+      <p class="eyebrow">Visit</p>
+      <h2 class="section-title">Five minutes off the Turnpike</h2>
+      <p class="section-lede">
+        Free parking at the door and a host stand that will not make you wait
+        long. Walk-ins always welcome.
+      </p>
+
+      <div class="visit__layout">
+        <div>
+          <h3 class="sr-only">Hours</h3>
+          <ul class="hours" id="hoursList">
+            <li data-day="0" data-open="12"   data-close="21">
+              <span class="hours__day">Sunday</span><span class="hours__time">12 PM – 9 PM</span>
+            </li>
+            <li data-day="1" class="is-closed">
+              <span class="hours__day">Monday</span><span class="hours__time">Closed</span>
+            </li>
+            <li data-day="2" data-open="11.5" data-close="21.5">
+              <span class="hours__day">Tuesday</span><span class="hours__time">11:30 AM – 9:30 PM</span>
+            </li>
+            <li data-day="3" data-open="11.5" data-close="21.5">
+              <span class="hours__day">Wednesday</span><span class="hours__time">11:30 AM – 9:30 PM</span>
+            </li>
+            <li data-day="4" data-open="11.5" data-close="21.5">
+              <span class="hours__day">Thursday</span><span class="hours__time">11:30 AM – 9:30 PM</span>
+            </li>
+            <li data-day="5" data-open="11.5" data-close="22.5">
+              <span class="hours__day">Friday</span><span class="hours__time">11:30 AM – 10:30 PM</span>
+            </li>
+            <li data-day="6" data-open="11.5" data-close="22.5">
+              <span class="hours__day">Saturday</span><span class="hours__time">11:30 AM – 10:30 PM</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="contact">
+          <div class="contact__row">
+            <h3>Address</h3>
+            <!-- TODO: replace with the real street address -->
+            <p><span class="tbd">Add street address</span><br>Horsham, PA 19044</p>
+          </div>
+          <div class="contact__row">
+            <h3>Phone</h3>
+            <!-- TODO: replace with the real number, and wrap it in a tel: link -->
+            <p><span class="tbd">Add phone number</span></p>
+          </div>
+          <div class="contact__row">
+            <h3>Parking</h3>
+            <p>Free lot on site.</p>
+          </div>
+          <div class="contact__actions">
+            <a class="btn btn--ghost-ink" href="https://www.google.com/maps/search/?api=1&amp;query=Los+Sarapes+Horsham+PA"
+               target="_blank" rel="noopener">Open in Maps</a>
+            <a class="btn btn--solid" href="#order">Order online</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ORDER
+       ============================================================ -->
+  <section class="order" id="order">
+    <h2>Hungry now?</h2>
+    <p>Order ahead and we will have it hot and bagged at the host stand.</p>
+    <div class="order__actions">
+      <!-- TODO: swap these for the real ordering link and a tel: number -->
+      <a class="btn btn--solid" href="#order">Start an order</a>
+      <a class="btn btn--ghost" href="#visit">Call the restaurant</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="site-footer__top">
+      <a class="site-footer__brand" href="#hero" aria-label="Los Sarapes Horsham — home">
+        <img src="images/logo/los-sarapes-logo-white.png" alt="Los Sarapes" width="556" height="449" loading="lazy">
+      </a>
+      <nav aria-label="Footer">
+        <ul>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#bar">Tequila bar</a></li>
+          <li><a href="#patio">Patio</a></li>
+          <li><a href="#visit">Visit</a></li>
+          <li><a href="#order">Order online</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="site-footer__base">
+      <p>&copy; <span id="year">2026</span> Los Sarapes Horsham</p>
+      <p>Horsham, Pennsylvania</p>
+      <p>Always fresh. Mexican at its best.</p>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Los Sarapes Horsham",
+  "description": "Handmade Mexican dishes, a full margarita and tequila bar, and a shaded patio in Horsham, PA.",
+  "servesCuisine": "Mexican",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Horsham",
+    "addressRegion": "PA",
+    "postalCode": "19044",
+    "addressCountry": "US"
+  },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "12:00", "closes": "21:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday", "Wednesday", "Thursday"], "opens": "11:30", "closes": "21:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday", "Saturday"], "opens": "11:30", "closes": "22:30" }
+  ]
+}
+</script>
+
+<script src="js/site.js" defer></script>
+</body>
+</html>

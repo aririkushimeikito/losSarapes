@@ -1,0 +1,770 @@
+/* ============================================================
+   LOS SARAPES — SITE STYLES
+   Palette pulled from the room itself: adobe walls, cobalt
+   glassware, marigold, cactus green, limestone plaster.
+   ============================================================ */
+
+/* Fonts are self-hosted (latin subset) rather than pulled from Google:
+   one less DNS + TLS handshake in front of first paint, and no
+   third-party request on a page that does not otherwise make one.
+   Lilita One echoes the rounded, hand-cut lettering in the logo;
+   Karla carries the body copy. */
+@font-face {
+  font-family: "Karla";
+  src: url("../fonts/karla-variable.woff2") format("woff2-variations");
+  font-weight: 200 800;   /* variable file — covers 400/500/700 in one request */
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lilita One";
+  src: url("../fonts/lilita-one-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --ink:        #17120F;
+  --ink-soft:   #3A2E27;
+  --ink-mute:   #6B5C51;
+  --bone:       #F6EFE2;
+  --bone-2:     #EDE2CE;
+  --bone-3:     #E2D4BA;
+  --adobe:      #B8432A;
+  --adobe-dark: #8F3220;
+  --cobalt:     #1B4CA8;
+  --marigold:   #E5A02C;
+  --cactus:     #2F6B4F;
+
+  --line:       rgba(23, 18, 15, .14);
+  --line-dark:  rgba(246, 239, 226, .18);
+
+  --display: "Lilita One", "Arial Black", sans-serif;
+  --body:    "Karla", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --header-h: 84px;
+  --band-h: 14px;
+  --gutter: clamp(20px, 5vw, 64px);
+  --measure: 1160px;
+  --section-y: clamp(72px, 9vw, 128px);
+  --radius: 14px;
+  --ease: cubic-bezier(.2, .7, .3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  /* Anchor targets must clear the fixed header, or headings hide behind it. */
+  scroll-padding-top: calc(var(--header-h) + 16px);
+}
+
+body {
+  margin: 0;
+  background: var(--bone);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Set while the mobile nav is open so the page behind it can't scroll. */
+body.is-locked { overflow: hidden; }
+
+img { display: block; max-width: 100%; height: auto; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--marigold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: absolute; top: 8px; left: 8px; z-index: 100;
+  transform: translateY(-200%);
+  background: var(--ink); color: var(--bone);
+  padding: 10px 16px; border-radius: 999px;
+  font-weight: 700; text-decoration: none;
+}
+.skip-link:focus { transform: none; }
+
+/* ---------- Shared type ---------- */
+
+.wrap { max-width: var(--measure); margin: 0 auto; }
+
+.eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  margin: 0 0 14px;
+  font-size: .76rem; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--adobe);
+}
+.eyebrow::after {
+  content: ""; flex: 1 1 auto; height: 2px; max-width: 84px;
+  background: currentColor; opacity: .35;
+}
+
+.section-title {
+  margin: 0 0 18px;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2rem, 4.4vw, 3.2rem);
+  line-height: 1.02;
+  letter-spacing: -.005em;
+  text-wrap: balance;
+}
+
+.section-lede {
+  max-width: 54ch;
+  margin: 0 0 clamp(36px, 5vw, 60px);
+  font-size: clamp(1.02rem, 1.4vw, 1.14rem);
+  color: var(--ink-soft);
+}
+
+/* Dark sections invert the accents rather than restating every rule. */
+.is-dark { background: var(--ink); color: var(--bone); }
+.is-dark .eyebrow { color: var(--marigold); }
+.is-dark .section-lede { color: rgba(246, 239, 226, .78); }
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  --btn-bg: transparent;
+  --btn-fg: var(--bone);
+  --btn-bd: currentColor;
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 50px;
+  padding: 0 26px;
+  border: 1.5px solid var(--btn-bd);
+  border-radius: 999px;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-family: var(--body);
+  font-size: .94rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .25s var(--ease), background-color .25s var(--ease),
+              color .25s var(--ease), border-color .25s var(--ease);
+}
+.btn:hover { transform: translateY(-2px); }
+
+.btn--solid {
+  --btn-bg: var(--marigold);
+  --btn-fg: var(--ink);
+  --btn-bd: var(--marigold);
+}
+.btn--solid:hover { --btn-bg: #F0AF3F; --btn-bd: #F0AF3F; }
+
+.btn--ghost {
+  --btn-bg: transparent;
+  --btn-fg: var(--bone);
+  --btn-bd: rgba(246, 239, 226, .55);
+}
+.btn--ghost:hover { --btn-bg: rgba(246, 239, 226, .12); --btn-bd: var(--bone); }
+
+/* Ghost button sitting on a light background needs ink, not bone. */
+.btn--ghost-ink {
+  --btn-bg: transparent;
+  --btn-fg: var(--ink);
+  --btn-bd: rgba(23, 18, 15, .35);
+}
+.btn--ghost-ink:hover { --btn-bg: rgba(23, 18, 15, .06); --btn-bd: var(--ink); }
+
+/* ---------- Header ---------- */
+
+.site-header {
+  position: fixed; inset: 0 0 auto 0; z-index: 50;
+  color: var(--bone);
+  transition: background-color .35s var(--ease), box-shadow .35s var(--ease),
+              color .35s var(--ease);
+}
+.site-header__inner {
+  display: flex; align-items: center; gap: 28px;
+  height: var(--header-h);
+  padding: 0 var(--gutter);
+}
+/* The logo is a tall stacked lockup — tiles above, wordmark below. Shrunk
+   to fit an 84px bar the wordmark becomes unreadable, so the header crops
+   to the wordmark and lets the hero carry the full lockup. */
+.site-header__brand {
+  display: block;
+  height: 34px;
+  overflow: hidden;
+}
+.site-header__brand img {
+  width: auto;
+  height: 106px;      /* full lockup, scaled so the wordmark reads */
+  margin-top: -72px;  /* …then pulled up so only the wordmark shows */
+}
+
+/* Two logo files, one swapped for the other — no invert filter, which
+   would mangle any non-monochrome artwork the restaurant swaps in later. */
+.site-header__brand .logo--dark { display: none; }
+
+/* Over the hero the mark already appears at full size in the hero itself,
+   so the header wordmark stays out of the way until you scroll past it. */
+.site-header:not(.is-stuck):not(.is-open) .site-header__brand {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+}
+.site-header__brand {
+  transition: opacity .3s var(--ease), transform .3s var(--ease), visibility .3s;
+}
+
+.site-nav { margin-left: auto; }
+.site-nav ul {
+  display: flex; gap: 30px;
+  margin: 0; padding: 0; list-style: none;
+}
+.site-nav a {
+  position: relative;
+  font-size: .82rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  text-decoration: none;
+}
+.site-nav a::after {
+  content: ""; position: absolute; left: 0; bottom: -7px;
+  width: 100%; height: 2px; background: var(--marigold);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .3s var(--ease);
+}
+.site-nav a:hover::after,
+.site-nav a[aria-current="true"]::after { transform: scaleX(1); }
+
+/* Scrolled state: header lands on bone, logo swaps to the ink artwork */
+.site-header.is-stuck,
+.site-header.is-open {
+  background: var(--bone);
+  color: var(--ink);
+  box-shadow: 0 1px 0 rgba(23, 18, 15, .12), 0 10px 30px -20px rgba(23, 18, 15, .5);
+}
+.site-header.is-stuck .logo--light,
+.site-header.is-open  .logo--light { display: none; }
+.site-header.is-stuck .logo--dark,
+.site-header.is-open  .logo--dark { display: block; }
+.site-header.is-stuck .btn--solid { --btn-bg: var(--adobe); --btn-bd: var(--adobe); --btn-fg: var(--bone); }
+.site-header.is-stuck .btn--solid:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; }
+
+.nav-toggle {
+  display: none;
+  width: 46px; height: 46px;
+  margin-left: auto;
+  border: 0; border-radius: 50%;
+  background: rgba(23, 18, 15, .28);
+  color: inherit; cursor: pointer;
+}
+.site-header.is-stuck .nav-toggle,
+.site-header.is-open .nav-toggle { background: rgba(23, 18, 15, .08); }
+.nav-toggle__bars,
+.nav-toggle__bars::before,
+.nav-toggle__bars::after {
+  display: block; width: 20px; height: 2px;
+  margin: 0 auto; background: currentColor;
+  transition: transform .3s var(--ease), opacity .2s linear;
+}
+.nav-toggle__bars::before, .nav-toggle__bars::after { content: ""; }
+.nav-toggle__bars::before { transform: translateY(-6px); }
+.nav-toggle__bars::after  { transform: translateY(4px); }
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars { transform: rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars::before { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars::after { transform: rotate(-90deg) translateX(-4px); }
+
+.mobile-nav {
+  background: var(--bone); color: var(--ink);
+  padding: 4px var(--gutter) 26px;
+  max-height: calc(100svh - var(--header-h));
+  overflow-y: auto;
+  border-top: 1px solid var(--line);
+}
+.mobile-nav ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; }
+.mobile-nav a {
+  display: block; padding: 14px 0;
+  font-size: 1.05rem; font-weight: 700; text-decoration: none;
+  border-bottom: 1px solid var(--line);
+}
+.mobile-nav li:last-child a { border-bottom: 0; }
+.mobile-nav .btn { margin-top: 16px; width: 100%; border-bottom: 0; }
+
+/* ---------- Hero ---------- */
+
+.hero {
+  position: relative;
+  display: flex; align-items: flex-end;
+  min-height: 100vh;          /* fallback for browsers without svh */
+  min-height: 100svh;
+  padding: calc(var(--header-h) + 40px) var(--gutter) calc(150px + var(--band-h));
+  overflow: hidden;
+  color: var(--bone);
+  background: var(--ink);
+}
+
+.hero__media { position: absolute; inset: 0; }
+.hero__video {
+  position: relative;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.hero__video.is-ready { opacity: 1; }
+
+/* Poster stays visible under the video until it can play */
+.hero__media::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: url("../images/hero/los-sarapes-hero-poster.jpg") center/cover no-repeat;
+}
+
+/* Warm scrim — dark enough for AA text contrast, still lets the room read */
+.hero__scrim {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(100deg, rgba(23, 18, 15, .88) 0%, rgba(23, 18, 15, .62) 42%, rgba(23, 18, 15, .28) 100%),
+    linear-gradient(to top, rgba(23, 18, 15, .85) 0%, rgba(23, 18, 15, 0) 55%);
+}
+
+.hero__content { position: relative; max-width: 660px; }
+
+.hero__mark {
+  width: clamp(150px, 20vw, 218px);
+  height: auto;
+  margin-bottom: clamp(22px, 3vw, 34px);
+}
+
+.hero__eyebrow {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 12px;
+  margin: 0 0 18px;
+  font-size: .78rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(246, 239, 226, .82);
+}
+.hero__eyebrow .dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--marigold);
+}
+.hero__eyebrow .status[hidden] { display: none; }
+.hero__eyebrow .status.is-open   { color: #8FD6A8; }
+.hero__eyebrow .status.is-closed { color: rgba(246, 239, 226, .7); }
+
+.hero__title {
+  margin: 0 0 20px;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2.9rem, 7.4vw, 5.4rem);
+  line-height: .96;
+  letter-spacing: -.005em;
+  text-wrap: balance;
+  text-shadow: 0 2px 40px rgba(23, 18, 15, .45);
+}
+
+.hero__lede {
+  max-width: 46ch;
+  margin: 0 0 32px;
+  font-size: clamp(1.02rem, 1.5vw, 1.16rem);
+  color: rgba(246, 239, 226, .9);
+}
+
+.hero__actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+/* ---------- Sound toggle ---------- */
+
+.sound-toggle {
+  position: absolute; right: var(--gutter);
+  bottom: calc(46px + var(--band-h));
+  z-index: 3;
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 9px 16px 9px 12px;
+  border: 1px solid rgba(246, 239, 226, .35);
+  border-radius: 999px;
+  background: rgba(23, 18, 15, .38);
+  backdrop-filter: blur(6px);
+  color: var(--bone);
+  font-family: var(--body);
+  font-size: .74rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color .25s var(--ease), border-color .25s var(--ease);
+}
+.sound-toggle:hover { background: rgba(23, 18, 15, .62); border-color: rgba(246, 239, 226, .7); }
+.sound-toggle svg {
+  width: 20px; height: 20px; flex: none;
+  fill: none; stroke: currentColor;
+  stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round;
+}
+.sound-toggle .ico-speaker { fill: currentColor; stroke-linejoin: round; }
+.sound-toggle .ico-on { opacity: 0; }
+.sound-toggle[aria-pressed="true"] .ico-on  { opacity: 1; }
+.sound-toggle[aria-pressed="true"] .ico-off { opacity: 0; }
+
+/* ---------- Scroll cue ---------- */
+
+.scroll-cue {
+  position: absolute; left: var(--gutter);
+  bottom: calc(46px + var(--band-h));
+  z-index: 3;
+  display: inline-flex; align-items: center; gap: 10px;
+  color: rgba(246, 239, 226, .78);
+  font-size: .74rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  text-decoration: none;
+}
+.scroll-cue:hover { color: var(--bone); }
+.scroll-cue svg {
+  width: 18px; height: 18px;
+  fill: none; stroke: currentColor;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  animation: cue-bob 2.6s ease-in-out infinite;
+}
+@keyframes cue-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(4px); }
+}
+
+/* ---------- Signature: the sarape band ---------- */
+
+/* Two layers: the coloured weft stripes, plus a fine warp thread overlay
+   so the band reads as woven cloth rather than a flat colour bar. */
+.sarape-band {
+  height: var(--band-h);
+  background-image:
+    repeating-linear-gradient(0deg,
+      rgba(23, 18, 15, .22) 0 1px,
+      rgba(255, 255, 255, .10) 1px 2px),
+    repeating-linear-gradient(90deg,
+      var(--adobe)    0     22px,
+      var(--marigold) 22px  30px,
+      var(--bone)     30px  34px,
+      var(--cobalt)   34px  56px,
+      var(--cactus)   56px  64px,
+      var(--bone-2)   64px  68px,
+      var(--adobe)    68px  76px,
+      var(--ink)      76px  96px
+    );
+}
+.hero .sarape-band {
+  position: absolute; inset: auto 0 0 0;
+  z-index: 4;
+}
+/* Same motif reused as a divider between sections */
+.sarape-rule { height: 8px; }
+
+/* ---------- Welcome strip ---------- */
+
+.welcome { padding: var(--section-y) var(--gutter); }
+.welcome__inner { max-width: var(--measure); margin: 0 auto; }
+.welcome__title {
+  margin: 0 0 clamp(32px, 4vw, 52px);
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  line-height: 1.02;
+  color: var(--adobe);
+}
+.welcome__facts {
+  display: grid; gap: clamp(28px, 4vw, 48px);
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  margin: 0; padding: 0; list-style: none;
+}
+.welcome__facts h3 {
+  margin: 0 0 8px; padding-top: 16px;
+  border-top: 2px solid var(--ink);
+  font-size: .8rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
+}
+.welcome__facts p { margin: 0; color: var(--ink-soft); max-width: 34ch; }
+
+/* ---------- Menu ---------- */
+
+.menu { padding: var(--section-y) var(--gutter); background: var(--bone-2); }
+
+.menu__grid {
+  display: grid; gap: clamp(16px, 2vw, 24px);
+  grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
+  margin: 0 0 clamp(36px, 5vw, 52px); padding: 0;
+  list-style: none;
+}
+
+.dish-card {
+  display: flex; flex-direction: column;
+  padding: clamp(24px, 3vw, 34px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bone);
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.dish-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px -28px rgba(23, 18, 15, .8);
+}
+.dish-card__glyph {
+  width: 34px; height: 34px; margin-bottom: 18px;
+  fill: none; stroke: var(--adobe);
+  stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+}
+.dish-card h3 {
+  margin: 0 0 10px;
+  font-family: var(--display); font-weight: 400;
+  font-size: 1.42rem; line-height: 1.1;
+}
+.dish-card p { margin: 0 0 16px; color: var(--ink-soft); font-size: .97rem; }
+.dish-card ul {
+  margin: auto 0 0; padding: 14px 0 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+  font-size: .84rem; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.dish-card li + li { margin-top: 6px; }
+
+.menu__note {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 18px 24px;
+  padding-top: clamp(28px, 4vw, 40px);
+  border-top: 2px solid var(--ink);
+}
+.menu__note p { margin: 0; max-width: 46ch; color: var(--ink-soft); }
+.menu__note .btn { margin-left: auto; }
+
+/* ---------- Tequila bar ---------- */
+
+.bar { padding: var(--section-y) var(--gutter); }
+.bar__layout {
+  display: grid; gap: clamp(40px, 6vw, 76px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, .92fr);
+  align-items: start;
+}
+.bar__list { margin: 0; padding: 0; list-style: none; }
+.bar__list li {
+  display: grid; gap: 4px 20px;
+  grid-template-columns: auto minmax(0, 1fr);
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line-dark);
+}
+.bar__list li:first-child { border-top: 1px solid var(--line-dark); }
+.bar__list dfn {
+  grid-row: span 2;
+  font-family: var(--display); font-style: normal;
+  font-size: 1.05rem; color: var(--marigold);
+  min-width: 3.2ch;
+}
+.bar__list b { font-size: 1.02rem; }
+.bar__list span { color: rgba(246, 239, 226, .68); font-size: .95rem; }
+
+/* ---------- Patio ---------- */
+
+.patio { padding: var(--section-y) var(--gutter); background: var(--bone-2); }
+.patio__layout {
+  display: grid; gap: clamp(36px, 5vw, 64px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+}
+/* No patio photography in the asset set yet, so the panel is woven from
+   the sarape motif itself — swap in an <img> when a shot is available.
+   Three layers, in paint order: a soft vignette so the cloth has a
+   fold to it, the coloured weft bands running across, and (in ::after)
+   the fine warp threads running down. */
+.patio__panel {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background:
+    radial-gradient(120% 90% at 50% 40%,
+      rgba(255, 255, 255, .10) 0%,
+      rgba(23, 18, 15, 0) 45%,
+      rgba(23, 18, 15, .38) 100%),
+    repeating-linear-gradient(180deg,
+      var(--adobe)      0     26px,
+      var(--marigold)   26px  34px,
+      var(--bone)       34px  40px,
+      var(--adobe-dark) 40px  48px,
+      var(--ink)        48px  65px,
+      var(--cactus)     65px  74px,
+      var(--bone-2)     74px  80px,
+      var(--cobalt)     80px  104px,
+      var(--marigold)   104px 110px,
+      var(--bone)       110px 118px
+    );
+}
+/* Warp threads: vertical, tight, low contrast — the thing that stops a
+   striped gradient reading as a bar chart. */
+.patio__panel::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg,
+    rgba(23, 18, 15, .26) 0 1px,
+    rgba(255, 255, 255, .09) 1px 3px);
+  mix-blend-mode: overlay;
+}
+.patio__badge {
+  position: absolute; z-index: 2; left: 24px; bottom: 24px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: var(--bone);
+  font-size: .76rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
+}
+.patio__points { margin: 0; padding: 0; list-style: none; }
+.patio__points li {
+  position: relative;
+  padding: 0 0 0 30px; margin-bottom: 14px;
+  color: var(--ink-soft);
+}
+.patio__points li::before {
+  content: ""; position: absolute; left: 0; top: .62em;
+  width: 14px; height: 3px; border-radius: 2px;
+  background: var(--cactus);
+}
+
+/* ---------- Visit ---------- */
+
+.visit { padding: var(--section-y) var(--gutter); }
+.visit__layout {
+  display: grid; gap: clamp(36px, 5vw, 64px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+}
+
+.hours { margin: 0; padding: 0; list-style: none; }
+.hours li {
+  display: flex; align-items: baseline; gap: 16px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+.hours li:first-child { border-top: 2px solid var(--ink); }
+.hours__day {
+  flex: none; min-width: 10ch;
+  font-size: .8rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+}
+.hours__time { margin-left: auto; text-align: right; color: var(--ink-soft); }
+.hours li.is-today { background: rgba(229, 160, 44, .16); }
+.hours li.is-today .hours__day::after {
+  content: "Today"; display: inline-block; margin-left: 10px;
+  padding: 2px 8px; border-radius: 999px;
+  background: var(--ink); color: var(--bone);
+  font-size: .62rem; letter-spacing: .12em;
+}
+.hours li.is-closed .hours__time { color: var(--ink-mute); }
+
+.contact { display: grid; gap: 26px; }
+.contact__row h3 {
+  margin: 0 0 6px;
+  font-size: .8rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.contact__row p { margin: 0; font-size: 1.08rem; }
+.contact__row a { text-decoration: none; border-bottom: 1.5px solid var(--marigold); }
+.contact__row a:hover { color: var(--adobe); }
+.contact__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px; }
+
+/* Placeholder copy the owner still needs to fill in. Dashed underline so
+   it is obvious in review and impossible to ship by accident unnoticed. */
+.tbd {
+  border-bottom: 1.5px dashed var(--adobe);
+  color: var(--adobe);
+}
+
+/* ---------- Order band ---------- */
+
+.order {
+  padding: clamp(56px, 7vw, 88px) var(--gutter);
+  background: var(--adobe); color: var(--bone);
+  text-align: center;
+}
+.order h2 {
+  margin: 0 0 12px;
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(1.9rem, 4.2vw, 3rem); line-height: 1.04;
+}
+.order p { max-width: 46ch; margin: 0 auto 28px; color: rgba(246, 239, 226, .88); }
+.order__actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+.order .btn--solid { --btn-bg: var(--bone); --btn-bd: var(--bone); --btn-fg: var(--ink); }
+.order .btn--solid:hover { --btn-bg: #fff; --btn-bd: #fff; }
+
+/* ---------- Footer ---------- */
+
+.site-footer { padding: clamp(48px, 6vw, 76px) var(--gutter) 40px; background: var(--ink); color: var(--bone); }
+.site-footer__top {
+  display: grid; gap: 32px;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--line-dark);
+}
+.site-footer__brand img { width: auto; height: 74px; }
+.site-footer nav ul {
+  display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: flex-end;
+  margin: 0; padding: 0; list-style: none;
+}
+.site-footer nav a {
+  font-size: .8rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  text-decoration: none; color: rgba(246, 239, 226, .78);
+}
+.site-footer nav a:hover { color: var(--marigold); }
+.site-footer__base {
+  display: flex; flex-wrap: wrap; gap: 10px 24px;
+  padding-top: 24px;
+  font-size: .84rem; color: rgba(246, 239, 226, .55);
+}
+.site-footer__base p { margin: 0; }
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1000px) {
+  .bar__layout, .patio__layout, .visit__layout { grid-template-columns: minmax(0, 1fr); }
+  .patio__panel { aspect-ratio: 16 / 9; }
+}
+
+@media (max-width: 900px) {
+  :root { --header-h: 70px; --band-h: 10px; }
+  .site-header__brand { height: 28px; }
+  .site-header__brand img { height: 88px; margin-top: -60px; }
+  .site-nav, .site-header__cta { display: none; }
+  .nav-toggle { display: block; }
+  .hero { padding-bottom: calc(128px + var(--band-h)); }
+  .scroll-cue span { display: none; }
+  .menu__note .btn { margin-left: 0; }
+  .site-footer__top { grid-template-columns: minmax(0, 1fr); }
+  .site-footer nav ul { justify-content: flex-start; }
+}
+
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .hero__actions .btn { flex: 1 1 100%; }
+  /* The eyebrow wraps to two lines here; the separator dot would be left
+     dangling at the end of the first one. */
+  .hero__eyebrow { gap: 4px 12px; }
+  .hero__eyebrow .dot { display: none; }
+  .sound-toggle__label { display: none; }
+  .sound-toggle { padding: 10px; }
+  .order__actions .btn { flex: 1 1 100%; }
+  .hours__day { min-width: 8ch; letter-spacing: .1em; }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  .btn:hover, .dish-card:hover { transform: none; }
+}
