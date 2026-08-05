@@ -195,9 +195,6 @@ a { color: inherit; }
 }
 .btn--outline:hover { --btn-bg: var(--marigold); --btn-bd: var(--marigold); --btn-fg: var(--ink); }
 
-/* Marks a control whose real destination is still to be supplied, so an
-   unwired CTA is obvious in review rather than silently going nowhere. */
-.tbd-link { outline: 2px dashed rgba(184, 67, 42, .55); outline-offset: 3px; }
 
 /* ---------- Header ---------- */
 

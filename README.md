@@ -97,11 +97,9 @@ because they are static.
 
 ## Still to fill in
 
-Placeholders render with a dashed red underline (`class="tbd"`) or a dashed
-outline on unwired buttons (`class="tbd-link"`), so they cannot ship
-unnoticed. Search for `tbd` and `TODO`:
+Placeholders render with a dashed red underline (`class="tbd"`), so they
+cannot ship unnoticed. Search for `tbd` and `TODO`:
 
-- the online-ordering URL — "Start an order" currently goes nowhere
 - a reservation system — "Make a reservation" dials the restaurant instead
 - menu prices, throughout `src/data/menus.json`
 - catering pricing, minimums and lead times
