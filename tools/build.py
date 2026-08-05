@@ -295,12 +295,16 @@ def render_gallery() -> str:
             f'</section>'
         )
 
-    return (
+    # The jump bar is returned on its own so the page can place it as a direct
+    # child of <main>, exactly as the menu pages do — a sticky element only
+    # sticks within its own parent, and the gallery sections carry a .wrap that
+    # would both unstick it and double-indent its chips.
+    jump_bar = (
         f'<nav class="jump-bar" aria-label="Sections of this gallery">\n'
         f'  <div class="wrap"><ul>{jump}</ul></div>\n'
         f'</nav>\n'
-        f'{"".join(sections)}\n'
     )
+    return jump_bar, "".join(sections)
 
 
 def jpeg_size(path: Path) -> tuple[int, int]:
@@ -530,6 +534,8 @@ def main() -> None:
         if meta.get("menu"):
             body = render_menu(meta["menu"]) + body
 
+        gallery_jump, gallery_body = render_gallery()
+
         html = layout
         for token, value in {
             "title": meta.get("title", "Los Sarapes Horsham"),
@@ -552,7 +558,8 @@ def main() -> None:
             "hours_jsonld": hours_jsonld(hours),
             "hours_data": hours_data(hours),
             "reviews": render_reviews(),
-            "gallery": render_gallery(),
+            "gallery_jump": gallery_jump,
+            "gallery": gallery_body,
             "menu_cards": render_menu_cards(),
             "owners_image": owners_image(),
         }.items():

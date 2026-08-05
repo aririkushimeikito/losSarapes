@@ -16,9 +16,12 @@ nav: gallery
 
   <div class="sarape-band sarape-rule" aria-hidden="true"></div>
 
-  <!-- Generated from src/data/gallery.json, which lists every photograph in
-       images/photos and the group it belongs to. The build fails if a file
-       there is missing from that list, so an upload cannot go unused. -->
+  <!-- The jump bar sits at <main> level so it sticks under the header, the
+       same as the menu pages. Everything below it is generated from
+       src/data/gallery.json, which lists every photograph in images/photos
+       and the group it belongs to. The build fails if a file there is missing
+       from that list, so an upload cannot go unused. -->
+{{gallery_jump}}
   <section class="gallery-section">
     <div class="wrap">
 {{gallery}}
