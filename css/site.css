@@ -815,6 +815,20 @@ body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; 
   max-width: 46ch;
 }
 
+/* Every printed address links to the listing, so a visitor can go straight
+   to directions from wherever they happen to be reading it. */
+.map-link {
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--marigold);
+  transition: color .2s var(--ease), border-color .2s var(--ease);
+}
+.map-link:hover { color: var(--adobe); border-bottom-color: var(--adobe); }
+.site-footer .map-link { border-bottom-color: rgba(229, 160, 44, .55); }
+.site-footer .map-link:hover { color: var(--marigold); border-bottom-color: var(--marigold); }
+/* The two-line form in the footer must not carry an underline across the
+   line break. */
+.map-link { display: inline-block; }
+
 /* ---------- Open / closed badge ---------- */
 
 /* One computation in js/site.js fills every [data-status] on the page:
@@ -956,13 +970,17 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
   letter-spacing: .08em;
 }
 
-/* Section titles at the top of a menu, each jumping to its own course. */
+/* Titles that jump to a section of the same page: course names on a menu,
+   group names on the gallery. */
 .course-jump { margin-top: 26px; }
-.course-jump ul {
+.jump-nav { margin: 0 0 clamp(28px, 4vw, 40px); }
+.course-jump ul,
+.jump-nav ul {
   display: flex; flex-wrap: wrap; gap: 8px;
   margin: 0; padding: 0; list-style: none;
 }
-.course-jump a {
+.course-jump a,
+.jump-nav a {
   display: inline-block;
   padding: 8px 16px;
   border: 1px solid var(--line);
@@ -973,7 +991,9 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
   text-decoration: none;
   transition: background-color .2s var(--ease), border-color .2s var(--ease), color .2s var(--ease);
 }
-.course-jump a:hover { background: var(--adobe); border-color: var(--adobe); color: var(--bone); }
+.course-jump a:hover,
+.jump-nav a:hover { background: var(--adobe); border-color: var(--adobe); color: var(--bone); }
+.jump-nav a { padding: 10px 22px; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; }
 
 .menu-download {
   display: inline-flex; align-items: center; gap: 10px;
@@ -1153,13 +1173,13 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
   .tile--wide { grid-column: span 1; }
 }
 
+.gallery-group + .gallery-group { margin-top: clamp(40px, 5vw, 64px); }
 .gallery-heading {
-  margin: clamp(36px, 5vw, 56px) 0 0;
+  margin: 0;
   font-size: .8rem; font-weight: 700;
   letter-spacing: .18em; text-transform: uppercase;
   color: var(--adobe);
 }
-.gallery-heading:first-of-type { margin-top: 0; }
 .gallery-heading + .gallery { margin-top: 18px; }
 
 /* ---------- About: images, closing line, timeline ---------- */

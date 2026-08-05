@@ -1,0 +1,359 @@
+{
+  "_comment": [
+    "Every photograph in images/photos, and which group it belongs to on the",
+    "gallery page. tools/build.py renders the page from this file, so adding",
+    "a photograph means adding it here — nothing else.",
+    "",
+    "The build fails if a file in images/photos is missing from this list, so",
+    "an upload cannot go unnoticed.",
+    "",
+    "Groups are rendered in the order given below, and photographs within a",
+    "group in the order listed."
+  ],
+  "groups": [
+    {
+      "id": "cocktails",
+      "title": "Cocktails"
+    },
+    {
+      "id": "cuisine",
+      "title": "Cuisine"
+    },
+    {
+      "id": "ambient",
+      "title": "Ambient"
+    }
+  ],
+  "photos": [
+    {
+      "file": "drink-margarita-green",
+      "group": "cocktails",
+      "alt": "A green margarita over ice with lime and a salted rim"
+    },
+    {
+      "file": "drink-margarita-blue-rim",
+      "group": "cocktails",
+      "alt": "A margarita with a blue salt rim and a wedge of lime"
+    },
+    {
+      "file": "drink-cucumber",
+      "group": "cocktails",
+      "alt": "A cucumber cocktail in a cobalt-stemmed glass"
+    },
+    {
+      "file": "drink-cocktail-blue",
+      "group": "cocktails",
+      "alt": "A cocktail in cobalt glass with cucumber and herbs"
+    },
+    {
+      "file": "drink-cocktail-red",
+      "group": "cocktails",
+      "alt": "A red cocktail garnished with a strawberry"
+    },
+    {
+      "file": "drink-sangria-flower",
+      "group": "cocktails",
+      "alt": "Sangria with berries and a flower set on top"
+    },
+    {
+      "file": "drink-sangria",
+      "group": "cocktails",
+      "alt": "Sangria in a stemmed glass, fruit through it"
+    },
+    {
+      "file": "drink-sangria-glass",
+      "group": "cocktails",
+      "alt": "A tall sangria on the bar"
+    },
+    {
+      "file": "drink-martini-blue",
+      "group": "cocktails",
+      "alt": "A cobalt martini glass with olives"
+    },
+    {
+      "file": "drink-martini-olives",
+      "group": "cocktails",
+      "alt": "A martini with olives, backlit at the bar"
+    },
+    {
+      "file": "drink-martini-dark",
+      "group": "cocktails",
+      "alt": "A dark martini with a citrus twist"
+    },
+    {
+      "file": "drink-espresso-martini",
+      "group": "cocktails",
+      "alt": "An espresso martini on the bar"
+    },
+    {
+      "file": "drink-sparkling-pink",
+      "group": "cocktails",
+      "alt": "A pink sparkling drink in a flute"
+    },
+    {
+      "file": "drink-sparkling-berry",
+      "group": "cocktails",
+      "alt": "A sparkling flute with a berry dropped in"
+    },
+    {
+      "file": "dish-fish-tacos-overhead",
+      "group": "cuisine",
+      "alt": "Three fish tacos and a green salsa, seen from above"
+    },
+    {
+      "file": "dish-fish-tacos",
+      "group": "cuisine",
+      "alt": "Three fish tacos with slaw and a green salsa"
+    },
+    {
+      "file": "dish-fish-tacos-plate",
+      "group": "cuisine",
+      "alt": "Fish tacos plated with slaw and crema"
+    },
+    {
+      "file": "dish-fish-tacos-close",
+      "group": "cuisine",
+      "alt": "A fish taco close up, slaw and cilantro on top"
+    },
+    {
+      "file": "dish-fish-tacos-salsa",
+      "group": "cuisine",
+      "alt": "Fish tacos beside a spoon of green salsa"
+    },
+    {
+      "file": "dish-fish-tacos-patio",
+      "group": "cuisine",
+      "alt": "Fish tacos on a table out on the patio"
+    },
+    {
+      "file": "dish-fish-tacos-menu",
+      "group": "cuisine",
+      "alt": "Fish tacos beside the printed dinner menu"
+    },
+    {
+      "file": "dish-queso-fritters",
+      "group": "cuisine",
+      "alt": "Fried queso sticks stacked over slaw"
+    },
+    {
+      "file": "dish-queso-fritters-angle",
+      "group": "cuisine",
+      "alt": "Queso sticks plated with slaw and chipotle dots"
+    },
+    {
+      "file": "dish-queso-fritters-overhead",
+      "group": "cuisine",
+      "alt": "Queso sticks seen from above on a white plate"
+    },
+    {
+      "file": "dish-flatbread",
+      "group": "cuisine",
+      "alt": "A flatbread topped with avocado and crema"
+    },
+    {
+      "file": "dish-flatbread-shrimp",
+      "group": "cuisine",
+      "alt": "A shrimp flatbread on a wooden board"
+    },
+    {
+      "file": "dish-flatbread-shrimp-overhead",
+      "group": "cuisine",
+      "alt": "A shrimp flatbread seen from above"
+    },
+    {
+      "file": "dish-flatbread-drinks",
+      "group": "cuisine",
+      "alt": "A flatbread and a cocktail together on the table"
+    },
+    {
+      "file": "dish-salmon",
+      "group": "cuisine",
+      "alt": "Salmon with rice and vegetables"
+    },
+    {
+      "file": "dish-salmon-platter",
+      "group": "cuisine",
+      "alt": "Salmon with wild rice and salad on a white platter"
+    },
+    {
+      "file": "dish-salmon-board",
+      "group": "cuisine",
+      "alt": "Salmon and rice plated on a board"
+    },
+    {
+      "file": "dish-salmon-overhead",
+      "group": "cuisine",
+      "alt": "Salmon plated with rice, a drink alongside"
+    },
+    {
+      "file": "dish-salmon-patio",
+      "group": "cuisine",
+      "alt": "Salmon served out on the patio"
+    },
+    {
+      "file": "dish-salmon-tall",
+      "group": "cuisine",
+      "alt": "Salmon over rice in a pool of sauce"
+    },
+    {
+      "file": "dish-steak-grilled",
+      "group": "cuisine",
+      "alt": "Grilled steak with rice and a cocktail alongside"
+    },
+    {
+      "file": "dish-steak",
+      "group": "cuisine",
+      "alt": "A beef medallion on a tortilla in a red sauce"
+    },
+    {
+      "file": "dish-steak-overhead",
+      "group": "cuisine",
+      "alt": "A beef medallion in red sauce, seen from above"
+    },
+    {
+      "file": "dish-chile-relleno",
+      "group": "cuisine",
+      "alt": "A chile relleno in red sauce, a martini beside it"
+    },
+    {
+      "file": "dish-shrimp-scallop-salad",
+      "group": "cuisine",
+      "alt": "Shrimp and scallop salad, crisp tortilla threads on top"
+    },
+    {
+      "file": "dish-shrimp-salad",
+      "group": "cuisine",
+      "alt": "Shrimp and scallop salad on a patio table"
+    },
+    {
+      "file": "dish-shrimp-salad-overhead",
+      "group": "cuisine",
+      "alt": "Shrimp and scallop salad seen from above"
+    },
+    {
+      "file": "dish-shrimp-salad-tall",
+      "group": "cuisine",
+      "alt": "A bowl of shrimp and scallop salad"
+    },
+    {
+      "file": "dish-salad-blue-glass",
+      "group": "cuisine",
+      "alt": "Salad served beside a cobalt water glass"
+    },
+    {
+      "file": "dish-salad-tall",
+      "group": "cuisine",
+      "alt": "A dressed salad topped with crisp tortilla"
+    },
+    {
+      "file": "dish-tres-leches",
+      "group": "cuisine",
+      "alt": "Tres leches cake with a carved rose and mint"
+    },
+    {
+      "file": "dish-tres-leches-angle",
+      "group": "cuisine",
+      "alt": "Tres leches cake in a pool of sauce"
+    },
+    {
+      "file": "table-spread-tacos",
+      "group": "cuisine",
+      "alt": "Tacos, a flatbread and a red drink across the table"
+    },
+    {
+      "file": "table-spread-flatbread",
+      "group": "cuisine",
+      "alt": "Fish tacos and a flatbread laid out together"
+    },
+    {
+      "file": "table-spread-dinner",
+      "group": "cuisine",
+      "alt": "A table laid with several dishes and drinks"
+    },
+    {
+      "file": "table-spread",
+      "group": "cuisine",
+      "alt": "Dishes and glasses set out down the table"
+    },
+    {
+      "file": "dining-room",
+      "group": "ambient",
+      "alt": "The dining room, tables laid with cobalt glassware under the beams"
+    },
+    {
+      "file": "dining-room-wide",
+      "group": "ambient",
+      "alt": "The dining room from the far end, windows along one side"
+    },
+    {
+      "file": "dining-room-booths",
+      "group": "ambient",
+      "alt": "Booth seating along an orange wall, artwork above"
+    },
+    {
+      "file": "dining-room-booths-2",
+      "group": "ambient",
+      "alt": "Booths and tables under the beamed ceiling"
+    },
+    {
+      "file": "dining-room-fireplace",
+      "group": "ambient",
+      "alt": "Tables beside the fireplace"
+    },
+    {
+      "file": "bar",
+      "group": "ambient",
+      "alt": "The bar, stools along its length"
+    },
+    {
+      "file": "bar-long",
+      "group": "ambient",
+      "alt": "The full length of the bar, stools down one side"
+    },
+    {
+      "file": "bar-taps",
+      "group": "ambient",
+      "alt": "The bar from the other end, taps and bottles behind"
+    },
+    {
+      "file": "patio-covered",
+      "group": "ambient",
+      "alt": "The covered patio under its timber roof, tables along the rail"
+    },
+    {
+      "file": "patio-wide",
+      "group": "ambient",
+      "alt": "The full length of the covered patio on a clear day"
+    },
+    {
+      "file": "patio-tables",
+      "group": "ambient",
+      "alt": "Patio tables laid with glasses, trees beyond the rail"
+    },
+    {
+      "file": "patio-seating",
+      "group": "ambient",
+      "alt": "Tables and chairs across the patio decking"
+    },
+    {
+      "file": "patio-lounge",
+      "group": "ambient",
+      "alt": "Cushioned lounge seating at one end of the patio"
+    },
+    {
+      "file": "patio-lounge-green",
+      "group": "ambient",
+      "alt": "Patio seating looking out into the trees"
+    },
+    {
+      "file": "exterior-building",
+      "group": "ambient",
+      "alt": "The restaurant from the car park, the patio pavilion alongside"
+    },
+    {
+      "file": "exterior-sign",
+      "group": "ambient",
+      "alt": "The Los Sarapes sign at the road"
+    }
+  ]
+}

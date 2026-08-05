@@ -25,6 +25,7 @@ still has no runtime build step and no framework.
 
 import json
 import re
+import struct
 import shutil
 import sys
 from pathlib import Path
@@ -214,6 +215,83 @@ def hours_data(hours: dict) -> str:
     })
 
 
+# --------------------------------------------------------------- gallery
+
+def render_gallery() -> str:
+    """The gallery page, from src/data/gallery.json and the files on disk."""
+    data = json.loads((SRC / "data" / "gallery.json").read_text())
+
+    on_disk = {p.stem for p in (ROOT / "images" / "photos").glob("*.jpg")}
+    listed = {p["file"] for p in data["photos"]}
+    # An uploaded photograph nobody added to the data file would otherwise sit
+    # in the repository unused and unnoticed. Fail instead.
+    if on_disk - listed:
+        raise SystemExit(
+            "gallery.json is missing photographs that exist in images/photos: "
+            + ", ".join(sorted(on_disk - listed))
+        )
+    if listed - on_disk:
+        raise SystemExit(
+            "gallery.json lists photographs that are not in images/photos: "
+            + ", ".join(sorted(listed - on_disk))
+        )
+
+    jump = "".join(
+        f'<li><a href="#gallery-{g["id"]}">{esc(g["title"])}</a></li>'
+        for g in data["groups"]
+    )
+
+    sections = []
+    for group in data["groups"]:
+        photos = [p for p in data["photos"] if p["group"] == group["id"]]
+        tiles = []
+        for i, photo in enumerate(photos):
+            width, height = jpeg_size(ROOT / "images" / "photos" / f'{photo["file"]}.jpg')
+            # Every fourth photograph runs double width, so the grid has a
+            # rhythm instead of reading as a uniform contact sheet.
+            wide = " tile--wide" if i % 7 == 3 else ""
+            tiles.append(
+                f'<li class="tile{wide}">'
+                f'<img src="images/photos/{photo["file"]}.jpg" alt="{esc(photo["alt"])}"'
+                f' width="{width}" height="{height}" loading="lazy">'
+                f'</li>'
+            )
+        sections.append(
+            f'<section class="gallery-group" id="gallery-{group["id"]}">'
+            f'<h2 class="gallery-heading">{esc(group["title"])}</h2>'
+            f'<ul class="gallery">{"".join(tiles)}</ul>'
+            f'</section>'
+        )
+
+    return (
+        f'<nav class="jump-nav" aria-label="Sections of this gallery">\n'
+        f'  <ul>{jump}</ul>\n'
+        f'</nav>\n'
+        f'{"".join(sections)}\n'
+    )
+
+
+def jpeg_size(path: Path) -> tuple[int, int]:
+    """Width and height straight from the JPEG header — no dependencies, and
+    no chance of the markup disagreeing with the file."""
+    data = path.read_bytes()
+    i = 2
+    while i < len(data):
+        if data[i] != 0xFF:
+            i += 1
+            continue
+        marker = data[i + 1]
+        if marker in (0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7,
+                      0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF):
+            height, width = struct.unpack(">HH", data[i + 5:i + 9])
+            return width, height
+        if marker in (0xD8, 0xD9) or 0xD0 <= marker <= 0xD7:
+            i += 2
+            continue
+        i += 2 + struct.unpack(">H", data[i + 2:i + 4])[0]
+    raise SystemExit(f"{path}: could not read dimensions")
+
+
 # --------------------------------------------------------------- reviews
 
 def render_reviews() -> str:
@@ -388,6 +466,7 @@ def main() -> None:
             "hours_jsonld": hours_jsonld(hours),
             "hours_data": hours_data(hours),
             "reviews": render_reviews(),
+            "gallery": render_gallery(),
         }.items():
             html = html.replace("{{" + token + "}}", value)
 
