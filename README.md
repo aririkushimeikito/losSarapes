@@ -93,7 +93,6 @@ unnoticed. Search for `tbd` and `TODO`:
 
 - the online-ordering URL — "Start an order" currently goes nowhere
 - a reservation system — "Make a reservation" dials the restaurant instead
-- social profile URLs (footer)
 - menu prices, throughout `src/data/menus.json`
 - catering pricing, minimums and lead times
 - private-party room capacities, deposits and minimums

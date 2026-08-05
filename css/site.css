@@ -198,10 +198,6 @@ a { color: inherit; }
 /* Marks a control whose real destination is still to be supplied, so an
    unwired CTA is obvious in review rather than silently going nowhere. */
 .tbd-link { outline: 2px dashed rgba(184, 67, 42, .55); outline-offset: 3px; }
-/* On a round icon the dashed square reads as breakage rather than a note,
-   so the marker follows the shape. */
-.social .tbd-link { outline: none; box-shadow: 0 0 0 2px rgba(229, 160, 44, .5); }
-.social .tbd-link:hover { box-shadow: 0 0 0 2px var(--marigold); }
 
 /* ---------- Header ---------- */
 
@@ -806,17 +802,19 @@ body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; 
   color: rgba(246, 239, 226, .78);
 }
 
+/* Five marks have to sit on one row inside a footer column that is about
+   220px wide, so they are sized to fit rather than left to wrap. */
 .social {
-  display: flex !important; flex-wrap: wrap; gap: 10px;
+  display: flex !important; flex-wrap: wrap; gap: 8px;
   margin-top: 16px !important;
 }
 .social a {
   display: grid; place-items: center;
-  width: 38px; height: 38px;
+  width: 32px; height: 32px;
   border-radius: 50%;
   transition: transform .25s var(--ease), filter .25s var(--ease);
 }
-.social svg { width: 26px; height: 26px; display: block; }
+.social svg { width: 23px; height: 23px; display: block; }
 /* Each mark carries its own brand colour, so they sit back a little on the
    dark footer until you go for one. */
 .social a { filter: saturate(.9) brightness(.94); }
