@@ -282,28 +282,29 @@
       // else the badge is a pill that owns its own dot.
       var bare = el.getAttribute('data-status-style') === 'bare';
 
-      if (bare) {
-        el.textContent = text;
-      } else {
-        el.innerHTML = '';
+      el.innerHTML = '';
+
+      if (!bare) {
         var dot = document.createElement('span');
         dot.className = 'status-pill__dot';
         dot.setAttribute('aria-hidden', 'true');
         el.appendChild(dot);
-
-        var full = document.createElement('span');
-        full.className = 'status-pill__full';
-        full.textContent = text;
-        el.appendChild(full);
-
-        // The header bar has no room for the whole sentence on a phone, so
-        // it carries a one-word version and CSS picks which one shows.
-        var short = document.createElement('span');
-        short.className = 'status-pill__short';
-        short.textContent = isOpen ? 'Open' : 'Closed';
-        short.setAttribute('aria-hidden', 'true');
-        el.appendChild(short);
       }
+
+      // One word on screen, everywhere. It fits any column at any width,
+      // and it is the part anyone actually scans for.
+      var word = document.createElement('span');
+      word.className = 'status-pill__word';
+      word.setAttribute('aria-hidden', 'true');
+      word.textContent = isOpen ? 'Open' : 'Closed';
+      el.appendChild(word);
+
+      // The sentence is worth more to someone who cannot see the printed
+      // hours beside it, so it is announced instead of the bare word.
+      var spoken = document.createElement('span');
+      spoken.className = 'sr-only';
+      spoken.textContent = text;
+      el.appendChild(spoken);
 
       el.classList.remove('is-open', 'is-closed');
       el.classList.add(isOpen ? 'is-open' : 'is-closed');

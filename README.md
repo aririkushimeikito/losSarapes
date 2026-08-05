@@ -74,11 +74,16 @@ for both is closed. Change a time, run the build, and every one of those
 follows — they cannot drift apart.
 
 **The open/closed badge** appears in the header on every page, in the hero
-line, above the Visit hours and in the footer. All four are filled by one
-computation in `js/site.js`, evaluated in the restaurant's own time zone
-rather than the visitor's — someone checking from California sees whether
-Ambler is open. With JavaScript off the badges stay hidden, since the answer
-is not knowable; the printed hours still render, because they are static.
+line, above the Visit hours and in the footer. Each one shows a single word
+— Open or Closed — which fits any column at any width. Screen readers get
+the full sentence instead ("Open now until 9 PM"), since it is worth more to
+someone who cannot see the hours printed beside it.
+
+All of them are filled by one computation in `js/site.js`, evaluated in the
+restaurant's own time zone rather than the visitor's — someone checking from
+California sees whether Ambler is open. With JavaScript off every badge stays
+hidden, since the answer is not knowable; the printed hours still render,
+because they are static.
 
 ## Still to fill in
 

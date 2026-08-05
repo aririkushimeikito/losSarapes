@@ -876,10 +876,6 @@ body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; 
   50%      { box-shadow: 0 0 0 4px transparent; opacity: .55; }
 }
 
-/* Only the header ever swaps to the one-word version, and only when the
-   bar is too narrow for the sentence. */
-.status-pill__short { display: none; }
-
 .status-pill--header { color: #7ED39B; }
 .status-pill--header.is-closed { color: rgba(246, 239, 226, .6); }
 .site-header.is-stuck .status-pill--header,
@@ -890,21 +886,8 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
 .status-pill--visit { margin-bottom: 20px; color: var(--cactus); }
 .status-pill--visit.is-closed { color: var(--adobe); }
 
-/* The footer sits in a narrow grid column, and the full sentence does not
-   fit — it used to run out of its column and across the one beside it. It
-   states just the word, with the sentence kept for screen readers. */
-.status-pill--footer {
-  position: relative;
-  margin: 0 0 16px !important;
-  color: #7ED39B;
-}
+.status-pill--footer { margin: 0 0 16px !important; color: #7ED39B; }
 .status-pill--footer.is-closed { color: rgba(246, 239, 226, .6); }
-.status-pill--footer .status-pill__full {
-  position: absolute; width: 1px; height: 1px;
-  padding: 0; margin: -1px; overflow: hidden;
-  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
-}
-.status-pill--footer .status-pill__short { display: inline; }
 
 /* ---------- Footer hours, grouped ---------- */
 
@@ -1302,17 +1285,7 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
 
 @media (max-width: 700px) {
   .site-header__brand img { height: 46px; }
-  /* The full sentence overflows the bar here, so the dot and one word carry
-     it visually. The sentence is hidden from the eye but left in the
-     accessibility tree — display:none would take it from screen readers
-     too, and the visible word is aria-hidden, so they would get nothing. */
-  .status-pill--header .status-pill__full {
-    position: absolute; width: 1px; height: 1px;
-    padding: 0; margin: -1px; overflow: hidden;
-    clip: rect(0 0 0 0); white-space: nowrap; border: 0;
-  }
-  .status-pill--header .status-pill__short { display: inline; }
-  .status-pill--header { position: relative; padding: 6px 12px 6px 10px; }
+  .status-pill--header { padding: 6px 12px 6px 10px; }
 }
 
 @media (max-width: 560px) {
