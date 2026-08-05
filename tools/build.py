@@ -7,7 +7,17 @@ that chrome into thirteen files means every future nav change is thirteen
 edits and one of them gets missed, so the chrome lives in src/layout.html
 and this script stamps it out.
 
-    python3 tools/build.py _site
+    python3 tools/build.py _site            # a clean directory, for local work
+    python3 tools/build.py . --in-place     # pages next to the assets, for Pages
+
+GitHub Pages can serve either an Actions artifact or the branch root, and
+which one a repository uses is not something this build controls. So the
+rendered pages are also committed at the repo root: under a branch-root
+build they are the site, and under an Actions build the workflow renders
+into _site and ignores them. Either way the visitor gets the site rather
+than a Jekyll rendering of the README.
+
+CI re-runs this and fails if the committed pages have drifted from src/.
 
 Stdlib only, no dependencies. Output is ordinary static HTML — the site
 still has no runtime build step and no framework.
@@ -156,10 +166,16 @@ def render_menu(slug: str) -> str:
 
 
 def main() -> None:
-    out = Path(sys.argv[1] if len(sys.argv) > 1 else "_site")
-    if out.exists():
-        shutil.rmtree(out)
-    out.mkdir(parents=True)
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    # In-place means "write the pages beside the assets already here" — so it
+    # must never wipe the target, which is the repository itself.
+    in_place = "--in-place" in sys.argv
+
+    out = Path(args[0] if args else "_site")
+    if not in_place:
+        if out.exists():
+            shutil.rmtree(out)
+        out.mkdir(parents=True)
 
     layout = (SRC / "layout.html").read_text()
     built = []
@@ -190,8 +206,13 @@ def main() -> None:
         (out / page.name).write_text(html)
         built.append(page.name)
 
-    for d in ASSET_DIRS:
-        shutil.copytree(ROOT / d, out / d)
+    # In place, the assets are already sitting next to the pages.
+    if not in_place:
+        for d in ASSET_DIRS:
+            shutil.copytree(ROOT / d, out / d)
+
+    # Without this, a branch-root Pages build hands the repo to Jekyll, which
+    # renders README.md as the home page and ignores everything else.
     (out / ".nojekyll").touch()
 
     print(f"{out}: {len(built)} pages — {', '.join(built)}")

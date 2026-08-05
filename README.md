@@ -22,8 +22,29 @@ python3 -m http.server 8000 --directory _site
 There is no dependency to install — `build.py` is stdlib Python. Output is
 ordinary static HTML; nothing runs at request time.
 
-Pushing to `main` builds and deploys to GitHub Pages automatically
-(`.github/workflows/pages.yml`). The first run enabled Pages itself.
+### How it gets published
+
+GitHub Pages serves either an Actions artifact or the branch root, depending
+on a repository setting this build cannot control. Both are kept working:
+
+- `.github/workflows/pages.yml` renders into `_site/` and uploads it, for an
+  Actions-source build.
+- The rendered pages are **also committed at the repo root**, for a
+  branch-root build. `.nojekyll` sits alongside them, without which Pages
+  hands the repo to Jekyll and serves a rendering of this README instead of
+  the site.
+
+**So after editing anything under `src/`, rebuild in place and commit the
+result:**
+
+```sh
+python3 tools/build.py . --in-place
+```
+
+CI re-runs that and fails the build if the committed pages have drifted.
+
+(If you would rather keep only one path, set Settings → Pages → Source to
+"GitHub Actions" and the root copies become dead weight you can delete.)
 
 ## Editing the site
 

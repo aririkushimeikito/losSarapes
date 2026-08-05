@@ -3,6 +3,11 @@ name: Deploy to GitHub Pages
 # Pages cannot be switched on through the API from outside Actions, so the
 # first run of this workflow turns it on itself (configure-pages
 # enablement) and every run after that just publishes.
+#
+# Note this workflow is only half the story: a repository whose Pages
+# source is the branch root serves the committed pages at the repo root
+# instead of anything uploaded here. Both paths are kept working on
+# purpose — see tools/build.py.
 on:
   push:
     branches: [main]
@@ -19,8 +24,25 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # The pages committed at the repo root are what a branch-root Pages build
+  # serves, so they must not drift from src/. Rebuild and diff.
+  check-committed-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild in place and fail on drift
+        run: |
+          python3 tools/build.py . --in-place
+          if ! git diff --quiet -- '*.html'; then
+            echo "::error::Committed pages are stale. Run: python3 tools/build.py . --in-place"
+            git diff --stat -- '*.html'
+            exit 1
+          fi
+          echo "Committed pages match src/."
+
   deploy:
     runs-on: ubuntu-latest
+    needs: check-committed-pages
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
