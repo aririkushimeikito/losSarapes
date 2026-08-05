@@ -29,6 +29,6 @@
     { "day": 6, "name": "Saturday",  "short": "Sat", "open": 11, "close": 22 }
   ],
 
-  "note": "Lunch until 3 PM, dinner from 3 PM. Sunday brunch runs 11 AM to 3 PM. Happy hour Tuesday to Friday, 4:30 to 6:30 PM, at the bar and on the patio.",
+  "note": "Lunch until 3 PM, dinner from 3 PM. Sunday brunch runs 11 AM to 3 PM. Happy hour Tuesday to Saturday, 4:30 to 6:30 PM, and Sunday 3:30 to 5:30 PM, at the bar and on the patio.",
   "footerNote": "Lunch until 3 PM, dinner from 3 PM.<br>Sunday brunch 11 AM &ndash; 3 PM."
 }

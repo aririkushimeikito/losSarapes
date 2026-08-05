@@ -237,279 +237,666 @@
     "dinner": {
       "title": "Dinner",
       "heroImage": "dish-steak-grilled",
-      "lede": "The full kitchen — moles built from whole chiles, plates that take all morning to get ready.",
-      "served": "Dinner is served from 3 PM — until 9 PM Tuesday to Thursday and Sunday, until 10 PM Friday and Saturday",
+      "downloadLabel": "Download Dinner Menu (PDF)",
+      "lede": "The full dinner card, plus a $29.95 seasonal prix fixe Sunday to Thursday.",
+      "served": "Dinner from 3 PM — until 9 PM Tuesday to Thursday and Sunday, 10 PM Friday and Saturday. Prix fixe is dine-in only, Sunday to Thursday.",
+      "pdf": "menus/los-sarapes-dinner-menu.pdf",
+      "footnote": "Consumption of raw undercooked meat, seafood, shellfish or eggs may increase your risk of food borne illness, especially if a prior medical condition is present. Please inform your server of any food allergies before ordering. Nuts, seeds and spices are used on premises. 20% gratuity will be added to parties of 6 or more. Please no substitutions.",
+      "cardImage": "dish-steak-grilled",
+      "cardWhen": "From 3 PM until close",
+      "cardBlurb": "The full kitchen — the parrilla, the moles, the plates that take all morning.",
       "courses": [
         {
-          "name": "Antojitos",
+          "name": "Prix fixe — $29.95",
+          "note": "Seasonal flavors. Choose a soup or salad, then one entree. Available Sunday to Thursday, dine-in only. Please no substitutions.",
           "items": [
             {
-              "name": "Guacamole, made at the table",
-              "desc": "Avocado, lime, cilantro, serrano, mashed in front of you.",
-              "price": null,
-              "tags": "V, GF"
-            },
-            {
-              "name": "Queso fundido con chorizo",
-              "desc": "Melted cheese and house chorizo, warm flour tortillas.",
+              "name": "Soup or salad",
+              "desc": "Tortilla soup or soup of the day; or ensalada Caesar or salad of the day.",
               "price": null
             },
             {
-              "name": "Ceviche de camarón",
-              "desc": "Shrimp cured in lime, tomato, red onion, avocado.",
-              "price": null,
+              "name": "Salmon enamorado",
+              "desc": "Grilled salmon, mango remoulade. White rice.",
+              "price": null
+            },
+            {
+              "name": "Pez a la talla",
+              "desc": "Grilled grouper in guajillo sauce. White rice.",
+              "price": null
+            },
+            {
+              "name": "Pollo al pipian",
+              "desc": "Stuffed chicken, rajas poblanas, queso fresco, homemade pipian. White rice.",
+              "price": null
+            },
+            {
+              "name": "Pollo criollo",
+              "desc": "Grilled chicken breast in a zesty tomatillo green sauce, filled with queso fresco, chorizo and black beans. Topped with melted cheese. White rice.",
+              "price": null
+            },
+            {
+              "name": "Carne Autlan",
+              "desc": "Grilled sirloin steak served over sauteed tomato, onion and jalapeno, accompanied by home-style potatoes.",
+              "price": null
+            }
+          ],
+          "hidePrice": true
+        },
+        {
+          "name": "Botanas | Appetizers",
+          "items": [
+            {
+              "name": "Rollos costeños",
+              "desc": "Lightly breaded flour tortilla stuffed with Chihuahua cheese, poblano peppers, lump crabmeat, baby shrimp. Served with creamy chipotle sauce.",
+              "price": "13.95"
+            },
+            {
+              "name": "Banderillas ahogadas",
+              "desc": "Crispy corn chicken taquitos, topped with crema, green and red hot sauces, queso fresco, cilantro.",
+              "price": "10.50",
               "tags": "GF"
             },
             {
-              "name": "Nachos de la casa",
-              "desc": "Beans, cheese, pico, jalapeño, crema. Add any protein.",
-              "price": null
+              "name": "Queso fundido",
+              "desc": "Oven melted Chihuahua cheese, choice of chorizo, mushrooms, rajas poblanas or rajas rancheras. Corn or flour tortillas. Add combo 5.",
+              "price": "12.50",
+              "tags": "GF"
             },
             {
-              "name": "Quesadilla de hongos",
-              "desc": "Wild mushrooms, epazote, oaxaca cheese.",
-              "price": null,
-              "tags": "V"
+              "name": "Cocktail de ceviche",
+              "desc": "Grouper and shrimp cooked in lime juices, with a tangy valentina sauce, avocado, cilantro.",
+              "price": "14.95",
+              "tags": "GF"
+            },
+            {
+              "name": "Street corn",
+              "desc": "Chargrilled corn on the cob drizzled with creamy chipotle-mayo, queso fresco.",
+              "price": "7",
+              "tags": "GF"
+            },
+            {
+              "name": "Mexican nachos",
+              "desc": "Homemade corn tortilla chips and fresh pico de gallo.",
+              "price": "7",
+              "tags": "GF"
+            },
+            {
+              "name": "Pulpo asado al chimichurri",
+              "desc": "Chargrilled octopus, chimichurri-lime sauce, resting on taquera sauce, chipotle-mayo, avocado.",
+              "price": "20",
+              "tags": "GF"
+            },
+            {
+              "name": "Guacamole real",
+              "desc": "Made to order, avocados, cilantro, lime and pico de gallo. Served with homemade corn tortilla chips.",
+              "price": "14.50",
+              "tags": "GF"
+            },
+            {
+              "name": "Chihuahua nachos",
+              "desc": "Homemade corn tortilla chips, topped with Chihuahua cheese, refried black beans, pico de gallo, cilantro. Add protein 7 or chorizo 5.",
+              "price": "12",
+              "tags": "GF"
+            },
+            {
+              "name": "Quesadillas",
+              "desc": "Flour tortilla, queso Oaxaca. Add chicken 7.",
+              "price": "7"
             }
           ]
         },
         {
-          "name": "From the grill",
-          "note": "Everything from the parrilla arrives sizzling. Mind the plate.",
+          "name": "Ensaladas | Salads",
           "items": [
             {
-              "name": "Fajitas",
-              "desc": "Steak, chicken, shrimp or vegetables. For one or for two.",
-              "price": null,
-              "tags": "GF"
+              "name": "Ensalada Caesar",
+              "desc": "Romaine lettuce tossed with our homemade croutons and Caesar dressing. Topped with parmesan cheese. Add chicken 7.",
+              "price": "12"
             },
             {
-              "name": "Carne asada",
-              "desc": "Marinated skirt steak, grilled onion, guacamole, tortillas.",
-              "price": null,
+              "name": "Ensalada Sarapes",
+              "desc": "Fresh mix of greens, sauteed vegetables, topped with your choice of marinated and grilled strips of chicken, beef or combo. Pico de gallo, guacamole, sour cream.",
+              "price": "19",
               "tags": "GF"
-            },
-            {
-              "name": "Camarones a la parrilla",
-              "desc": "Garlic-chile shrimp, citrus, charred lime.",
-              "price": null,
-              "tags": "GF"
-            },
-            {
-              "name": "Pollo a la parrilla",
-              "desc": "Achiote-marinated chicken, grilled peppers, rice.",
-              "price": null,
-              "tags": "GF"
-            },
-            {
-              "name": "Molcajete",
-              "desc": "Steak, chicken, shrimp and chorizo in a volcanic stone bowl, still bubbling.",
-              "price": null
             }
           ]
         },
         {
-          "name": "Casa specialties",
+          "name": "Sopas | Soups",
+          "note": "Cup 8, bowl 10.",
           "items": [
             {
-              "name": "Enchiladas, four ways",
-              "desc": "Verde, roja, mole or suiza. Chicken, beef or cheese.",
-              "price": null
-            },
-            {
-              "name": "Mole poblano",
-              "desc": "Chicken under a mole of chiles, chocolate and spice. Two days in the making.",
-              "price": null
-            },
-            {
-              "name": "Carnitas",
-              "desc": "Pork shoulder confited until it falls apart, then crisped.",
-              "price": null,
+              "name": "Sopa de tortilla",
+              "desc": "Chicken broth, shredded chicken, corn tortilla strips, avocado, cilantro, queso fresco.",
+              "price": "8 / 10",
               "tags": "GF"
             },
             {
-              "name": "Chiles rellenos",
-              "desc": "Two poblanos stuffed with cheese, egg battered, salsa ranchera.",
-              "price": null,
-              "tags": "V"
+              "name": "Crema poblana",
+              "desc": "Poblano pepper bisque.",
+              "price": "8 / 10"
+            }
+          ]
+        },
+        {
+          "name": "Flatbreads",
+          "items": [
+            {
+              "name": "Al pastor",
+              "desc": "Grilled pork marinated in achiote and spices. Topped with taquera sauce, cheese, pineapple, cilantro, onions.",
+              "price": "14.50"
+            },
+            {
+              "name": "Carne, pollo asado o carnitas",
+              "desc": "Choice of arrachera beef steak, grilled chicken or carnitas, taquera sauce, cilantro, pico de gallo, cheese.",
+              "price": "16"
+            }
+          ]
+        },
+        {
+          "name": "Tacos",
+          "items": [
+            {
+              "name": "Tacos de camaron",
+              "desc": "Sauteed shrimp, garlic, chipotle, Mexican spices, cheese, avocado and cilantro.",
+              "price": "21",
+              "tags": "GF"
             },
             {
               "name": "Tacos de pescado",
-              "desc": "Beer-battered white fish, cabbage, chipotle crema, three per order.",
-              "price": null
+              "desc": "Grilled or beer battered grouper, shredded carrots, mixed cabbage, cilantro and chipotle-mayo. Taquera sauce on the side.",
+              "price": "20"
+            },
+            {
+              "name": "Tacos de birria",
+              "desc": "Slow simmered braised beef with guajillo and Mexican spices, corn tortillas. Side of savory beef broth. Add cheese 3.",
+              "price": "19",
+              "tags": "GF"
+            },
+            {
+              "name": "Tacos de marisco",
+              "desc": "Octopus, shrimp, chorizo, avocado and cilantro.",
+              "price": "21",
+              "tags": "GF"
+            },
+            {
+              "name": "Ahi tuna tacos",
+              "desc": "Seared ahi tuna, taquera and chipotle cream sauce, avocado and cilantro on flour tortillas.",
+              "price": "21",
+              "tags": "GF"
             }
           ]
         },
         {
-          "name": "Sweet",
+          "name": "Pescados y mariscos | Fish & seafood",
+          "note": "MP — market price.",
           "items": [
             {
-              "name": "Flan de la casa",
-              "desc": "Vanilla custard, burnt caramel.",
-              "price": null,
-              "tags": "V, GF"
+              "name": "Emperador",
+              "desc": "Whole red snapper done crispy, topped with shrimp, calamari, seafood mix. Sauteed in a garlic tequila aioli. Flag rice, spring mix salad.",
+              "price": "MP"
             },
             {
-              "name": "Fried ice cream",
-              "desc": "Cinnamon crust, honey, whipped cream.",
-              "price": null,
-              "tags": "V"
+              "name": "Cuernavaca",
+              "desc": "Grouper, sauteed shrimp and spinach on a Cointreau garlic-lemon sauce. Grilled asparagus, rice.",
+              "price": "32",
+              "tags": "GF"
             },
             {
-              "name": "Churros",
-              "desc": "Rolled in cinnamon sugar, chocolate for dipping.",
-              "price": null,
-              "tags": "V"
+              "name": "Camarones Culiacan",
+              "desc": "Bacon wrapped shrimp, lump crab meat, baby shrimp, creamy tequila-chipotle sauce. Served with rice.",
+              "price": "33",
+              "tags": "GF"
             },
             {
-              "name": "Sopapillas",
-              "desc": "Fried pastry pillows, honey, powdered sugar.",
-              "price": null,
-              "tags": "V"
+              "name": "Salmon al chimichurri",
+              "desc": "Grilled salmon, chimichurri sauce, avocado puree salad, grilled asparagus.",
+              "price": "30",
+              "tags": "GF"
+            },
+            {
+              "name": "Atun Leonardo",
+              "desc": "Seared big eye ahi tuna, seasoned with jalapeño, black sesame seed, grilled vegetables, balsamic vinegar.",
+              "price": "34",
+              "tags": "GF"
+            }
+          ]
+        },
+        {
+          "name": "Pollo | Chicken",
+          "items": [
+            {
+              "name": "Mole poblano",
+              "desc": "Boneless chicken breast, poured with mole sauce, roasted sesame seeds. Black beans, rice.",
+              "price": "28",
+              "tags": "GF"
+            },
+            {
+              "name": "Pollo dos quesos",
+              "desc": "Breaded chicken cutlet, topped with roasted poblano pepper, stuffed with queso fresco and corn, covered with melted Chihuahua cheese, garnished with cilantro. Rice, refried black beans.",
+              "price": "28"
+            },
+            {
+              "name": "Pollo mignon",
+              "desc": "Boneless chicken breast, wrapped with bacon, melted Chihuahua cheese, atop our smoky chorizo-chipotle sauce. Rice, refried black beans.",
+              "price": "28",
+              "tags": "GF"
+            }
+          ]
+        },
+        {
+          "name": "Carnes | Meats",
+          "items": [
+            {
+              "name": "Molcajete mixto | Volcanic rock",
+              "desc": "A steaming molcajete filled with our green tomatillo sauce, a variety of meats — grilled steak, chicken, chorizo and shrimp — grilled green onions, nopal and panela cheese. A crowd favorite.",
+              "price": "35",
+              "tags": "GF"
+            },
+            {
+              "name": "El Yucateco",
+              "desc": "Tender petite steak grilled to perfection, topped with rajas rancheras, chimichurri sauce, crispy potato wedges, Mexican street corn, garnished with chipotle mayo, queso fresco. Spicy.",
+              "price": "35",
+              "tags": "GF"
+            },
+            {
+              "name": "Tampiqueña",
+              "desc": "Center cut filet mignon strips, cheese enchiladas, rajas poblanas, guacamole, rice, refried black beans, queso fresco, cilantro.",
+              "price": "39.50",
+              "tags": "GF"
+            },
+            {
+              "name": "Brochetas | Skewers",
+              "desc": "Marinated filet mignon, chicken and bacon with chile de arbol, grilled with bell pepper and red onion. Rice, beans.",
+              "price": "30"
+            },
+            {
+              "name": "Bisteces encebollados",
+              "desc": "Arrachera beef steak, sauteed jalapeños, onions, habanero sauce and potatoes. Rice and beans.",
+              "price": "30",
+              "tags": "GF"
+            }
+          ]
+        },
+        {
+          "name": "Fajitas & flautas",
+          "items": [
+            {
+              "name": "Fajitas Los Sarapes",
+              "desc": "Sauteed mild bell peppers and onions with your choice of carnitas, beef steak, chicken or vegetarian. Rice, refried black beans. Guacamole, crema, pico de gallo.",
+              "price": "25",
+              "tags": "GF, V"
+            },
+            {
+              "name": "Parrillada",
+              "desc": "Sauteed mild bell peppers and onions with your choice of carnitas, beef steak, chicken or vegetarian, applewood bacon bites, fresh pineapple and cheese. Served on a sizzling skillet.",
+              "price": "26.50",
+              "tags": "GF"
+            },
+            {
+              "name": "Flautas",
+              "desc": "Crispy rolled corn tortillas stuffed with shredded chicken. Topped with sour cream, pico de gallo, guacamole, lettuce, cilantro, hot sauce. Rice.",
+              "price": "20",
+              "tags": "GF"
+            }
+          ]
+        },
+        {
+          "name": "Antojitos | Cravings",
+          "items": [
+            {
+              "name": "Chile relleno",
+              "desc": "Fire roasted and battered poblano pepper, stuffed with cheese, topped with green and red hot sauce, sour cream and cilantro. Rice, refried black beans.",
+              "price": "22"
+            },
+            {
+              "name": "Mexican jumbo",
+              "desc": "The perfect sampler dish: 2 cheese enchiladas smothered with hot sauce, 1 bean and cheese taco and 1 tostada with shredded chicken. Rice, sour cream, guacamole, pico de gallo.",
+              "price": "23"
+            }
+          ]
+        },
+        {
+          "name": "Enchiladas",
+          "items": [
+            {
+              "name": "De la casa",
+              "desc": "Soft corn tortillas stuffed with your choice of chicken, beef, cheese, carnitas or vegetarian. Poured with choice of sauce: green hot, red hot, mole, beans or mild tomato. Topped with crema, cilantro, onions, queso fresco. Rice, refried black beans.",
+              "price": "24",
+              "tags": "GF"
+            },
+            {
+              "name": "Tapatias",
+              "desc": "Flavorful tricolor enchiladas: carnitas enchilada poured with mole verde sauce, chicken enchilada with creamy cheese sauce, and beef enchilada with chile de arbol sauce. Pumpkin and sesame seeds. Flag rice.",
+              "price": "28"
+            },
+            {
+              "name": "Del mar",
+              "desc": "Soft corn tortillas stuffed with shrimp and grouper, poured with your choice of sauce: mole, mestizo or green sauce. Garnished with sour cream, queso fresco, mixed cabbage.",
+              "price": "29",
+              "tags": "GF"
+            }
+          ]
+        },
+        {
+          "name": "Add a side",
+          "items": [
+            {
+              "name": "Salmon",
+              "desc": "Add to any dish.",
+              "price": "16"
+            },
+            {
+              "name": "Shrimp",
+              "desc": "Add to any dish.",
+              "price": "16"
+            },
+            {
+              "name": "Octopus",
+              "desc": "Add to any dish.",
+              "price": "12"
             }
           ]
         }
-      ],
-      "cardImage": "dish-steak-grilled",
-      "cardWhen": "From 3 PM until close",
-      "cardBlurb": "The full kitchen — the parrilla, the moles, the plates that take all morning."
+      ]
     },
     "kids": {
       "title": "Kids",
       "heroImage": "dish-queso-fritters-angle",
-      "lede": "For anyone under twelve. Smaller plates, nothing spicy, and it comes out first.",
-      "served": "Available all day",
-      "courses": [
-        {
-          "name": "Plates",
-          "note": "Each comes with rice, beans and a drink.",
-          "items": [
-            {
-              "name": "Cheese quesadilla",
-              "desc": "Flour tortilla, melted cheese. Add chicken if they want it.",
-              "price": null,
-              "tags": "V"
-            },
-            {
-              "name": "Chicken taco",
-              "desc": "One soft taco, mild, cheese on the side.",
-              "price": null
-            },
-            {
-              "name": "Mini burrito",
-              "desc": "Beans and cheese, chicken or beef.",
-              "price": null
-            },
-            {
-              "name": "Chicken tenders",
-              "desc": "With fries, because sometimes that is the answer.",
-              "price": null
-            },
-            {
-              "name": "Arroz con pollo",
-              "desc": "Rice and grilled chicken, nothing else on the plate.",
-              "price": null,
-              "tags": "GF"
-            }
-          ]
-        },
-        {
-          "name": "Sweet",
-          "items": [
-            {
-              "name": "Vanilla ice cream",
-              "desc": "One scoop, chocolate sauce.",
-              "price": null,
-              "tags": "V"
-            },
-            {
-              "name": "Churro, single",
-              "desc": "Cinnamon sugar.",
-              "price": null,
-              "tags": "V"
-            }
-          ]
-        }
-      ],
+      "lede": "Everything $11, for anyone ten and under.",
+      "served": "Available all day. Ten and under only.",
+      "footnote": "Nuts, seeds and spices are used on premises. Please inform your server of any food allergies before ordering.",
       "cardImage": "dish-queso-fritters-overhead",
       "cardWhen": "All day",
-      "cardBlurb": "Under twelve. Smaller plates, nothing spicy, and it comes out first."
+      "cardBlurb": "Under twelve. Smaller plates, nothing spicy, and it comes out first.",
+      "courses": [
+        {
+          "name": "Everything $11",
+          "note": "Ten and under only. Each plate is $11.",
+          "items": [
+            {
+              "name": "Mexican pizza",
+              "desc": "Homemade flatbread topped with tomato sauce and melted cheese. Add chicken 1.95.",
+              "price": null
+            },
+            {
+              "name": "Kid's tacos",
+              "desc": "Two corn or flour tortillas with your choice of beef steak or chicken, stuffed with cheese. Garnished with crumbled cheese and sour cream.",
+              "price": null
+            },
+            {
+              "name": "Kid's pasta",
+              "desc": "Sauteed with butter or tomato sauce, garnished with crumbled cheese. Add chicken 1.95.",
+              "price": null
+            },
+            {
+              "name": "Pollo con papas o arroz",
+              "desc": "Grilled chicken served with french fries or rice. Grilled steak: add 3.50.",
+              "price": null
+            },
+            {
+              "name": "Mini-burritos",
+              "desc": "Flour tortilla stuffed with your choice of chicken and cheese, beef and cheese, or bean and cheese. Garnished with crumbled cheese and sour cream.",
+              "price": null
+            }
+          ],
+          "hidePrice": true
+        }
+      ]
     },
     "happy-hour": {
       "title": "Happy hour",
       "heroImage": "bar",
-      "lede": "At the bar and on the patio, Tuesday through Friday. Same kitchen, smaller plates, better prices.",
-      "served": "Tuesday to Friday, 4:30 PM to 6:30 PM — bar and patio only",
+      "downloadLabel": "Download Happy Hour Menu (PDF)",
+      "lede": "Tuesday to Saturday, 4:30 to 6:30 PM, and Sunday 3:30 to 5:30 PM. At the bar and on the patio.",
+      "served": "Tuesday to Saturday, 4:30 to 6:30 PM. Sunday, 3:30 to 5:30 PM. Bar and patio only.",
+      "pdf": "menus/los-sarapes-happy-hour-menu.pdf",
+      "footnote": "Happy hour specials may vary based on location. Consuming raw or undercooked meats, poultry, seafood, shellfish or eggs might increase your risk of foodborne illness. Before placing your order, please inform your server if anyone in your party has a food allergy.",
+      "cardImage": "drink-margarita-blue-rim",
+      "cardWhen": "Tue–Sat 4:30–6:30, Sun 3:30–5:30",
+      "cardBlurb": "Bar and patio only. Same kitchen, smaller plates, better prices.",
       "courses": [
         {
-          "name": "Drinks",
+          "name": "Margaritas — $7",
+          "note": "All $7.",
           "items": [
             {
               "name": "House margarita",
-              "desc": "Blanco, lime, orange liqueur. Rocks or frozen.",
+              "desc": "Gold tequila, fresh lime juice, triple sec, our mix.",
               "price": null
             },
             {
-              "name": "Draft beer",
-              "desc": "Whatever is on — ask the bartender.",
+              "name": "People's",
+              "desc": "Gold tequila, fresh lime juice, agave, pineapple juice.",
               "price": null
             },
             {
-              "name": "House wine",
-              "desc": "Red, white or rosé, by the glass.",
+              "name": "Blood orange",
+              "desc": "Blanco tequila, fresh lime juice, blood orange puree, agave.",
               "price": null
             },
             {
-              "name": "Well cocktails",
-              "desc": "Built to order.",
+              "name": "Summer peach",
+              "desc": "Bourbon, peach liquor, unsweet tea, agave.",
               "price": null
+            },
+            {
+              "name": "Creamy espresso martini",
+              "desc": "Fresh brewed espresso, vodka, bourbon cream, dash simple syrup, coffee liquor.",
+              "price": null
+            }
+          ],
+          "hidePrice": true
+        },
+        {
+          "name": "Beer & cans",
+          "items": [
+            {
+              "name": "Tecate cans",
+              "desc": "Ice cold.",
+              "price": "3"
+            },
+            {
+              "name": "State side flavor",
+              "desc": "Ask what is on.",
+              "price": "4"
             }
           ]
         },
         {
-          "name": "Bar plates",
+          "name": "Drafts",
+          "note": "Lagers $4, IPAs $5.",
           "items": [
             {
-              "name": "Chips, salsa and queso",
-              "desc": "The reason to sit down.",
-              "price": null,
-              "tags": "V"
+              "name": "Modelo SP",
+              "desc": "Mexican lager.",
+              "price": "4"
             },
             {
-              "name": "Street tacos",
-              "desc": "Two per order, corn tortillas, onion and cilantro.",
+              "name": "Pacifico",
+              "desc": "Pilsner.",
+              "price": "4"
+            },
+            {
+              "name": "Negra Modelo",
+              "desc": "Medium bodied lager.",
+              "price": "4"
+            },
+            {
+              "name": "Adulting",
+              "desc": "Guava infused hazy IPA.",
+              "price": "5"
+            },
+            {
+              "name": "Lagunitas",
+              "desc": "IPA.",
+              "price": "5"
+            },
+            {
+              "name": "Stacy Mom",
+              "desc": "IPA.",
+              "price": "5"
+            },
+            {
+              "name": "Seasonal",
+              "desc": "IPA. Ask what is pouring.",
+              "price": "5"
+            }
+          ]
+        },
+        {
+          "name": "Half-off wines",
+          "items": [
+            {
+              "name": "Liberty Creek Pinot Grigio",
+              "desc": "Half off, was 14.",
+              "price": "7"
+            },
+            {
+              "name": "Liberty Creek Chardonnay",
+              "desc": "Half off, was 14.",
+              "price": "7"
+            },
+            {
+              "name": "Liberty Creek Cabernet Sauvignon",
+              "desc": "Half off, was 14.",
+              "price": "7"
+            },
+            {
+              "name": "Liberty Creek Merlot",
+              "desc": "Half off, was 14.",
+              "price": "7"
+            },
+            {
+              "name": "Villa Ponzi Moscato",
+              "desc": "Half off, was 12.",
+              "price": "6"
+            },
+            {
+              "name": "Silvergate Pinot Noir",
+              "desc": "Half off, was 12.",
+              "price": "6"
+            }
+          ]
+        },
+        {
+          "name": "House spirits — $6",
+          "note": "House pours, $6 each.",
+          "items": [
+            {
+              "name": "Tequila",
+              "desc": "",
               "price": null
             },
             {
-              "name": "Guacamole, small",
-              "desc": "Same guacamole, half the bowl.",
-              "price": null,
-              "tags": "V, GF"
-            },
-            {
-              "name": "Flautas",
-              "desc": "Three rolled and fried chicken taquitos, crema.",
+              "name": "Gin",
+              "desc": "",
               "price": null
             },
             {
-              "name": "Wings al pastor",
-              "desc": "Achiote and pineapple glaze.",
-              "price": null,
-              "tags": "GF"
+              "name": "Vodka",
+              "desc": "",
+              "price": null
+            },
+            {
+              "name": "Rum",
+              "desc": "",
+              "price": null
+            },
+            {
+              "name": "Whisky",
+              "desc": "",
+              "price": null
+            },
+            {
+              "name": "Bourbon",
+              "desc": "",
+              "price": null
+            }
+          ],
+          "hidePrice": true
+        },
+        {
+          "name": "Tacos — $3",
+          "note": "All $3.",
+          "items": [
+            {
+              "name": "Birria",
+              "desc": "Slow simmered braised beef, guajillo, Mexican spices.",
+              "price": null
+            },
+            {
+              "name": "Salmon",
+              "desc": "Grilled, avocado, shaved cabbage, chipotle-mayo.",
+              "price": null
+            },
+            {
+              "name": "Beef tinga",
+              "desc": "Refried black beans, queso fresco, cilantro.",
+              "price": null
+            },
+            {
+              "name": "Carnitas",
+              "desc": "Salsa taquera, cilantro, red onion.",
+              "price": null
+            },
+            {
+              "name": "Chorizo",
+              "desc": "Queso Oaxaca, rajas, green onion.",
+              "price": null
+            },
+            {
+              "name": "Al pastor",
+              "desc": "Salsa taquera, cilantro, red onion.",
+              "price": null
+            }
+          ],
+          "hidePrice": true
+        },
+        {
+          "name": "Aperitivos",
+          "items": [
+            {
+              "name": "Empanada",
+              "desc": "Chorizo, potatoes and cheese.",
+              "price": "3"
+            },
+            {
+              "name": "Mini burrito",
+              "desc": "Black beans and queso Chihuahua.",
+              "price": "3"
+            },
+            {
+              "name": "Street corn",
+              "desc": "Corn on the cob, creamy chipotle-mayo, queso fresco, chile piquin.",
+              "price": "4"
+            },
+            {
+              "name": "Chihuahua nachos",
+              "desc": "Black beans, melted cheese, pico de gallo, cilantro.",
+              "price": "7"
+            },
+            {
+              "name": "Quesadillas",
+              "desc": "Plain. Add chicken 3.",
+              "price": "7"
             }
           ]
         }
-      ],
-      "cardImage": "drink-margarita-blue-rim",
-      "cardWhen": "Tuesday to Friday, 4:30 – 6:30 PM",
-      "cardBlurb": "Bar and patio only. Same kitchen, smaller plates, better prices."
+      ]
     },
     "cocktails": {
       "title": "Cocktails & wine",
       "heroImage": "bar-taps",
+      "downloadLabel": "Download Cocktail Menu (PDF)",
       "lede": "Margaritas shaken to order with fresh lime, a mezcal list, and wine by the glass or the bottle.",
       "served": "Served whenever the bar is open. Please drink responsibly.",
-      "pdf": "menus/los-sarapes-lunch-menu.pdf",
+      "pdf": "menus/los-sarapes-cocktail-menu.pdf",
+      "footnote": "Drink responsibly.",
+      "cardImage": "drink-cocktail-red",
+      "cardWhen": "Whenever the bar is open",
+      "cardBlurb": "Margaritas shaken to order, and the tequila shelf behind them.",
       "courses": [
         {
           "name": "Handcrafted margaritas",
@@ -558,18 +945,27 @@
               "name": "Espresso martini",
               "desc": "Fresh brewed espresso, vodka, splash of simple syrup, coffee liquor.",
               "price": "16"
-            },
-            {
-              "name": "Spicy watermelon margarita",
-              "desc": "Tequila, triple sec, habanero agave infused, watermelon puree, lime juice. Spicy tajin rim.",
-              "price": "16",
-              "tags": "Seasonal"
             }
           ]
         },
         {
           "name": "Mezcal cocktails",
           "items": [
+            {
+              "name": "Mezcal carajillo",
+              "desc": "Fresh brewed espresso, 43 liqueur, mezcal.",
+              "price": "15"
+            },
+            {
+              "name": "Little smokey",
+              "desc": "Muddled lemons, agave, mint, pineapple juice, Granja Nomada mezcal, topped off with soda.",
+              "price": "14"
+            },
+            {
+              "name": "Mezcal margarita",
+              "desc": "Classic margarita with the smokiness of Montelobos mezcal.",
+              "price": "15"
+            },
             {
               "name": "Nopal",
               "desc": "Tangy cocktail made with tamarind extract, Granja Nomada mezcal, lime juice, topped with tamarind soda.",
@@ -580,6 +976,42 @@
               "desc": "Classic made with Fosforo smoky mezcal, bitters, agave, mixed with flavors of orange and cherry.",
               "price": "16",
               "tags": "Smoked"
+            },
+            {
+              "name": "Cafe de la olla",
+              "desc": "Espresso martini — fresh brewed espresso, Banhez mezcal, xocolate mole bitters, coffee liquor and a touch of chocolate.",
+              "price": "16"
+            }
+          ]
+        },
+        {
+          "name": "Mocktails",
+          "note": "Zero proof, built with the same care as everything else on this list.",
+          "items": [
+            {
+              "name": "Blood orange mule",
+              "desc": "Tequila Jalisco 55, muddled oranges, agave, lime juice and non-alcoholic ginger beer.",
+              "price": "14"
+            },
+            {
+              "name": "Paloma blanca",
+              "desc": "Lime juice, agave, pinch of salt, Tequila Jalisco 55, grapefruit soda.",
+              "price": "15"
+            },
+            {
+              "name": "Spicy pineapple tonic",
+              "desc": "Jalapeños muddled with pineapple juice, Tequila Jalisco 55, tonic water.",
+              "price": "14"
+            },
+            {
+              "name": "Skinny",
+              "desc": "Tequila Jalisco 55, fresh lime juice, agave.",
+              "price": "16"
+            },
+            {
+              "name": "Peach mule",
+              "desc": "Kentucky 74 bourbon zero-proof whiskey, non-alcoholic ginger beer, peach puree.",
+              "price": "16"
             }
           ]
         },
@@ -599,27 +1031,6 @@
             }
           ],
           "hidePrice": true
-        },
-        {
-          "name": "Mocktails",
-          "note": "Zero proof, and built with the same care as everything else on this list.",
-          "items": [
-            {
-              "name": "Blood orange mule",
-              "desc": "Tequila Jalisco 55, muddled oranges, agave, lime juice and non-alcoholic ginger beer.",
-              "price": "14"
-            },
-            {
-              "name": "Paloma blanca",
-              "desc": "Lime juice, agave, pinch of salt, Tequila Jalisco 55, grapefruit soda.",
-              "price": "15"
-            },
-            {
-              "name": "Peach mule",
-              "desc": "Kentucky 74 bourbon zero-proof whiskey, non-alcoholic ginger beer, peach puree.",
-              "price": "16"
-            }
-          ]
         },
         {
           "name": "White & rosé wine",
@@ -646,8 +1057,8 @@
               "price": "14 / 54"
             },
             {
-              "name": "Sofia Rosé",
-              "desc": "Crisp and bright with notes of strawberry, blood orange, tangerine and acacia.",
+              "name": "Diora Rosé Belle Fete",
+              "desc": "An expressive rosé overflowing with flavor, depth and a devotion to indulgence.",
               "price": "13 / 50"
             }
           ]
@@ -671,6 +1082,11 @@
               "price": "13 / 50"
             },
             {
+              "name": "Marques de Riscal Rioja RSV",
+              "desc": "Intense black-cherry color with gold depth, aromas of liquorice, cinnamon and black pepper.",
+              "price": "60"
+            },
+            {
               "name": "Chateau Ste Michelle Red Blend Ltd",
               "desc": "Artisan blend reveals ripe flavors of raspberry and blackberry with notes of spice and vanilla.",
               "price": "14 / 54"
@@ -692,10 +1108,7 @@
             }
           ]
         }
-      ],
-      "cardImage": "drink-cocktail-red",
-      "cardWhen": "Whenever the bar is open",
-      "cardBlurb": "Margaritas shaken to order, and the tequila shelf behind them."
+      ]
     },
     "beers": {
       "title": "Beers & drafts",
@@ -784,89 +1197,65 @@
     "brunch": {
       "title": "Sunday brunch",
       "heroImage": "table-spread-flatbread",
-      "lede": "One day a week, the kitchen turns to eggs, chilaquiles and a very large michelada.",
-      "served": "Sundays, 11 AM to 3 PM",
+      "downloadLabel": "Download Sunday Brunch Menu (PDF)",
+      "lede": "One day a week — eggs, French toast, pancakes and a breakfast burrito.",
+      "served": "Sundays, 11 AM to 3 PM.",
+      "cardImage": "dish-flatbread-drinks",
+      "cardWhen": "Sundays, 11 AM – 3 PM",
+      "cardBlurb": "Huevos rancheros, dulce de leche French toast, and a breakfast burrito.",
+      "pdf": "menus/los-sarapes-brunch-menu.pdf",
       "courses": [
         {
-          "name": "Eggs",
-          "note": "All served with black beans and potatoes.",
+          "name": "Brunch",
           "items": [
             {
               "name": "Huevos rancheros",
-              "desc": "Two eggs on corn tortillas, salsa ranchera, queso fresco.",
-              "price": null,
-              "tags": "V"
+              "desc": "Two crispy corn tortillas (tostadas), refried black beans, shredded lettuce, jalapeno-taquera sauce and two over-easy eggs, with chorizo and potatoes.",
+              "price": "12"
             },
             {
-              "name": "Chilaquiles",
-              "desc": "Tortillas simmered in verde or roja, crema, onion, a fried egg.",
-              "price": null,
-              "tags": "V"
+              "name": "Omelette poblano",
+              "desc": "Three-egg omelet, stuffed with potatoes, mushrooms, poblano strips and onions. Poblano sauce and crema.",
+              "price": "16"
             },
             {
-              "name": "Huevos con chorizo",
-              "desc": "Scrambled with house chorizo, warm tortillas.",
-              "price": null
+              "name": "Huevos benedictinos",
+              "desc": "English muffins, ham, poached eggs and poblano sauce. Chorizo and bell pepper potatoes, or hash browns.",
+              "price": "13"
             },
             {
-              "name": "Machaca",
-              "desc": "Shredded beef, eggs, peppers and onion.",
-              "price": null
+              "name": "Three pancakes",
+              "desc": "A full stack.",
+              "price": "11"
             },
             {
-              "name": "Breakfast burrito",
-              "desc": "Eggs, potato, cheese, your choice of meat, salsa on the side.",
-              "price": null
-            }
-          ]
-        },
-        {
-          "name": "Sweet side",
-          "items": [
-            {
-              "name": "Pan dulce basket",
-              "desc": "Conchas and whatever else came out of the oven.",
-              "price": null,
-              "tags": "V"
+              "name": "Two pancakes",
+              "desc": "A short stack.",
+              "price": "9"
             },
             {
-              "name": "Churro waffle",
-              "desc": "Cinnamon sugar, cajeta, whipped cream.",
-              "price": null,
-              "tags": "V"
-            }
-          ]
-        },
-        {
-          "name": "Brunch drinks",
-          "items": [
-            {
-              "name": "Michelada",
-              "desc": "The large one. Lager, lime, house spice, chile rim.",
-              "price": null
+              "name": "Dulce de leche French toast",
+              "desc": "Cinnamon French toast, topped with powdered sugar, served with dulce de leche.",
+              "price": "12"
             },
             {
-              "name": "Mimosa",
-              "desc": "Orange, or whatever agua fresca is on.",
-              "price": null
+              "name": "Burrito despertar",
+              "desc": "Three scrambled eggs, refried black beans, mild Mexican chorizo and salsa roja. Topped with guacamole, crema and pico de gallo.",
+              "price": "15"
             },
             {
-              "name": "Bloody maria",
-              "desc": "Blanco instead of vodka, and better for it.",
-              "price": null
+              "name": "Quesadilla Sarapes",
+              "desc": "Grilled large flour tortilla stuffed with your choice of chicken (blanco) or beef steak (negro), melted Chihuahua cheese. Guacamole, pico de gallo and sour cream. Rice on the side.",
+              "price": "14"
             },
             {
-              "name": "Café de olla",
-              "desc": "Coffee brewed with cinnamon and piloncillo.",
-              "price": null,
-              "tags": "V"
+              "name": "Flatbreads — chicken or beef",
+              "desc": "Arrachera beef steak or grilled chicken, taquera sauce, cilantro, pico de gallo and cheese.",
+              "price": "15"
             }
           ]
         }
-      ],
-      "cardImage": "dish-flatbread-drinks",
-      "cardWhen": "Sundays, 11 AM – 3 PM",
-      "cardBlurb": "Chilaquiles, huevos rancheros, and a very large michelada."
+      ]
     }
   },
   "cardOrder": [

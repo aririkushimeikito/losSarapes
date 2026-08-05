@@ -1183,6 +1183,42 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
 }
 .card p { margin: 0; color: var(--ink-soft); font-size: .97rem; }
 
+/* ---------- Catering: corporate lunch package ---------- */
+
+.package { padding: var(--section-y) var(--gutter); }
+.package .wrap { max-width: var(--measure); margin: 0 auto; }
+.package__items {
+  display: grid; gap: clamp(16px, 2vw, 24px);
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  margin: clamp(28px, 4vw, 44px) 0; padding: 0; list-style: none;
+}
+.package__items li {
+  padding: clamp(20px, 2.5vw, 28px);
+  border: 1px solid var(--line-dark);
+  border-radius: var(--radius);
+}
+.package__items h3 {
+  margin: 0 0 8px;
+  font-family: var(--display); font-weight: 400; font-size: 1.3rem;
+}
+.package__items p { margin: 0; color: rgba(246, 239, 226, .78); font-size: .95rem; }
+
+.package__terms {
+  display: flex; flex-wrap: wrap; gap: 10px 40px;
+  margin: 0 0 clamp(28px, 4vw, 40px);
+  padding-top: clamp(24px, 3vw, 34px);
+  border-top: 1px solid var(--line-dark);
+}
+.package__terms p { margin: 0; font-size: 1.02rem; }
+.package__terms strong {
+  font-family: var(--display); font-weight: 400; font-size: 1.5rem;
+  color: var(--marigold);
+}
+.package__terms span { display: block; font-size: .82rem; color: rgba(246, 239, 226, .6); }
+/* The download button sits on the dark package section, so it keeps the
+   solid marigold fill rather than the dark-on-light default. */
+.package .menu-download { --btn-bg: var(--marigold); --btn-bd: var(--marigold); --btn-fg: var(--ink); }
+
 /* ---------- Events ---------- */
 
 .events-section { padding: 0 var(--gutter) var(--section-y); }

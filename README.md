@@ -104,10 +104,8 @@ Placeholders render with a dashed red underline (`class="tbd"`), so they
 cannot ship unnoticed. Search for `tbd` and `TODO`:
 
 - a reservation system — "Make a reservation" dials the restaurant instead
-- menu prices, throughout `src/data/menus.json`
-- catering pricing, minimums and lead times
-- private-party room capacities, deposits and minimums
-- this season's dated events, or delete that block
+- Beers & drafts prices — that menu is still a placeholder
+- this season's dated events on the Events page, or delete that block
 - real guest reviews in `src/data/reviews.json` — three of the four cards
   are templates and render greyed with a PLACEHOLDER chip
 
@@ -115,9 +113,9 @@ Two menu cards use the nearest photograph rather than an exact one: Sunday
 brunch and Kids have no dedicated shot in the library. Swap `cardImage` in
 `src/data/menus.json` when brunch and kids' plates are photographed.
 
-Lunch and Cocktails are transcribed from the printed cards, with real
-prices. Dinner, Kids, Happy hour, Beers and Brunch are still representative
-placeholders and should be replaced from the printed menus.
+Lunch, Dinner, Kids, Happy hour, Cocktails and Sunday brunch are transcribed
+from the restaurant's printed menus, with real prices. Only Beers & drafts is
+still a representative placeholder, awaiting its printed list.
 
 ## The jump bar
 
@@ -145,10 +143,10 @@ menu URL, price range and `sameAs` links to every social profile.
 ## The downloadable menus
 
 `menus/` holds the restaurant's own menu PDFs — the printed artwork, not a
-rendering of the web page. `menus/los-sarapes-lunch-menu.pdf` is three
-pages: prix fixe, the a la carte lunch card, and drinks. The download
-button on `menu-lunch.html` opens it in a new tab; the path is the `pdf`
-field in `src/data/menus.json`.
+rendering of the web page. Each menu page's download button opens its PDF in
+a new tab; the path is the `pdf` field for that menu in `src/data/menus.json`
+(the Catering page links its PDF directly). Current PDFs: lunch, dinner,
+happy hour, cocktail, Sunday brunch, catering.
 
 To add one for another menu, drop the PDF in `menus/` and set that menu's
 `pdf` field to its path.
