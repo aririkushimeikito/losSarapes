@@ -263,21 +263,49 @@ def render_reviews() -> str:
     )
 
 
+def anchor(text: str) -> str:
+    """A stable id from a course name, for the jump links at the top."""
+    slug = re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
+    return f"course-{slug}"
+
+
 def render_menu(slug: str) -> str:
     """Build a menu page body from src/data/menus.json."""
     data = json.loads((SRC / "data" / "menus.json").read_text())
     menu = data["menus"][slug]
 
+    # The titles run at the top of the page and jump down to their section,
+    # so a long menu can be navigated without scrolling through it.
+    jump = "".join(
+        f'<li><a href="#{anchor(c["name"])}">{esc(c["name"])}</a></li>'
+        for c in menu["courses"]
+    )
+
+    pdf = ""
+    if menu.get("pdf"):
+        pdf = (
+            f'<a class="btn btn--solid menu-download" href="{esc(menu["pdf"])}"'
+            f' target="_blank" rel="noopener" download>'
+            f'<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">'
+            f'<path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 19h16"/></svg>'
+            f'Download the {esc(menu["title"].lower())} menu (PDF)</a>'
+        )
+
     courses = []
     for course in menu["courses"]:
+        # A prix fixe course, or one where the choice is the whole price,
+        # has nothing to put in a price column.
+        hide_price = course.get("hidePrice", False)
+
         rows = []
         for item in course["items"]:
             price = item.get("price")
-            price_html = (
-                f'<span class="menu-item__price">{esc(price)}</span>'
-                if price
-                else '<span class="menu-item__price tbd">$—</span>'
-            )
+            if hide_price:
+                price_html = ""
+            elif price:
+                price_html = f'<span class="menu-item__price">{esc(price)}</span>'
+            else:
+                price_html = '<span class="menu-item__price tbd">$—</span>'
             note = (
                 f'<span class="menu-item__tags">{esc(item["tags"])}</span>'
                 if item.get("tags")
@@ -291,7 +319,7 @@ def render_menu(slug: str) -> str:
                 f'</li>'
             )
         courses.append(
-            f'<section class="course">'
+            f'<section class="course" id="{anchor(course["name"])}">'
             f'<h2 class="course__title">{esc(course["name"])}</h2>'
             + (f'<p class="course__note">{esc(course["note"])}</p>'
                if course.get("note") else "")
@@ -306,6 +334,10 @@ def render_menu(slug: str) -> str:
         f'    <h1 class="section-title">{esc(menu["title"])}</h1>\n'
         f'    <p class="section-lede">{esc(menu["lede"])}</p>\n'
         f'    <p class="served">{esc(menu["served"])}</p>\n'
+        f'    <nav class="course-jump" aria-label="Sections of this menu">\n'
+        f'      <ul>{jump}</ul>\n'
+        f'    </nav>\n'
+        f'    {pdf}\n'
         f'  </div>\n'
         f'</section>\n'
         f'<div class="sarape-band sarape-rule" aria-hidden="true"></div>\n'

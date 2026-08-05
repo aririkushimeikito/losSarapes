@@ -986,7 +986,39 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
   letter-spacing: .08em;
 }
 
+/* Section titles at the top of a menu, each jumping to its own course. */
+.course-jump { margin-top: 26px; }
+.course-jump ul {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin: 0; padding: 0; list-style: none;
+}
+.course-jump a {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bone);
+  font-size: .78rem; font-weight: 700;
+  letter-spacing: .06em;
+  text-decoration: none;
+  transition: background-color .2s var(--ease), border-color .2s var(--ease), color .2s var(--ease);
+}
+.course-jump a:hover { background: var(--adobe); border-color: var(--adobe); color: var(--bone); }
+
+.menu-download {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-top: 22px;
+}
+.menu-download svg {
+  width: 18px; height: 18px; flex: none;
+  fill: none; stroke: currentColor;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+
 .menu-body { padding: clamp(44px, 6vw, 76px) var(--gutter) var(--section-y); }
+/* No scroll-margin here: html already carries scroll-padding-top for the
+   fixed header, and the two add up rather than overriding, which dropped
+   every jump target a full header-height too low. */
 .courses { display: grid; gap: clamp(44px, 6vw, 76px); }
 .course__title {
   margin: 0 0 6px;
@@ -1175,6 +1207,98 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
   mix-blend-mode: overlay;
 }
 
+/* ---------- About: images, closing line, timeline ---------- */
+
+.address-line {
+  margin: 24px 0 0;
+  font-size: .78rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.feature-image {
+  display: block;
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+}
+.aside-image { display: block; width: 100%; border-radius: var(--radius); }
+.aside-caption {
+  margin: 10px 0 24px !important;
+  font-size: .72rem !important; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-mute) !important;
+}
+
+/* Slots waiting on a photograph. Woven like the patio panel so they read as
+   deliberate, and labelled with the exact path the file belongs at. */
+.feature-image--pending,
+.aside-image--pending {
+  position: relative;
+  display: grid; place-items: center;
+  padding: 20px;
+  text-align: center;
+  background:
+    radial-gradient(120% 90% at 50% 40%,
+      rgba(255, 255, 255, .10) 0%, rgba(23, 18, 15, 0) 45%, rgba(23, 18, 15, .38) 100%),
+    repeating-linear-gradient(180deg,
+      var(--adobe) 0 26px, var(--marigold) 26px 34px, var(--bone) 34px 40px,
+      var(--adobe-dark) 40px 48px, var(--ink) 48px 65px, var(--cactus) 65px 74px,
+      var(--bone-2) 74px 80px, var(--cobalt) 80px 104px, var(--marigold) 104px 110px,
+      var(--bone) 110px 118px);
+}
+.feature-image--pending { height: 320px; }
+.aside-image--pending { aspect-ratio: 1 / 1; }
+.feature-image--pending .tbd,
+.aside-image--pending .tbd {
+  max-width: 100%;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: var(--bone);
+  border-bottom: 0;
+  font-size: .7rem; font-weight: 700;
+  letter-spacing: .06em;
+  /* The label carries a file path, which is one long unbreakable token and
+     will push the page sideways on a phone unless it is allowed to break. */
+  overflow-wrap: anywhere;
+}
+
+.prose__closing {
+  font-family: var(--display);
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  line-height: 1.2;
+  color: var(--adobe) !important;
+}
+
+.timeline-section { padding: var(--section-y) var(--gutter); background: var(--bone-2); }
+.timeline { margin: clamp(32px, 4vw, 48px) 0 clamp(36px, 5vw, 52px); padding: 0; list-style: none; }
+.timeline li {
+  display: grid; gap: 8px clamp(24px, 4vw, 56px);
+  grid-template-columns: minmax(0, 130px) minmax(0, 1fr);
+  padding: 28px 0;
+  border-top: 2px solid var(--ink);
+}
+/* No bottom rule on the last entry — the note below it opens with its own
+   border-top, and the two together read as a mistake. */
+.timeline__year {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  line-height: 1;
+  color: var(--adobe);
+  font-variant-numeric: tabular-nums;
+}
+.timeline h3 {
+  margin: 0 0 8px;
+  font-family: var(--display); font-weight: 400; font-size: 1.4rem;
+}
+.timeline p { margin: 0 0 10px; color: var(--ink-soft); max-width: 58ch; }
+.timeline a { font-weight: 700; font-size: .88rem; }
+
+@media (max-width: 640px) {
+  .timeline li { grid-template-columns: minmax(0, 1fr); }
+}
+
 /* ---------- Reviews ---------- */
 
 .reviews { padding: var(--section-y) var(--gutter); background: var(--bone-2); }
@@ -1297,6 +1421,43 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
   .sound-toggle { padding: 10px; }
   .order__actions .btn { flex: 1 1 100%; }
   .hours__day { min-width: 8ch; letter-spacing: .1em; }
+}
+
+/* ---------- Print ---------- */
+
+/* Also what tools/build-menu-pdfs.js prints the downloadable menu from, so
+   this stylesheet is the PDF's design as much as the browser's. */
+@media print {
+  .site-header, .mobile-nav, .sarape-band, .order, .site-footer,
+  .course-jump, .menu-download, .status-pill, .skip-link { display: none !important; }
+
+  body { background: #fff; color: #000; font-size: 11pt; }
+  .page-head { padding: 0 0 18pt; }
+  .menu-body { padding: 0; }
+  .wrap { max-width: none; }
+
+  .section-title { font-size: 26pt; margin-bottom: 6pt; }
+  .section-lede { font-size: 11pt; margin-bottom: 8pt; color: #333; }
+  .served { background: none; padding: 0; font-size: 9.5pt; }
+
+  .courses { gap: 20pt; }
+  .course__title { font-size: 15pt; margin-bottom: 2pt; }
+  /* Keep a course heading with at least the start of its list. */
+  .course { break-inside: avoid; }
+  .menu-item { break-inside: avoid; padding: 6pt 0; }
+  .menu-item__head h3 { font-size: 10.5pt; }
+  .menu-item p { font-size: 9.5pt; color: #333; }
+  .menu-item__tags { color: #555; }
+
+  /* The address belongs on a menu someone has printed and carried off. */
+  .page-head .wrap::after {
+    content: "Los Sarapes Horsham · 1101 Horsham Rd, Ambler, PA 19002 · (215) 654-5002";
+    display: block;
+    margin-top: 10pt;
+    font-size: 9pt;
+    letter-spacing: .04em;
+    color: #444;
+  }
 }
 
 /* ---------- Reduced motion ---------- */

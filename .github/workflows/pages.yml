@@ -58,6 +58,11 @@ jobs:
       - name: Build site
         run: python3 tools/build.py _site
 
+      # The downloadable menu PDFs are committed (see tools/build-menu-pdfs.js)
+      # rather than generated here, so this job needs no browser.
+      - name: Copy menu PDFs
+        run: cp -r menus _site/menus
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
