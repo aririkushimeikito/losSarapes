@@ -1078,6 +1078,11 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
   display: inline-flex; align-items: center; gap: 10px;
   margin-top: 22px;
 }
+/* A menu that offers more than one PDF lays its buttons in a row that wraps
+   to a stack on narrow screens. The row carries the top margin so the
+   buttons sit flush with each other. */
+.menu-downloads { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+.menu-downloads .menu-download { margin-top: 0; }
 .menu-download svg {
   width: 18px; height: 18px; flex: none;
   fill: none; stroke: currentColor;
@@ -1397,6 +1402,9 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
 /* ---------- Reviews ---------- */
 
 .reviews { padding: var(--section-y) var(--gutter); background: var(--bone-2); }
+/* The live review carousel sits under the heading where the lede used to,
+   so it carries that spacing itself. */
+.reviews-widget { margin-top: clamp(28px, 4vw, 44px); }
 
 .review-grid {
   display: grid; gap: clamp(16px, 2vw, 24px);

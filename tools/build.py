@@ -37,7 +37,7 @@ SITE_URL = "https://www.lossarapeshorsham.com"
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "src"
-ASSET_DIRS = ["css", "js", "fonts", "images", "videos"]
+ASSET_DIRS = ["css", "js", "fonts", "images", "videos", "menus"]
 
 # Header order, matching the navigation the restaurant runs today.
 # key, label, href, children
@@ -330,48 +330,25 @@ def jpeg_size(path: Path) -> tuple[int, int]:
 
 # --------------------------------------------------------------- reviews
 
+# The home page reviews are served live by EMR's carousel widget rather than
+# the static cards that used to live here — its script pulls the real reviews
+# in at load. The block is verbatim from the provider; its inline function
+# uses only double quotes, so a plain (non-f) string carries it safely.
+REVIEWS_EMBED = '''<!-- Review Pixel -->
+<script type="text/javascript">
+!function(){var e,t=document;e=function(){if(window.EMRPixel)return console.info("EMR: Pixel already loaded");var e=t.createElement("script");e.defer=!0,e.src="https://cdn2.revw.me/js/pixel.js?t="+864e5*Math.ceil(new Date/864e5);var n=t.getElementsByTagName("script")[0];n.charset="utf-8",n.parentNode.insertBefore(e,n),e.onload=function(){EMRPixel.init("digitalone.reviews",42)}},"interactive"===t.readyState||"complete"===t.readyState?e():t.addEventListener("DOMContentLoaded",e)}();
+</script><emr-simple-carousel widget-id="390e85c2-116b-4f99-a42b-fcef0963c852"></emr-simple-carousel>
+<!-- Review Pixel End -->'''
+
+
 def render_reviews() -> str:
     data = json.loads((SRC / "data" / "reviews.json").read_text())
-
-    cards = []
-    for review in data["reviews"]:
-        placeholder = review.get("placeholder", False)
-        rating = int(review.get("rating", 5))
-
-        stars = "".join(
-            f'<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"'
-            f' class="star{"" if i < rating else " is-empty"}">'
-            f'<path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/>'
-            f"</svg>"
-            for i in range(5)
-        )
-
-        name = esc(review["name"])
-        source = esc(review["source"])
-        attribution = (
-            f'<a href="{esc(review["url"])}" target="_blank" rel="noopener">{source}</a>'
-            if review.get("url") else source
-        )
-
-        cards.append(
-            f'<li class="review-card{" review-card--placeholder" if placeholder else ""}">'
-            + ('<p class="review-card__flag">Placeholder</p>' if placeholder else "")
-            + f'<p class="stars" role="img" aria-label="{rating} out of 5">{stars}</p>'
-            f'<blockquote><p>{esc(review["quote"])}</p></blockquote>'
-            f'<p class="review-card__by">'
-            f'<span class="review-card__name">{name}</span>'
-            f'<span class="review-card__source">on {attribution}</span>'
-            f'</p>'
-            f'</li>'
-        )
-
     return (
         f'<section class="reviews" id="reviews">\n'
         f'  <div class="wrap">\n'
         f'    <p class="eyebrow">Reviews</p>\n'
         f'    <h2 class="section-title">{esc(data["heading"])}</h2>\n'
-        f'    <p class="section-lede">{esc(data["lede"])}</p>\n'
-        f'    <ul class="review-grid">{"".join(cards)}</ul>\n'
+        f'    <div class="reviews-widget">{REVIEWS_EMBED}</div>\n'
         f'  </div>\n'
         f'</section>\n'
     )
@@ -423,16 +400,27 @@ def render_menu(slug: str) -> str:
         for c in menu["courses"]
     )
 
-    pdf = ""
-    if menu.get("pdf"):
-        label = menu.get("downloadLabel", f'Download the {menu["title"].lower()} menu (PDF)')
-        pdf = (
-            f'<a class="btn btn--solid menu-download" href="{esc(menu["pdf"])}"'
+    def download_button(label: str, href: str) -> str:
+        return (
+            f'<a class="btn btn--solid menu-download" href="{esc(href)}"'
             f' target="_blank" rel="noopener">'
             f'<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">'
             f'<path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 19h16"/></svg>'
             f'{esc(label)}</a>'
         )
+
+    # A menu can offer more than one PDF — a prix-fixe card alongside the full
+    # menu, say — via a `downloads` list of {label, pdf}. A single `pdf` with
+    # its `downloadLabel` is the common case and still works.
+    pdf = ""
+    if menu.get("downloads"):
+        buttons = "".join(
+            download_button(d["label"], d["pdf"]) for d in menu["downloads"]
+        )
+        pdf = f'<div class="menu-downloads">{buttons}</div>'
+    elif menu.get("pdf"):
+        label = menu.get("downloadLabel", f'Download the {menu["title"].lower()} menu (PDF)')
+        pdf = download_button(label, menu["pdf"])
 
     footnote = ""
     if menu.get("footnote"):

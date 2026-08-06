@@ -19,6 +19,11 @@
       "title": "Lunch",
       "heroImage": "dish-fish-tacos-patio",
       "downloadLabel": "Download Lunch Menu (PDF)",
+      "_downloads_note": "Prix-fixe PDF not supplied yet — it points at the full lunch PDF as a placeholder. Swap its `pdf` when the prix-fixe file lands in menus/.",
+      "downloads": [
+        { "label": "Download Prix Fixe Lunch Menu", "pdf": "menus/los-sarapes-lunch-menu.pdf" },
+        { "label": "Download Lunch Menu", "pdf": "menus/los-sarapes-lunch-menu.pdf" }
+      ],
       "lede": "The full lunch card, plus a $18.99 prix fixe Tuesday to Friday.",
       "served": "Lunch Tuesday to Saturday, 11 AM to 3 PM. Prix fixe is dine-in only, Tuesday to Friday.",
       "pdf": "menus/los-sarapes-lunch-menu.pdf",
@@ -238,6 +243,11 @@
       "title": "Dinner",
       "heroImage": "dish-steak-grilled",
       "downloadLabel": "Download Dinner Menu (PDF)",
+      "_downloads_note": "Prix-fixe PDF not supplied yet — it points at the full dinner PDF as a placeholder. Swap its `pdf` when the prix-fixe file lands in menus/.",
+      "downloads": [
+        { "label": "Download Prix Fixe Dinner Menu", "pdf": "menus/los-sarapes-dinner-menu.pdf" },
+        { "label": "Download Dinner Menu", "pdf": "menus/los-sarapes-dinner-menu.pdf" }
+      ],
       "lede": "The full dinner card, plus a $29.95 seasonal prix fixe Sunday to Thursday.",
       "served": "Dinner from 3 PM — until 9 PM Tuesday to Thursday and Sunday, 10 PM Friday and Saturday. Prix fixe is dine-in only, Sunday to Thursday.",
       "pdf": "menus/los-sarapes-dinner-menu.pdf",
