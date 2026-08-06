@@ -198,12 +198,38 @@ a { color: inherit; }
 
 /* ---------- Header ---------- */
 
+/* Contact strip above the header. It sits in normal flow and scrolls away;
+   the sticky header below pins to the top once it does, so no offset maths
+   are needed anywhere. */
+.topbar {
+  background: var(--ink);
+  color: rgba(246, 239, 226, .82);
+  border-bottom: 1px solid var(--line-dark);
+  font-size: clamp(.72rem, 1.4vw, .82rem);
+}
+.topbar__inner {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+  gap: 3px 10px;
+  max-width: var(--measure); margin: 0 auto;
+  padding: 8px var(--gutter);
+  line-height: 1.35; text-align: center;
+}
+.topbar a { color: inherit; text-decoration: none; }
+.topbar a:hover { color: var(--marigold); }
+.topbar__email { text-decoration: underline; text-underline-offset: 2px; }
+.topbar__sep { opacity: .45; }
+.topbar__msg { font-weight: 700; color: var(--bone); }
+
 .site-header {
-  position: fixed; inset: 0 0 auto 0; z-index: 50;
+  position: sticky; top: 0; z-index: 50;
   color: var(--bone);
   transition: background-color .35s var(--ease), box-shadow .35s var(--ease),
               color .35s var(--ease);
 }
+/* On the home page the header floats transparently over the hero. With the
+   header in normal flow now, pull the hero up underneath it to keep that
+   overlay — the hero's own top padding still clears the bar. */
+.has-hero .site-header { margin-bottom: calc(-1 * var(--header-h)); }
 .site-header__inner {
   display: flex; align-items: center; gap: clamp(14px, 1.8vw, 30px);
   height: var(--header-h);
@@ -942,14 +968,16 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
   margin: 0 0 12px !important;
 }
 .hours-compact li {
-  display: flex; align-items: baseline; gap: 14px;
+  display: flex; align-items: baseline; gap: 10px;
   color: rgba(246, 239, 226, .78); font-size: .95rem;
 }
 .hours-compact li span:first-child {
-  flex: none; min-width: 4.6em;
+  flex: none; min-width: 4em;
   font-weight: 700;
 }
-.hours-compact li span:last-child { font-variant-numeric: tabular-nums; }
+/* Keep a day's hours on one line — "11 AM – 10 PM" was breaking after the
+   dash and dropping "PM" to its own row in the narrow footer column. */
+.hours-compact li span:last-child { font-variant-numeric: tabular-nums; white-space: nowrap; }
 
 /* ---------- Pull quote ---------- */
 

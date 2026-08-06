@@ -1264,6 +1264,31 @@
               "name": "Flatbreads — chicken or beef",
               "desc": "Arrachera beef steak or grilled chicken, taquera sauce, cilantro, pico de gallo and cheese.",
               "price": "15"
+            },
+            {
+              "name": "Chilaquiles verdes and carne asada",
+              "desc": "Salsa verde Mexican tortilla casserole, topped with crema, onions, queso fresco and two over-easy eggs. Served with arrachera steak or grilled chicken and refried black beans.",
+              "price": "20"
+            },
+            {
+              "name": "Tacos de pescado",
+              "desc": "Beer-battered grouper, shredded carrots, mixed cabbage, cilantro and chipotle mayo. Taquera sauce on the side.",
+              "price": "20"
+            },
+            {
+              "name": "Tacos del paisa",
+              "desc": "Your choice of grilled chicken, grilled beef steak, al pastor (pork), tinga poblana (spicy shredded beef), or chorizo (jalapeño onions). No combinations, please. Choice of flour or corn tortilla.",
+              "price": "15"
+            },
+            {
+              "name": "Tacos de camarón",
+              "desc": "Sautéed shrimp, garlic, Mexican spices, cheese. Garnished with avocado and cilantro. Salsa taquera on the side.",
+              "price": "21"
+            },
+            {
+              "name": "Fajitas Sarapes",
+              "desc": "Sautéed mild bell peppers and onions with your choice of carnitas, beef steak, chicken, or vegetarian. Rice and refried beans. Guacamole, crema and pico de gallo. Flour or corn tortillas on the side.",
+              "price": "16"
             }
           ]
         }
