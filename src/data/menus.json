@@ -19,9 +19,8 @@
       "title": "Lunch",
       "heroImage": "dish-fish-tacos-patio",
       "downloadLabel": "Download Lunch Menu (PDF)",
-      "_downloads_note": "Prix-fixe PDF not supplied yet — it points at the full lunch PDF as a placeholder. Swap its `pdf` when the prix-fixe file lands in menus/.",
       "downloads": [
-        { "label": "Download Prix Fixe Lunch Menu", "pdf": "menus/los-sarapes-lunch-menu.pdf" },
+        { "label": "Download Prix Fixe Lunch Menu", "pdf": "menus/los-sarapes-prix-fixe-lunch-menu.pdf" },
         { "label": "Download Lunch Menu", "pdf": "menus/los-sarapes-lunch-menu.pdf" }
       ],
       "lede": "The full lunch card, plus a $18.99 prix fixe Tuesday to Friday.",
