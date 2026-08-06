@@ -808,6 +808,13 @@ body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; 
   letter-spacing: .1em; text-transform: uppercase;
   color: rgba(246, 239, 226, .78);
 }
+/* Each other-location link shows its logo above its name. */
+.site-footer__sisters { gap: 20px !important; }
+.site-footer__sisters a { display: inline-flex; flex-direction: column; gap: 8px; }
+.sister-logo { width: auto; height: 52px; display: block; }
+/* The El Sarape mark is a mid-grey on transparency; lift it a touch so it
+   reads on the dark footer. */
+.sister-logo--el { height: 58px; filter: brightness(1.35); }
 
 /* Five marks have to sit on one row inside a footer column that is about
    220px wide, so they are sized to fit rather than left to wrap. */
