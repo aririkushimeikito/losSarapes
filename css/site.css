@@ -857,6 +857,8 @@ body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; 
 }
 .social svg { width: 23px; height: 23px; display: block; }
 .social .social-img { width: 23px; height: 23px; display: block; border-radius: 50%; }
+/* The Google mark is a bare glyph on transparency — no circle to round. */
+.social .social-img--plain { border-radius: 0; }
 /* Each mark carries its own brand colour, so they sit back a little on the
    dark footer until you go for one. */
 .social a { filter: saturate(.9) brightness(.94); }
