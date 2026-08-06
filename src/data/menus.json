@@ -242,9 +242,8 @@
       "title": "Dinner",
       "heroImage": "dish-steak-grilled",
       "downloadLabel": "Download Dinner Menu (PDF)",
-      "_downloads_note": "Prix-fixe PDF not supplied yet — it points at the full dinner PDF as a placeholder. Swap its `pdf` when the prix-fixe file lands in menus/.",
       "downloads": [
-        { "label": "Download Prix Fixe Dinner Menu", "pdf": "menus/los-sarapes-dinner-menu.pdf" },
+        { "label": "Download Prix Fixe Dinner Menu", "pdf": "menus/los-sarapes-prix-fixe-dinner-menu.pdf" },
         { "label": "Download Dinner Menu", "pdf": "menus/los-sarapes-dinner-menu.pdf" }
       ],
       "lede": "The full dinner card, plus a $29.95 seasonal prix fixe Sunday to Thursday.",
