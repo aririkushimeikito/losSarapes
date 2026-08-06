@@ -827,6 +827,19 @@ body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; 
   text-transform: none; font-weight: 400; letter-spacing: .01em;
   font-size: .78rem; color: var(--marigold); overflow-wrap: anywhere;
 }
+/* On desktop/laptop the Other-locations column is widened so the two spots
+   sit left and right, side by side, with their URLs still on one line. Below
+   this they stack (the base rules above). */
+@media (min-width: 1000px) {
+  .site-footer__cols { grid-template-columns: 1fr 1fr 1fr 2fr; align-items: start; }
+  .site-footer__sisters {
+    flex-direction: row !important; justify-content: center;
+    gap: clamp(20px, 2vw, 40px) !important;
+  }
+  .site-footer__sisters li { flex: 1 1 0; min-width: 0; }
+  .site-footer__sisters a { align-items: center; text-align: center; }
+  .sister-url { font-size: .74rem; }
+}
 
 /* Five marks have to sit on one row inside a footer column that is about
    220px wide, so they are sized to fit rather than left to wrap. */
