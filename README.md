@@ -103,7 +103,8 @@ because they are static.
 Placeholders render with a dashed red underline (`class="tbd"`), so they
 cannot ship unnoticed. Search for `tbd` and `TODO`:
 
-- a reservation system — "Make a reservation" dials the restaurant instead
+- "Make a reservation" on the hero opens the restaurant's Yelp Reservations
+  page in a new tab
 - Beers & drafts prices — that menu is still a placeholder
 - this season's dated events on the Events page, or delete that block
 - real guest reviews in `src/data/reviews.json` — three of the four cards
