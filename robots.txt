@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.lossarapeshorsham.com/sitemap.xml
+Sitemap: https://digitaloneweb.github.io/lossarapes/sitemap.xml

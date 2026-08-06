@@ -33,7 +33,7 @@ from pathlib import Path
 # The domain the site will be served from. Canonical URLs, Open Graph URLs,
 # the sitemap and the structured data are all built from it, so moving the
 # site is a one-line change here.
-SITE_URL = "https://www.lossarapeshorsham.com"
+SITE_URL = "https://digitaloneweb.github.io/lossarapes"
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "src"
