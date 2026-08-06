@@ -804,21 +804,43 @@ body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; 
   letter-spacing: .1em; text-transform: uppercase;
   color: rgba(246, 239, 226, .78);
 }
-/* The two other-location marks sit side by side — one left, one right —
-   each above its name. width:auto keeps them from stretching. */
+/* "Other locations" is its own full-width band below the three info columns,
+   so the two locations get room to sit side by side with their names and full
+   URLs on one line — balanced, same logo height, never stretched. */
+.site-footer__locations {
+  margin-top: clamp(24px, 3vw, 34px);
+  padding-top: clamp(24px, 3vw, 32px);
+  border-top: 1px solid var(--line-dark);
+  text-align: center;
+}
+.site-footer__locations h2 {
+  margin: 0 0 18px;
+  font-size: .74rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--marigold);
+}
 .site-footer__sisters {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px 16px !important;
-  align-items: start;
+  display: flex !important; flex-wrap: wrap; justify-content: center;
+  gap: clamp(28px, 6vw, 80px) !important;
 }
+.site-footer__sisters li { width: 240px; max-width: 100%; }
 .site-footer__sisters a {
-  display: inline-flex; flex-direction: column; gap: 8px; align-items: flex-start;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  text-align: center;
 }
-.sister-logo { width: auto; max-width: 100%; height: 46px; display: block; object-fit: contain; }
-/* The El Sarape mark is a mid-grey on transparency; lift it a touch so it
-   reads on the dark footer. */
-.sister-logo--el { height: 50px; filter: brightness(1.35); }
+.sister-logo-box { display: flex; align-items: center; justify-content: center; height: 54px; }
+.sister-logo {
+  height: 46px; width: auto; max-width: 100%;
+  display: block; object-fit: contain;
+}
+/* The El Sarape mark is a mid-grey on transparency; lift it so it reads on
+   the dark footer. Same height as its neighbour — only the tone differs. */
+.sister-logo--el { filter: brightness(1.4); }
+.sister-name { line-height: 1.3; }
+.sister-url {
+  text-transform: none; font-weight: 400; letter-spacing: .01em;
+  font-size: .76rem; color: var(--marigold); overflow-wrap: anywhere;
+}
 
 /* Five marks have to sit on one row inside a footer column that is about
    220px wide, so they are sized to fit rather than left to wrap. */
@@ -1314,9 +1336,10 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
 /* ---------- Gallery ---------- */
 
 .gallery-section { padding: 0 var(--gutter) var(--section-y); }
+/* Every tile is one equal cell, so the grid lines up evenly on every row. */
 .gallery {
   display: grid; gap: 14px;
-  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
   grid-auto-rows: 220px;
   margin: clamp(32px, 4vw, 48px) 0 clamp(36px, 5vw, 52px); padding: 0;
   list-style: none;
@@ -1327,12 +1350,54 @@ body:not(.has-hero) .status-pill--header.is-closed { color: var(--ink-mute); }
   border-radius: var(--radius);
   background: var(--bone-2);
 }
-.tile img { width: 100%; height: 100%; object-fit: cover; }
-.tile--wide { grid-column: span 2; }
-.tile--tall { grid-row: span 2; }
-/* A wide tile cannot span two columns when there is only one. */
-@media (max-width: 620px) {
-  .tile--wide { grid-column: span 1; }
+.tile__open {
+  display: block; width: 100%; height: 100%;
+  padding: 0; border: 0; background: none; cursor: pointer;
+}
+.tile img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .4s var(--ease);
+}
+.tile__open:hover img, .tile__open:focus-visible img { transform: scale(1.05); }
+.tile__open:focus-visible { outline: 3px solid var(--marigold); outline-offset: -3px; }
+
+/* ---------- Lightbox ---------- */
+
+.lightbox[hidden] { display: none; }
+.lightbox {
+  position: fixed; inset: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: center;
+  padding: clamp(12px, 4vw, 48px);
+  background: rgba(18, 14, 11, .92);
+}
+.lightbox__img {
+  max-width: 100%; max-height: 100%;
+  width: auto; height: auto;
+  border-radius: var(--radius);
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, .8);
+}
+.lightbox__btn {
+  position: absolute;
+  display: grid; place-items: center;
+  width: 52px; height: 52px;
+  border: 0; border-radius: 50%;
+  background: rgba(246, 239, 226, .12); color: var(--bone);
+  cursor: pointer;
+  transition: background-color .2s var(--ease);
+}
+.lightbox__btn:hover { background: rgba(246, 239, 226, .24); }
+.lightbox__btn svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.lightbox__close { top: clamp(12px, 3vw, 28px); right: clamp(12px, 3vw, 28px); }
+.lightbox__prev { left: clamp(10px, 2vw, 28px); top: 50%; transform: translateY(-50%); }
+.lightbox__next { right: clamp(10px, 2vw, 28px); top: 50%; transform: translateY(-50%); }
+.lightbox__count {
+  position: absolute; bottom: clamp(14px, 3vw, 30px); left: 50%; transform: translateX(-50%);
+  font-size: .82rem; letter-spacing: .12em; color: rgba(246, 239, 226, .7);
+}
+@media (max-width: 560px) {
+  .lightbox__prev { left: 8px; }
+  .lightbox__next { right: 8px; }
+  .lightbox__btn { width: 44px; height: 44px; }
 }
 
 .gallery-group + .gallery-group { margin-top: clamp(40px, 5vw, 64px); }

@@ -277,15 +277,17 @@ def render_gallery() -> str:
     for group in data["groups"]:
         photos = [p for p in data["photos"] if p["group"] == group["id"]]
         tiles = []
-        for i, photo in enumerate(photos):
+        for photo in photos:
             width, height = jpeg_size(ROOT / "images" / "photos" / f'{photo["file"]}.jpg')
-            # Every fourth photograph runs double width, so the grid has a
-            # rhythm instead of reading as a uniform contact sheet.
-            wide = " tile--wide" if i % 7 == 3 else ""
+            # Every tile is the same size, so the grid lines up evenly. Each is
+            # a button that opens the photograph in the lightbox (js/site.js).
+            src = f'images/photos/{photo["file"]}.jpg'
+            alt = esc(photo["alt"])
             tiles.append(
-                f'<li class="tile{wide}">'
-                f'<img src="images/photos/{photo["file"]}.jpg" alt="{esc(photo["alt"])}"'
-                f' width="{width}" height="{height}" loading="lazy">'
+                f'<li class="tile">'
+                f'<button class="tile__open" type="button" data-full="{src}" aria-label="View larger: {alt}">'
+                f'<img src="{src}" alt="{alt}" width="{width}" height="{height}" loading="lazy">'
+                f'</button>'
                 f'</li>'
             )
         sections.append(
