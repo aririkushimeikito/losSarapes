@@ -831,14 +831,16 @@ body:not(.has-hero) .btn--outline:hover { --btn-bg: #C94E33; --btn-bd: #C94E33; 
    sit left and right, side by side, with their URLs still on one line. Below
    this they stack (the base rules above). */
 @media (min-width: 1000px) {
-  .site-footer__cols { grid-template-columns: 1fr 1fr 1fr 2fr; align-items: start; }
+  .site-footer__cols { grid-template-columns: 1fr 1.25fr 0.78fr 1.8fr; align-items: start; }
   .site-footer__sisters {
     flex-direction: row !important; justify-content: center;
-    gap: clamp(20px, 2vw, 40px) !important;
+    gap: clamp(16px, 1.6vw, 32px) !important;
   }
   .site-footer__sisters li { flex: 1 1 0; min-width: 0; }
   .site-footer__sisters a { align-items: center; text-align: center; }
-  .sister-url { font-size: .74rem; }
+  .sister-url { font-size: .7rem; }
+  /* Keep each sentence of the hours note on one line. */
+  .site-footer__fine { white-space: nowrap; font-size: .78rem; }
 }
 
 /* Five marks have to sit on one row inside a footer column that is about
